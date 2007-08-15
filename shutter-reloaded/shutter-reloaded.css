@@ -1,0 +1,89 @@
+/* Shutter */
+* {
+padding: 0;
+margin: 0;
+}
+#shNewShutter {
+top: 0;
+left: 0;
+height: 100%;
+width: 100%;
+position: fixed;
+z-index: 100;
+}
+#shNewDisplay {
+position: fixed;
+left: 0;
+top: 0;
+width: 100%;
+text-align: center;
+z-index: 102;
+}
+#shNewDisplay #shTopImg {
+margin: 0 auto 2px auto;
+border: 1px solid #555;
+padding: 2px;
+background: transparent;
+display: block;
+cursor: pointer;
+}
+table#shWrap {
+margin: auto;
+height: auto;
+width: auto;
+}
+#shNewDisplay #shWrap td {
+text-align: center;
+}
+#shNewDisplay #shTextWrap a {
+text-decoration: none;
+font: bold 16pt 'Courier New', Courier, fixed;
+letter-spacing: -2px;
+margin: 0 10px;
+width: 26px;
+}
+.sh_arrows {
+vertical-align: top;
+}
+#shNewDisplay #shTextWrap a:hover {
+color: #fff;
+border: none;
+}
+#shNewDisplay #shTextWrap #sh_prev {
+float: left;
+}
+#shNewDisplay #shTextWrap #sh_next {
+float: right;
+}
+#shNewDisplay #shTextWrap #shTitle {
+font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+line-height: 19px;
+}
+#shNewDisplay #shWaitBar {
+font: bold 32px 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+height: 36px;
+width: 100%;
+left: 0;
+cursor: default;
+opacity: 0.999;
+filter: alpha(opacity=100);
+z-index: 101;
+display: none;
+margin-top: 160px;
+}
+
+* html #shNewShutter { 
+_position: absolute;
+_top: 0;
+_left: 0;
+_height: expression( eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollHeight : document.body.scrollHeight );
+_width: expression( eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollWidth : document.body.scrollWidth );
+_overflow: hidden;
+}
+
+* html #shNewDisplay {
+_position: absolute;
+_top: expression( eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop : document.body.scrollTop );
+filter: alpha(opacity=100);
+_overflow: hidden;
+}
