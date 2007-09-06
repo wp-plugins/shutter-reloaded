@@ -1,5 +1,15 @@
 // initial idea from Shutter by Andrew Sutherland, http://code.jalenack.com/
 function mkShutter( shlink, setid, inset ) {
+
+// edit the variables below to change the "Loading" and the "Click to close" text
+// ***************************************************************************
+
+var loading = 'L O A D I N G';
+var close = 'Click to close';
+
+// ***************************************************************************
+
+
   var shNewDisplay, shNewShutter, shfile, shTitle, prevlink, nextlink, previmg, nextimg;
   
   this.hideShutter = function() {
@@ -115,7 +125,7 @@ function mkShutter( shlink, setid, inset ) {
     document.getElementsByTagName('body')[0].appendChild(shNewDisplay);
   } else { shNewDisplay = document.getElementById('shNewDisplay'); }
   
-  shNewDisplay.innerHTML = '<div id="shWaitBar">L O A D I N G</div><table id="shWrap" style="visibility:hidden;"><tr><td colspan="3"><img src="' + shutterLinks[shlink] + '" id="shTopImg" onload="shShowImg();" onclick="hideShutter();" title=" X " /></td></tr><tr id="shTextWrap"><td class="sh_arrows"><a href="' + prevlink + '" id="sh_prev">&lt;&lt;</a></td><td id="shTitle">' + shTitle + '</td><td class="sh_arrows"><a href="' + nextlink + '" id="sh_next">&gt;&gt;</a></td></tr></table>';
+  shNewDisplay.innerHTML = '<div id="shWaitBar">'+loading+'</div><table id="shWrap" style="visibility:hidden;"><tr><td colspan="3"><img src="' + shutterLinks[shlink] + '" id="shTopImg" onload="shShowImg();" onclick="hideShutter();" title="'+close+'" /></td></tr><tr id="shTextWrap"><td class="sh_arrows"><a href="' + prevlink + '" id="sh_prev">&lt;&lt;</a></td><td id="shTitle">' + shTitle + '</td><td class="sh_arrows"><a href="' + nextlink + '" id="sh_next">&gt;&gt;</a></td></tr></table>';
   shNewDisplay.innerHTML += '<div style="display:none">-----------------------------</div>'; // ugly ie6 html comments/dub. characters fix
     
   // preload

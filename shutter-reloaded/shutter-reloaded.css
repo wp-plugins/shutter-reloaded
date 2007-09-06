@@ -1,5 +1,5 @@
 /* Shutter */
-* {
+* #shNewShutter, * #shNewDisplay {
 padding: 0;
 margin: 0;
 }
@@ -9,18 +9,23 @@ left: 0;
 height: 100%;
 width: 100%;
 position: fixed;
-z-index: 100;
+z-index: 1000;
+background-color: #000000;
+opacity: 0.8;
+filter:alpha(opacity=80);
 }
 #shNewDisplay {
 position: fixed;
 left: 0;
 top: 0;
 width: 100%;
+overflow: hidden;
 text-align: center;
-z-index: 102;
+background-color: transparent;
+z-index: 1002;
 }
 #shNewDisplay #shTopImg {
-margin: 0 auto 2px auto;
+margin: 0 auto;
 border: 1px solid #555;
 padding: 2px;
 background: transparent;
@@ -41,6 +46,7 @@ font: bold 16pt 'Courier New', Courier, fixed;
 letter-spacing: -2px;
 margin: 0 10px;
 width: 26px;
+color: #999999;
 }
 .sh_arrows {
 vertical-align: top;
@@ -58,6 +64,7 @@ float: right;
 #shNewDisplay #shTextWrap #shTitle {
 font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
 line-height: 19px;
+color: #ffffff;
 }
 #shNewDisplay #shWaitBar {
 font: bold 32px 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
@@ -67,9 +74,10 @@ left: 0;
 cursor: default;
 opacity: 0.999;
 filter: alpha(opacity=100);
-z-index: 101;
+z-index: 1001;
 display: none;
 margin-top: 160px;
+color: #ae0a0a;
 }
 
 * html #shNewShutter { 
