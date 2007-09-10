@@ -3,7 +3,7 @@ Contributors: Andrew Ozz
 Donate link: 
 Tags: images, javascript, viewer, lightbox
 Requires at least: 2.1
-Tested up to: 2.2.2
+Tested up to: 2.2.3
 Stable tag: 1.1
 
 Darkens the current page and displays an image on top (like Lightbox, Thickbox, etc.), but is a lot smaller (under 8KB) and faster.
@@ -15,7 +15,7 @@ Shutter Reloaded is an image viewer for your website that works similary to Ligh
 
 New in this version: support for Lightbox style activation (rel = lightbox[...]), better build-in help, several bugfixes.
 
-This plugin offers full customisation: colour and opacity settings for the background, colour for the caption and the previous and next links and colour of the loading sign.
+This plugin offers full customisation: colour and opacity settings for the background, colour for the caption and the previous and next links and colour and text of the loading sign.
 
 There are options to enable it for all links pointing to an image on your site (with option to exclude some pages), or just on selected pages. It can be enabled only for image links with a specific CSS class. That class can be set from the options page in WordPress, so if you already have thumbnails linked to images and set with a CSS class, you only need to enter that class in the Shutter Reloaded options.
 
@@ -47,7 +47,7 @@ Standard WordPress quick and easy installation:
 
 = Does this plugin work on WordPress version... =
 
-Shutter Reloaded has been tested on WordPress 2.1.3, 2.2.1 and 2.2.2
+Shutter Reloaded has been tested on WordPress 2.1.3, 2.2.1, 2.2.2 and 2.2.3
 
 = I have ... plugin installed that also outputs javascript in the header, will there be any conflicts/incompatibilities? =
 
