@@ -19,7 +19,7 @@ New in version 1.1: Support for Lightbox style activation (rel = lightbox[...]),
 
 This plugin offers full customisation: colour and opacity settings for the background, colour for the caption and the previous and next links and colour of the loading sign.
 
-There are options to enable it for all links pointing to an image on your site (with option to exclude some pages), or just on selected pages. It can be enabled only for image links with CSS class = "shutter" or "shutterset" or "shutterset_123". If CSS class activation is used, image links with class="shutter" will be displayed separately, image links with class="shutterset" will be displayed in a single set and image links with class="shutterset_###" where ### is any number unique for each set, will be displayed in separate sets.
+There are options to enable it for all links pointing to an image on your site (with option to exclude some pages), or just on selected pages. It can be enabled only for image links with CSS class = "shutter" with option to create a single set or multiple sets for each html page.
 
 The plugin can also "auto-make" image sets for each page, so when several posts are displayed on the "Home" page, links to images on each post will be in a separate set. See the built-in help for more information.
 
