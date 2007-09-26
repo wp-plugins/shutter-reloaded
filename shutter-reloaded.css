@@ -1,4 +1,7 @@
 /* Shutter */
+body {
+height: 100%;
+}
 * #shNewShutter, * #shNewDisplay {
 padding: 0;
 margin: 0;
