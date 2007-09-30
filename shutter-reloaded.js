@@ -31,6 +31,10 @@ var shClose = 'Click to Close';
       var shWaitBar = document.getElementById('shWaitBar');
       if ( shWaitBar ) shWaitBar.parentNode.removeChild(shWaitBar); 
 
+      var wiH = window.innerHeight ? window.innerHeight : 0;
+      var dbH = document.body.clientHeight ? document.body.clientHeight : 0;
+      var deH = document.documentElement ? document.documentElement.clientHeight : 0;
+      
       if( wiH > 0 ) {
         var wHeight = ( (wiH - dbH) > 1 && (wiH - dbH) < 30 ) ? dbH : wiH;
         var wHeight = ( (wHeight - deH) > 1 && (wHeight - deH) < 30 ) ? deH : wHeight;
