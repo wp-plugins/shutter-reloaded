@@ -83,7 +83,7 @@ shutterOnload( function() {
         shutterLinks[i] = document.links[i].href;
         if ( document.links[i].rel.toLowerCase().indexOf('lightbox[') != -1 ) {
           var set = document.links[i].rel.slice(9, -1);
-          var setid = 0;
+          var setid = 1;
           for( var b = 0; b < set.length; b++ ) {
             if(isNaN(set.charAt(b))) setid = setid + set.charCodeAt(b);
             else setid = setid + set.charAt(b);
@@ -105,7 +105,7 @@ shutterOnload( function() {
         if ( document.links[i].target ) document.links[i].target = '';
         if ( document.links[i].className.toLowerCase().indexOf('shutterset') != -1 ) {
           var set = ( document.links[i].className.indexOf(' ') != -1 ) ? document.links[i].className.slice(0,document.links[i].className.indexOf(' ')) :  document.links[i].className;
-          var setid = ( set.indexOf('_') != -1 ) ? parseInt(set.slice(set.indexOf('_') + 1)) : 0;
+          var setid = ( set.indexOf('_') != -1 ) ? parseInt(set.slice(set.lastIndexOf('_') + 1)) : 0;
           setid = isNaN(setid) ? 0 : setid;
           if ( shutterSets[setid] == null ) shutterSets[setid] = []; 
           inset = shutterSets[setid].push(i);

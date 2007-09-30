@@ -31,13 +31,14 @@ var shClose = 'Click to Close';
       var shWaitBar = document.getElementById('shWaitBar');
       if ( shWaitBar ) shWaitBar.parentNode.removeChild(shWaitBar); 
 
-      var deH = document.documentElement ? document.documentElement.clientHeight : 0;
-      var dbH = window.innerHeight ? window.innerHeight : document.body.clientHeight;
-      var wHeight = ( deH > 0 && ( deH < dbH || dbH < 1 ) ) ? deH : dbH;
+      if( wiH > 0 ) {
+        var wHeight = ( (wiH - dbH) > 1 && (wiH - dbH) < 30 ) ? dbH : wiH;
+        var wHeight = ( (wHeight - deH) > 1 && (wHeight - deH) < 30 ) ? deH : wHeight;
+      } else var wHeight = ( deH > 0 ) ? deH : dbH;
 
       var deW = document.documentElement ? document.documentElement.clientWidth : 0;
-      var dbW = document.body.clientWidth;
-      var wWidth = ( deW > 0 ) ? deW : dbW;
+      var dbW = window.innerWidth ? window.innerWidth : document.body.clientWidth;
+      var wWidth = ( deW > 1 ) ? deW : dbW;
 
       var capH = shTextWrap.clientHeight ? shTextWrap.clientHeight : 24;
       var shHeight = wHeight - 15 - capH;
@@ -62,14 +63,14 @@ var shClose = 'Click to Close';
   // from lightbox by Lokesh Dhakar - http://www.huddletogether.com
   this.showSelectBoxes = function() {
 	var selects = document.getElementsByTagName("select");
-	for (i = 0; i != selects.length; i++) {
+	for (i = 0; i < selects.length; i++) {
 		selects[i].style.visibility = "visible";
 	}
   }
 
   this.hideSelectBoxes = function() {
 	var selects = document.getElementsByTagName("select");
-	for (i = 0; i != selects.length; i++) {
+	for (i = 0; i < selects.length; i++) {
 		selects[i].style.visibility = "hidden";
 	}
   }
