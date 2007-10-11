@@ -156,7 +156,7 @@ if(typeof srelOnload=='function')srelOnload();
 function srel_auto_set($content) {
 	global $post;
   	
-    $pattern = array( '/<a([^>]*)href=[\'"]([^"]+).(gif|jpeg|jpg|png)[\'"]([^>]*>)/i', '/<a class="shutterset_%SRELID%" href="([^"]+)"([^>]*)class=[\'"]([^"]+)[\'"]([^>]*>)/i' );
+    $pattern = array( '/<a([^>]*)href=[\'"]([^"\']+).(gif|jpeg|jpg|png)[\'"]([^>]*>)/i', '/<a class="shutterset_%SRELID%" href="([^"]+)"([^>]*)class=[\'"]([^"]+)[\'"]([^>]*>)/i' );
     $replacement = array( '<a class="shutterset_%SRELID%" href="$2.$3"$1$4', '<a class="shutterset_%SRELID% $3" href="$1"$2$4' );
     $content = preg_replace($pattern, $replacement, $content);
 
