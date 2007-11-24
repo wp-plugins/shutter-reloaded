@@ -1,148 +1,251 @@
-// initial idea from Shutter by Andrew Sutherland, http://code.jalenack.com/
-function mkShutter( shlink, setid, inset ) {
+// This file is part of Shutter Reloaded WordPress plugin. For standalone version visit http://www.laptoptips.ca/javascripts/shutter-reloaded/
 
-// edit the variables below to change the "Loading" and the "Click to close" text
-// ***************************************************************************
+if (typeof shutterOnload == 'function') {
+  var shutterLinks = {}, shutterSets = {};
+  oldonload = window.onload;
+  if( typeof window.onload != 'function' ) window.onload = shutterOnload;
+  else window.onload = function(){shutterOnload();if(oldonload){oldonload();}};
+}
 
-var shLoading = 'L O A D I N G';
-var shClose = 'Click to Close';
+shutterReloaded = {
 
-// ***************************************************************************
-
-
-  var shNewDisplay, shNewShutter, shfile, shTitle, prevlink, nextlink, previmg, nextimg;
+  I : function (a) {
+    return document.getElementById(a);
+  },
   
-  this.hideShutter = function() {
-    shNewDisplay = document.getElementById('shNewDisplay');
-    shNewDisplay.parentNode.removeChild(shNewDisplay);
-    shutter = document.getElementById('shNewShutter');
-    shutter.parentNode.removeChild(shutter);
-    showSelectBoxes();
-    showFlash();
-  }
+  L10n : shL10n,
+  imageCount : shImageCount,
+  textBtns : shTextBtns,
+  shImgDir : shImgDir,
 
-  this.shShowImg = function() {
-    if ( document.getElementById('shNewShutter') ) {
-      var shWrap = document.getElementById('shWrap');
-      if ( shWrap.style.visibility == 'visible' ) return;
+  Init : function (a) {
+    var L, T, shtype, i, setid, inset, shfile, shMenuPre, k, img;
+    for ( i = 0; i < document.links.length; i++ ) {
+      L = document.links[i];
+      shtype = L.href.slice(-4).toLowerCase();
+      if ( shtype != '.jpg' && shtype != '.png' && shtype != '.gif' && shtype != 'jpeg' ) continue;
+      if ( a == 'sh' && L.className.toLowerCase().indexOf('shutter') == -1 ) continue;
+      if ( a == 'lb' && L.rel.toLowerCase().indexOf('lightbox') == -1 ) continue;
       
-      var shTopImg = document.getElementById('shTopImg');
-      var shTextWrap = document.getElementById('shTextWrap');
-      var shWaitBar = document.getElementById('shWaitBar');
-      if ( shWaitBar ) shWaitBar.parentNode.removeChild(shWaitBar); 
-
-      var wiH = window.innerHeight ? window.innerHeight : 0;
-      var dbH = document.body.clientHeight ? document.body.clientHeight : 0;
-      var deH = document.documentElement ? document.documentElement.clientHeight : 0;
+      if ( L.className.toLowerCase().indexOf('shutterset') != -1 ) 
+        setid = ( L.className.indexOf(' ') != -1 ) ? L.className.slice(0,L.className.indexOf(' ')) : L.className;
+      else if ( L.rel.toLowerCase().indexOf('lightbox[') != -1 ) 
+        setid = L.rel;
+      else setid = 0, inset = -1;
       
-      if( wiH > 0 ) {
-        var wHeight = ( (wiH - dbH) > 1 && (wiH - dbH) < 30 ) ? dbH : wiH;
-        var wHeight = ( (wHeight - deH) > 1 && (wHeight - deH) < 30 ) ? deH : wHeight;
-      } else var wHeight = ( deH > 0 ) ? deH : dbH;
-
-      var deW = document.documentElement ? document.documentElement.clientWidth : 0;
-      var dbW = window.innerWidth ? window.innerWidth : document.body.clientWidth;
-      var wWidth = ( deW > 1 ) ? deW : dbW;
-
-      var capH = shTextWrap.clientHeight ? shTextWrap.clientHeight : 24;
-      var shHeight = wHeight - 15 - capH;
-      if ( shTopImg.height > shHeight ) {
-        shTopImg.width = shTopImg.width * (shHeight / shTopImg.height);
-        shTopImg.height = shHeight;
-      }
-
-      if ( shTopImg.width > (wWidth - 16) ) {
-        shTopImg.height = shTopImg.height * ((wWidth - 16) / shTopImg.width);
-        shTopImg.width = wWidth - 16;
+      if( setid ) {
+        if ( ! shutterSets[setid] ) shutterSets[setid] = []; 
+        inset = shutterSets[setid].push(i);
       }
       
-      var top = (wHeight - shTopImg.height - capH - 5) * 0.45;
-      var mtop = (top > 3) ? Math.floor(top) : 3;
-
-      shWrap.style.margin = mtop + 'px auto auto auto';
-      shWrap.style.visibility = 'visible';
+      shfile = L.href.slice(L.href.lastIndexOf('/')+1);
+      T = ( L.title && L.title != shfile ) ? L.title : '';
+      
+      shutterLinks[i] = {link:L.href,num:inset,set:setid,title:T}
+      L.onclick = new Function('shutterReloaded.Make("'+i+'");return false;');
     }
-  }
-
-  // from lightbox by Lokesh Dhakar - http://www.huddletogether.com
-  this.showSelectBoxes = function() {
-	var selects = document.getElementsByTagName("select");
-	for (i = 0; i < selects.length; i++) {
-		selects[i].style.visibility = "visible";
-	}
-  }
-
-  this.hideSelectBoxes = function() {
-	var selects = document.getElementsByTagName("select");
-	for (i = 0; i < selects.length; i++) {
-		selects[i].style.visibility = "hidden";
-	}
-  }
-
-  this.showFlash = function() {
-	var flashObjects = document.getElementsByTagName("object");
-	for (i = 0; i < flashObjects.length; i++) {
-		flashObjects[i].style.visibility = "visible";
-	}
-
-	var flashEmbeds = document.getElementsByTagName("embed");
-	for (i = 0; i < flashEmbeds.length; i++) {
-		flashEmbeds[i].style.visibility = "visible";
-	}
-  }
-
-  this.hideFlash = function() {
-	var flashObjects = document.getElementsByTagName("object");
-	for (i = 0; i < flashObjects.length; i++) {
-		flashObjects[i].style.visibility = "hidden";
-	}
-
-	var flashEmbeds = document.getElementsByTagName("embed");
-	for (i = 0; i < flashEmbeds.length; i++) {
-		flashEmbeds[i].style.visibility = "hidden";
-	}
-  }
-
-  shfile = shutterLinks[shlink].slice(shutterLinks[shlink].lastIndexOf('/')+1);
-  if ( document.links[shlink].title && document.links[shlink].title != shfile ) shTitle = document.links[shlink].title;
-  else shTitle = '&nbsp;';
-
-  if ( inset != -1 ) {
-    if ( inset > 1 ) prevlink = 'javascript:mkShutter(' + shutterSets[setid][inset - 2] + ',' + setid + ',' + (inset - 1) +')';
-    else prevlink = '';
-
-    if ( inset < (shutterSets[setid].length) ) nextlink = 'javascript:mkShutter(' + shutterSets[setid][inset] + ',' + setid + ',' + (inset + 1) +')';
-    else nextlink = '';
-  }
-  
-  if ( document.getElementById('shNewShutter') == null ) {
-    shNewShutter = document.createElement('div');
-    shNewShutter.setAttribute('id','shNewShutter');
-    document.getElementsByTagName('body')[0].appendChild(shNewShutter);
-    hideSelectBoxes();
-    hideFlash();
-    shNewShutter.onclick = hideShutter;
-  }
-
-  if ( document.getElementById('shNewDisplay') == null ) {
-    shNewDisplay = document.createElement('div');
-    shNewDisplay.setAttribute('id','shNewDisplay');
-    document.getElementsByTagName('body')[0].appendChild(shNewDisplay);
-  } else { shNewDisplay = document.getElementById('shNewDisplay'); }
-  
-  shNewDisplay.innerHTML = '<div id="shWaitBar">'+shLoading+'</div><table id="shWrap" style="visibility:hidden;"><tr><td colspan="3"><img src="' + shutterLinks[shlink] + '" id="shTopImg" onload="shShowImg();" onclick="hideShutter();" title="'+shClose+'" /></td></tr><tr id="shTextWrap"><td class="sh_arrows"><a href="' + prevlink + '" id="sh_prev">&lt;&lt;</a></td><td id="shTitle">' + shTitle + '</td><td class="sh_arrows"><a href="' + nextlink + '" id="sh_next">&gt;&gt;</a></td></tr></table>';
-  shNewDisplay.innerHTML += '<div style="display:none">-----------------------------</div>'; // ugly ie6 html comments/dub. characters fix
     
-  // preload
-  if ( prevlink ) {
-    previmg = new Image();
-    previmg.src = shutterLinks[shutterSets[setid][inset - 2]];
-  } else { document.getElementById('sh_prev').style.visibility = 'hidden'; }
+    if ( ! this.textBtns ) {
+      shMenuPre = ['close.gif','prev.gif','next.gif','resize1.gif','resize2.gif','loading.gif'];
+      for ( k = 0; k < shMenuPre.length; k++ ) {
+        img = new Image();
+        img.src = this.shImgDir+shMenuPre[k];
+      }
+    }
+  },
 
-  if ( nextlink ) {
-    nextimg = new Image();
-    nextimg.src = shutterLinks[shutterSets[setid][inset]];
-  } else { document.getElementById('sh_next').style.visibility = 'hidden'; }
+  Make : function(ln,fs) {
+    var prev, next, prevlink = '', nextlink = '', previmg, nextimg, prevbtn, nextbtn, D, S, W, NB, fsarg = '', imgNum, closebtn, fsbtn, fsLink;
+
+    if ( ! this.Top ) {
+      if ( typeof window.pageYOffset != 'undefined' ) this.Top = window.pageYOffset;
+      else this.Top = (document.documentElement.scrollTop > 0) ? document.documentElement.scrollTop : document.body.scrollTop;
+    }
     
-  window.setTimeout(function(){if(document.getElementById('shWaitBar'))document.getElementById('shWaitBar').style.display = 'block'},2000);
+    if ( typeof this.pgHeight == 'undefined' ) 
+      this.pgHeight = Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
+    
+    if ( fs ) this.FS = true;
+    else this.FS = null;
+    
+    if ( this.resizing ) this.resizing = null;
+    window.onresize = new Function('shutterReloaded.Resize("'+ln+'");');
+    
+    document.documentElement.style.overflowX = 'hidden';
+    if ( ! this.VP ) {
+      this._viewPort();
+      this.VP = true;
+    }
+    
+    if ( ! (S = this.I('shShutter')) ) {
+      S = document.createElement('div');
+      S.setAttribute('id','shShutter');
+      document.getElementsByTagName('body')[0].appendChild(S);
+      this.fixTags();
+    }
+
+    if ( ! (D = this.I('shDisplay')) ) {
+      D = document.createElement('div');
+      D.setAttribute('id','shDisplay');
+      D.style.top = this.Top + 'px';
+      document.getElementsByTagName('body')[0].appendChild(D);
+    }
+
+    S.style.height = this.pgHeight + 'px';    
+    
+    var dv = this.textBtns ? ' | ' : '';
+    if ( shutterLinks[ln].num > 1 ) {
+      prev = shutterSets[shutterLinks[ln].set][shutterLinks[ln].num - 2];
+      prevbtn = this.textBtns ? this.L10n[0] : '<img src="'+this.shImgDir+'prev.gif" title="'+this.L10n[0]+'" />';
+      prevlink = '<a href="#" onclick="shutterReloaded.Make('+prev+');return false">'+prevbtn+'</a>'+dv;
+      previmg = new Image();
+      previmg.src = shutterLinks[prev].link;
+    }
+    
+    if ( shutterLinks[ln].num != -1 && shutterLinks[ln].num < (shutterSets[shutterLinks[ln].set].length) ) {
+      next = shutterSets[shutterLinks[ln].set][shutterLinks[ln].num];
+      nextbtn = this.textBtns ? this.L10n[1] : '<img src="'+this.shImgDir+'next.gif" title="'+this.L10n[1]+'" />';
+      nextlink = '<a href="#" onclick="shutterReloaded.Make('+next+');return false">'+nextbtn+'</a>'+dv;
+      nextimg = new Image();
+      nextimg.src = shutterLinks[next].link;
+    }
+    
+    closebtn = this.textBtns ? this.L10n[2] : '<img src="'+this.shImgDir+'close.gif" title="'+this.L10n[2]+'" />';
+    
+    imgNum = ( (shutterLinks[ln].num > 0) && this.imageCount ) ? ' '+this.L10n[5]+'&nbsp;'+shutterLinks[ln].num+'&nbsp;'+this.L10n[6]+'&nbsp;'+shutterSets[shutterLinks[ln].set].length : '';
+    if ( imgNum && this.textBtns ) imgNum += ' |';
+
+    if ( this.FS ) {
+      fsbtn = this.textBtns ? this.L10n[4] : '<img src="'+this.shImgDir+'resize2.gif" title="'+this.L10n[4]+'"  />';
+    } else {
+      fsbtn = this.textBtns ? this.L10n[3] : '<img src="'+this.shImgDir+'resize1.gif" title="'+this.L10n[3]+'" />';
+      fsarg = ',1';
+    }
+    
+    fsLink = '<span id="fullSize"><a href="#" onclick="shutterReloaded.Make('+ln+fsarg+');return false">'+fsbtn+'</a>'+dv+'</span>';
+    
+    if ( ! (NB = this.I('shNavBar')) ) {
+      NB = document.createElement('div');
+      NB.setAttribute('id','shNavBar');
+      document.getElementsByTagName('body')[0].appendChild(NB);
+    }
+    
+    NB.innerHTML = dv+prevlink+'<a href="#" onclick="shutterReloaded.hideShutter();return false">'+closebtn+'</a>'+dv+fsLink+nextlink+imgNum;
+    
+    D.innerHTML = '<div id="shWrap"><img src="'+shutterLinks[ln].link+'" id="shTopImg" onload="shutterReloaded.ShowImg();" onclick="shutterReloaded.hideShutter();" /><div id="shTitle">'+shutterLinks[ln].title+'</div></div>';
+    
+    window.setTimeout(function(){shutterReloaded.loading();},2000);
+  },
+  
+  loading : function() {
+    var S, WB, W;
+    if ( (W = this.I('shWrap')) && W.style.visibility == 'visible' ) return;
+    if ( ! (S = this.I('shShutter')) ) return;
+    if ( this.I('shWaitBar') ) return;
+    WB = document.createElement('div');
+    WB.setAttribute('id','shWaitBar');
+    WB.style.top = this.Top + 'px';
+    WB.innerHTML = '<img src="'+this.shImgDir+'loading.gif" title="'+this.L10n[7]+'" />';
+    S.appendChild(WB);
+  },
+  
+  hideShutter : function() {
+    var D, S, NB;
+    if ( D = this.I('shDisplay') ) D.parentNode.removeChild(D);
+    if ( S = this.I('shShutter') ) S.parentNode.removeChild(S);
+    if ( NB = this.I('shNavBar') ) NB.parentNode.removeChild(NB);
+    this.fixTags(true);
+    window.scrollTo(0,this.Top);
+    window.onresize = this.FS = this.Top = this.VP = null;
+    document.documentElement.style.overflowX = '';
+  },
+
+  Resize : function(ln) {
+    if ( this.resizing ) return;
+    if ( ! this.I('shShutter') ) return;
+    var W = this.I('shWrap');
+    if ( W ) W.style.visibility = 'hidden';
+    
+    window.setTimeout(function(){shutterReloaded.resizing = null},500);
+    window.setTimeout(new Function('shutterReloaded.VP = null;shutterReloaded.Make("'+ln+'");'),100);
+    this.resizing = true;
+  },
+  
+  _viewPort : function() {
+    var wiH = window.innerHeight ? window.innerHeight : 0;
+    var dbH = document.body.clientHeight ? document.body.clientHeight : 0;
+    var deH = document.documentElement ? document.documentElement.clientHeight : 0;
+      
+    if( wiH > 0 ) {
+      this.wHeight = ( (wiH - dbH) > 1 && (wiH - dbH) < 30 ) ? dbH : wiH;
+      this.wHeight = ( (this.wHeight - deH) > 1 && (this.wHeight - deH) < 30 ) ? deH : this.wHeight;
+    } else this.wHeight = ( deH > 0 ) ? deH : dbH;
+
+    var deW = document.documentElement ? document.documentElement.clientWidth : 0;
+    var dbW = window.innerWidth ? window.innerWidth : document.body.clientWidth;
+    this.wWidth = ( deW > 1 ) ? deW : dbW;
+  },
+  
+  ShowImg : function() {
+    var S, W, WB, D, T, TI, NB, wHeight, wWidth, capH, shHeight, maxHeight, itop, mtop, resized = 0;
+    S = this.I('shShutter');
+    if ( ! S ) return;
+
+    if ( (W = this.I('shWrap')) && W.style.visibility == 'visible' ) return;
+    if ( WB = this.I('shWaitBar') ) WB.parentNode.removeChild(WB);
+    
+    D = this.I('shDisplay');
+    TI = this.I('shTopImg');
+    T = this.I('shTitle');
+    NB = this.I('shNavBar');
+    S.style.width = D.style.width = '';
+    T.style.width = (TI.width - 4) + 'px';
+    
+    capH = NB.offsetHeight ? T.offsetHeight + NB.offsetHeight : 30;
+    shHeight = this.wHeight - 7 - capH;
+
+    if ( this.FS ) {
+      if ( TI.width > (this.wWidth - 10) ) 
+        S.style.width = D.style.width = TI.width + 10 + 'px';
+        document.documentElement.style.overflowX = '';
+    } else {
+      window.scrollTo(0,this.Top);
+      if ( TI.height > shHeight ) {
+        TI.width = TI.width * (shHeight / TI.height);
+        TI.height = shHeight;
+        resized = 1;
+      }
+      if ( TI.width > (this.wWidth - 16) ) {
+        TI.height = TI.height * ((this.wWidth - 16) / TI.width);
+        TI.width = this.wWidth - 16;
+        resized = 1;
+      }
+      T.style.width = (TI.width - 4) + 'px';
+      NB.style.bottom = '0px';
+    }
+
+    maxHeight = this.Top + TI.height + capH + 10;
+    if ( maxHeight > this.pgHeight ) S.style.height = maxHeight + 'px'; 
+    window.scrollTo(0,this.Top);
+    if ( (this.FS && (TI.height > shHeight || TI.width > this.wWidth)) || resized ) this.I('fullSize').style.display = 'inline';
+    
+    itop = (shHeight - TI.height) * 0.45;
+    mtop = (itop > 3) ? Math.floor(itop) : 3;
+    D.style.top = this.Top + mtop + 'px';
+    NB.style.bottom = '0';
+    W.style.visibility = 'visible';
+  },
+
+  fixTags : function(arg) {
+	var sel = document.getElementsByTagName('select');
+	var obj = document.getElementsByTagName('object');
+	var emb = document.getElementsByTagName('embed');
+    
+    if ( arg ) var vis = 'visible';
+    else var vis = 'hidden';
+    
+    for (i = 0; i < sel.length; i++) sel[i].style.visibility = vis;
+    for (i = 0; i < obj.length; i++) obj[i].style.visibility = vis;
+    for (i = 0; i < emb.length; i++) emb[i].style.visibility = vis;
+  }
 }
