@@ -9,7 +9,7 @@ Author URI: http://www.laptoptips.ca/
 
 Acknowledgement: some ideas from: Shutter by Andrew Sutherland - http://code.jalenack.com, WordPress - http://wordpress.org, Lightbox by Lokesh Dhakar - http://www.huddletogether.com, IE6 css position:fixed ideas from gunlaug.no and quirksmode.org, the icons are from Crystal Project Icons, Everaldo Coelho, http://www.everaldo.com
 
-Released under the GPL version 2 or newer, http://www.gnu.org/copyleft/gpl.html
+Released under the GPL version 2 or newer, http://www.gnu.org/copyleft/gpl.html 
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -97,7 +97,7 @@ shImgDir = '<?php bloginfo('wpurl'); ?>/wp-content/plugins/shutter-reloaded/imag
     if( $srel_options['shTextBtns'] == 1 ) { ?>shTextBtns = true;
 <?php } else { ?>shTextBtns = false;
 <?php } ?>
-shL10n = ['<?php _e('Previous', 'srel-l10n'); ?>','<?php _e('Next', 'srel-l10n'); ?>','<?php _e('Close', 'srel-l10n'); ?>','<?php _e('Full Size', 'srel-l10n'); ?>','<?php _e('Fit to Screen', 'srel-l10n'); ?>','<?php _e('Image', 'srel-l10n'); ?>','<?php _e('of', 'srel-l10n'); ?>','<?php _e('Loading...', 'srel-l10n'); ?>'];
+shL10n = ['<?php echo js_escape(__("Previous", "srel-l10n")); ?>','<?php echo js_escape(__("Next", "srel-l10n")); ?>','<?php echo js_escape(__("Close", "srel-l10n")); ?>','<?php echo js_escape(__("Full Size", "srel-l10n")); ?>','<?php echo js_escape(__("Fit to Screen", "srel-l10n")); ?>','<?php echo js_escape(__("Image", "srel-l10n")); ?>','<?php echo js_escape(__("of", "srel-l10n")); ?>','<?php echo js_escape(__("Loading...", "srel-l10n")); ?>'];
 shutterOnload = function(){<?php echo $addshutter; ?>};
 //]]>
 </script>
@@ -245,9 +245,9 @@ function srel_optpage() {
     <form method="post" name="srel_mainform" id="srel_mainform" action="">
     <fieldset>
     
-    <p class="submit" style="margin-top:0;"><input type="button" id="srelhide" onclick="if(document.getElementById('srelhelp').style.display == 'none'){document.getElementById('srelhelp').style.display = 'block';document.getElementById('srelhide').value = '<?php echo js_escape(__('Hide Help', 'srel-l10n')); ?>';
-} else {document.getElementById('srelhelp').style.display = 'none';document.getElementById('srelhide').value = '<?php echo js_escape(__('Show Help', 'srel-l10n')); ?>';}" 
-value="<?php echo js_escape(__('Show Help', 'srel-l10n')); ?>" style="color:blue;" /></p>
+    <p class="submit" style="margin-top:0;"><input type="button" id="srelhide" onclick="if(document.getElementById('srelhelp').style.display == 'none'){document.getElementById('srelhelp').style.display = 'block';document.getElementById('srelhide').value = '<?php echo js_escape(__("Hide Help", "srel-l10n")); ?>';
+} else {document.getElementById('srelhelp').style.display = 'none';document.getElementById('srelhide').value = '<?php echo js_escape(__("Show Help", "srel-l10n")); ?>';}" 
+value="<?php echo js_escape(__("Show Help", "srel-l10n")); ?>" style="color:blue;" /></p>
     
     <div id="srelhelp" style="display:none;border: 1px solid blue;padding:0 12px;margin:10px 0 0">
     <h4><?php _e('Setup and Usage', 'srel-l10n'); ?></h4>
@@ -307,10 +307,10 @@ if ( $opt == 'srel_all' || $opt == 'auto_set' ) { ?>
 
     <input type="text" name="srel_exclude" size="4" maxlength="4" tabindex="4" value="" />
     <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_add_excluded" value="<?php _e('Add Excluded ID', 'srel-l10n'); ?>" 
-        onclick="if (form.srel_exclude.value == ''){alert('<?php echo js_escape(__('Please enter the Page/Post ID that you want to add to this list.', 'srel-l10n')); ?>');return false;}" />
+        onclick="if (form.srel_exclude.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to add to this list.", "srel-l10n")); ?>');return false;}" />
     
     <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_rem_excluded" value="<?php _e('Remove Excluded ID', 'srel-l10n'); ?>" 
-    onclick="if (form.srel_exclude.value == ''){alert('<?php echo js_escape(__('Please enter the Page/Post ID that you want to remove from this list.', 'srel-l10n')); ?>');return false;}" />
+    onclick="if (form.srel_exclude.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to remove from this list.", "srel-l10n")); ?>');return false;}" />
     
     <div style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it at the <a href="edit-pages.php">Manage Pages</a> or the <a href="edit.php">Manage Posts</a> page.', 'srel-l10n'); ?></div>
     <?php wp_nonce_field( 'srel-save-options' ); ?>
@@ -355,9 +355,9 @@ if ( $opt == 'srel_pages' ) { ?>
 
     <input type="text" name="srel_include" size="4" maxlength="4" tabindex="4" value="" />
     <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_add_included" value="<?php _e('Add ID', 'srel-l10n'); ?>" 
-        onclick="if (form.srel_include.value == ''){alert('<?php echo js_escape(__('Please enter the Page/Post ID that you want to add to this list.', 'srel-l10n')); ?>');return false;}" />
+        onclick="if (form.srel_include.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to add to this list.", "srel-l10n")); ?>');return false;}" />
     <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_rem_included" value="<?php _e('Remove ID', 'srel-l10n'); ?>" 
-    onclick="if (form.srel_include.value == ''){alert('<?php echo js_escape(__('Please enter the Page/Post ID that you want to remove from this list.', 'srel-l10n')); ?>');return false;}" />
+    onclick="if (form.srel_include.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to remove from this list.", "srel-l10n")); ?>');return false;}" />
     
     <div style="color:#888;"><?php _e('Please enter the ID for the post/page for use with shutter. You can see it at the <a href="edit-pages.php">Manage Pages</a> or the <a href="edit.php">Manage Posts</a> page.', 'srel-l10n'); ?></div>
     <?php wp_nonce_field( 'srel-save-options' ); ?>
