@@ -57,6 +57,7 @@ background: transparent;
 display: block;
 max-width: none;
 max-height: none;
+float: none;
 }
 div#shDisplay div#shWrap {
 visibility: hidden;
@@ -70,6 +71,7 @@ margin-top: 120px;
 }
 #shWaitBar img {
 border: 0;
+float: none;
 }
 #fullSize {
 display: none;
@@ -78,6 +80,7 @@ display: none;
 border: 0;
 vertical-align: middle;
 margin: 0 2px;
+float: none;
 opacity: 0.6;
 filter: alpha(opacity=60);
 }
