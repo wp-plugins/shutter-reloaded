@@ -81,7 +81,7 @@ shutterReloaded = {
       S = document.createElement('div');
       S.setAttribute('id','shShutter');
       document.getElementsByTagName('body')[0].appendChild(S);
-      this.fixTags();
+      this.hideTags();
     }
 
     if ( ! (D = this.I('shDisplay')) ) {
@@ -154,7 +154,7 @@ shutterReloaded = {
     if ( D = this.I('shDisplay') ) D.parentNode.removeChild(D);
     if ( S = this.I('shShutter') ) S.parentNode.removeChild(S);
     if ( NB = this.I('shNavBar') ) NB.parentNode.removeChild(NB);
-    this.fixTags(true);
+    this.hideTags(true);
     window.scrollTo(0,this.Top);
     window.onresize = this.FS = this.Top = this.VP = null;
     document.documentElement.style.overflowX = '';
@@ -236,16 +236,17 @@ shutterReloaded = {
     W.style.visibility = 'visible';
   },
 
-  fixTags : function(arg) {
+  hideTags : function(arg) {
 	var sel = document.getElementsByTagName('select');
 	var obj = document.getElementsByTagName('object');
 	var emb = document.getElementsByTagName('embed');
-    
-    if ( arg ) var vis = 'visible';
-    else var vis = 'hidden';
+    var ifr = document.getElementsByTagName('iframe');
+
+    var vis = ( arg ) ? 'visible' : 'hidden';
     
     for (i = 0; i < sel.length; i++) sel[i].style.visibility = vis;
     for (i = 0; i < obj.length; i++) obj[i].style.visibility = vis;
     for (i = 0; i < emb.length; i++) emb[i].style.visibility = vis;
+    for (i = 0; i < ifr.length; i++) ifr[i].style.visibility = vis;
   }
 }
