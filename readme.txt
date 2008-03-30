@@ -2,9 +2,9 @@
 Contributors: Andrew Ozz
 Donate link: 
 Tags: images, javascript, viewer, lightbox
-Requires at least: 2.0.9
-Tested up to: 2.3.1
-Stable tag: 2.0
+Requires at least: 2.5
+Tested up to: 2.5
+Stable tag: 2.1
 
 Darkens the current page and displays an image on top (like Lightbox, Thickbox, etc.), but is a lot smaller (10KB) and faster.
 
@@ -13,7 +13,9 @@ Darkens the current page and displays an image on top (like Lightbox, Thickbox, 
 
 Shutter Reloaded is an image viewer for your website that works similary to Lightbox, Thickbox, etc. but is under 10KB in size and does not require any external libraries. It has many features: resizing large images if the window is too small to display them with option to show the full size image, combining images in sets, redrawing the window after resizing, pre-loading of neighbour images for faster display and very good browser compatibility.
 
-New in version 2.0: Option to display full size image if it was resized to fit the browser window, display of image count (for sets), option for graphic or text buttons, support for localization (.pot file included), translations in French and German, the code is better organized and improved.
+New in version 2.1: Upgrades for compatibility with WordPress 2.5.
+
+New in version 2.0: Option to display full size image if it was resized to fit the browser window, display of image count (for sets), option for graphic or text buttons, support for localization (.pot file included), the code is better organized and improved.
 
 New in version 1.2: Compatibility with WordPress version 2.0 (2.0.9 and 2.0.11) and 2.3, several improvements and small bugfixes. 
 
@@ -46,7 +48,7 @@ Standard WordPress quick and easy installation:
 
 = Does this plugin work on WordPress version... =
 
-Shutter Reloaded has been tested on WordPress 2.0.9, 2.0.11, 2.1.3, 2.2.1, 2.2.3, 2.3 and 2.3.1
+Shutter Reloaded has been tested on WordPress 2.0.11, 2.1, 2.2, 2.3 and 2.5. For WordPress version 2.3.3 and earlier, please use version 2.0 of the plugin.
 
 = I have ... plugin installed that uses javascript, will there be any conflicts/incompatibilities? =
 

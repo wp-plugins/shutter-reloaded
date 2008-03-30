@@ -113,7 +113,6 @@ shutterReloaded = {
     closebtn = this.textBtns ? this.L10n[2] : '<img src="'+this.shImgDir+'close.gif" title="'+this.L10n[2]+'" />';
     
     imgNum = ( (shutterLinks[ln].num > 0) && this.imageCount ) ? ' '+this.L10n[5]+'&nbsp;'+shutterLinks[ln].num+'&nbsp;'+this.L10n[6]+'&nbsp;'+shutterSets[shutterLinks[ln].set].length : '';
-    if ( imgNum && this.textBtns ) imgNum += ' |';
 
     if ( this.FS ) {
       fsbtn = this.textBtns ? this.L10n[4] : '<img src="'+this.shImgDir+'resize2.gif" title="'+this.L10n[4]+'"  />';
@@ -130,7 +129,7 @@ shutterReloaded = {
       document.getElementsByTagName('body')[0].appendChild(NB);
     }
     
-    NB.innerHTML = dv+prevlink+'<a href="#" onclick="shutterReloaded.hideShutter();return false">'+closebtn+'</a>'+dv+fsLink+nextlink+imgNum;
+    NB.innerHTML = dv+prevlink+'<a href="#" onclick="shutterReloaded.hideShutter();return false">'+closebtn+'</a>'+dv+nextlink+fsLink+imgNum;
     
     D.innerHTML = '<div id="shWrap"><img src="'+shutterLinks[ln].link+'" id="shTopImg" onload="shutterReloaded.ShowImg();" onclick="shutterReloaded.hideShutter();" /><div id="shTitle">'+shutterLinks[ln].title+'</div></div>';
     
@@ -227,7 +226,7 @@ shutterReloaded = {
     maxHeight = this.Top + TI.height + capH + 10;
     if ( maxHeight > this.pgHeight ) S.style.height = maxHeight + 'px'; 
     window.scrollTo(0,this.Top);
-    if ( (this.FS && (TI.height > shHeight || TI.width > this.wWidth)) || resized ) this.I('fullSize').style.display = 'inline';
+    if ( (this.FS && (TI.height > shHeight || TI.width > this.wWidth)) || resized ) this.I('fullSize').style.visibility = 'visible';
     
     itop = (shHeight - TI.height) * 0.45;
     mtop = (itop > 3) ? Math.floor(itop) : 3;

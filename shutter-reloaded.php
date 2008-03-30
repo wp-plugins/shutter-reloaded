@@ -3,13 +3,13 @@
 Plugin Name: Shutter Reloaded
 Plugin URI: http://www.laptoptips.ca/projects/wp-shutter-reloaded/
 Description: Darkens the current page and displays an image on top like Lightbox, Thickbox, etc. However this script is a lot smaller and faster.
-Version: 2.0
+Version: 2.1
 Author: Andrew Ozz
 Author URI: http://www.laptoptips.ca/
 
 Acknowledgement: some ideas from: Shutter by Andrew Sutherland - http://code.jalenack.com, WordPress - http://wordpress.org, Lightbox by Lokesh Dhakar - http://www.huddletogether.com, IE6 css position:fixed ideas from gunlaug.no and quirksmode.org, the icons are from Crystal Project Icons, Everaldo Coelho, http://www.everaldo.com
 
-Released under the GPL version 2 or newer, http://www.gnu.org/copyleft/gpl.html 
+Released under the GPL version 2 or newer, http://www.gnu.org/copyleft/gpl.html
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -71,10 +71,10 @@ function srel_makeshutter() {
 if( $srel_options['custom'] == 1 ) { ?>
 <style type="text/css">
 <?php 
-    if( $srel_options['btncolor'] != 'aaaaff' ) { ?>
+    if( $srel_options['btncolor'] != 'cccccc' ) { ?>
 div#shNavBar a {color:#<?php echo $srel_options['btncolor']; ?>;}
 <?php }
-    if( $srel_options['menucolor'] != '2e2e2e' ) { ?>
+    if( $srel_options['menucolor'] != '3e3e3e' ) { ?>
 div#shNavBar {background-color:#<?php echo $srel_options['menucolor']; ?>;}
 <?php }
     if( $srel_options['imgcountcolor'] != '999999' ) { ?>
@@ -90,7 +90,7 @@ div#shShutter{background-color:#<?php echo $srel_options['shcolor']; ?>;opacity:
 <?php } ?>
 <script type="text/javascript">
 //<![CDATA[
-shImgDir = '<?php bloginfo('wpurl'); ?>/wp-content/plugins/shutter-reloaded/images/';
+shImgDir = '<?php bloginfo('wpurl'); ?>/wp-content/plugins/shutter-reloaded/menu/';
 <?php if( $srel_options['shImageCount'] == 1 ) { ?>shImageCount = true;
 <?php } else { ?>shImageCount = false;
 <?php } 
@@ -150,7 +150,7 @@ function srel_optpage() {
     }
     
     $srel_options = get_option('srel_options');
-    $def = array( 'shcolor' => '000000', 'opacity' => '80', 'capcolor' => 'ffffff', 'menucolor' => '2e2e2e', 'btncolor' => 'aaaaff', 'imgcountcolor' => '999999' );
+    $def = array( 'shcolor' => '000000', 'opacity' => '80', 'capcolor' => 'ffffff', 'menucolor' => '3e3e3e', 'btncolor' => 'cccccc', 'imgcountcolor' => '999999' );
     
     if( ! is_array($srel_options) ) {
         $srel_options = array_merge( $def, array('shImageCount' => '1', 'shTextBtns' => '0', 'custom' => '0') );
@@ -161,8 +161,8 @@ function srel_optpage() {
         check_admin_referer('srel-save-options');
         $new_srel_options['shcolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['shcolor']) ? strtolower($_POST['shcolor']) : '000000';
         $new_srel_options['capcolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['capcolor']) ? strtolower($_POST['capcolor']) : 'ffffff';
-        $new_srel_options['menucolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['menucolor']) ? strtolower($_POST['menucolor']) : '2e2e2e';
-        $new_srel_options['btncolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['btncolor']) ? strtolower($_POST['btncolor']) : 'aaaaff';
+        $new_srel_options['menucolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['menucolor']) ? strtolower($_POST['menucolor']) : '3e3e3e';
+        $new_srel_options['btncolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['btncolor']) ? strtolower($_POST['btncolor']) : 'cccccc';
         $new_srel_options['imgcountcolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['imgcountcolor']) ? strtolower($_POST['imgcountcolor']) : '999999';
         $new_srel_options['shImageCount'] = $_POST['shImageCount'] ? 1 : 0;
         $new_srel_options['shTextBtns'] = $_POST['shTextBtns'] ? 1 : 0;
@@ -237,19 +237,18 @@ function srel_optpage() {
     }
 
     if ( isset($_POST['srel_saveopt']) ) { ?>
-    <div style="background-color: rgb(230, 230, 255);" id="message" class="updated fade-5555cc"><p><strong><?php _e('Options saved!', 'srel-l10n'); ?></strong></p></div>
+    <div id="message" class="updated"><p><strong><?php _e('Options saved!', 'srel-l10n'); ?></strong></p></div>
 <?php } ?>
 
     <div class="wrap">
     <h2><?php _e('Shutter Reloaded Options', 'srel-l10n'); ?></h2>
     <form method="post" name="srel_mainform" id="srel_mainform" action="">
-    <fieldset>
     
-    <p class="submit" style="margin-top:0;"><input type="button" id="srelhide" onclick="if(document.getElementById('srelhelp').style.display == 'none'){document.getElementById('srelhelp').style.display = 'block';document.getElementById('srelhide').value = '<?php echo js_escape(__("Hide Help", "srel-l10n")); ?>';
+    <p class="tablenav" style="text-align:right;"><input type="button" id="srelhide" class="button" onclick="if(document.getElementById('srelhelp').style.display == 'none'){document.getElementById('srelhelp').style.display = 'block';document.getElementById('srelhide').value = '<?php echo js_escape(__("Hide Help", "srel-l10n")); ?>';
 } else {document.getElementById('srelhelp').style.display = 'none';document.getElementById('srelhide').value = '<?php echo js_escape(__("Show Help", "srel-l10n")); ?>';}" 
-value="<?php echo js_escape(__("Show Help", "srel-l10n")); ?>" style="color:blue;" /></p>
+value="<?php echo js_escape(__("Show Help", "srel-l10n")); ?>" /></p>
     
-    <div id="srelhelp" style="display:none;border: 1px solid blue;padding:0 12px;margin:10px 0 0">
+    <div id="srelhelp" style="display:none;border: 1px solid #C6D9E9;padding:0 12px;margin:10px 0 0">
     <h4><?php _e('Setup and Usage', 'srel-l10n'); ?></h4>
     <p><?php _e('Shutter is activated by <strong>the link</strong> pointing to the image you want to display, with or without a thumbnail (text links work too). The activation class and the title have to be set on that link.', 'srel-l10n'); ?></p>
     <p><?php _e('To take full control of Shutter\'s activation and to make multiple image sets on the same page, you will need to add the <strong>class=&quot;shutter&quot;</strong> or <strong>&quot;shutterset&quot;</strong> or <strong>&quot;shutterset_setname&quot;</strong> to your links in &quot;Code&quot; view on the Write/Edit Post page.', 'srel-l10n'); ?></p>
@@ -260,36 +259,34 @@ value="<?php echo js_escape(__("Show Help", "srel-l10n")); ?>" style="color:blue
     <p><?php _e('You can use the &quot;Activate shutter on all image links&quot; and also make sets by adding class=&quot;shutterset&quot; or class=&quot;shutterset_setname&quot; or rel=&quot;lightbox[...]&quot; to some of the image links.', 'srel-l10n'); ?></p>
     </div>
     
-    <p><?php _e('You can add Shutter Reloaded to your site in five different ways:', 'srel-l10n'); ?> </p>
+    <div style="padding:0 12px 12px;">
+    <h4><?php _e('You can add Shutter Reloaded to your site in five different ways:', 'srel-l10n'); ?> </h4>
     <?php wp_nonce_field( 'srel-save-options' ); ?>
     <input type="hidden" name="srel_main" value="srel_main" />
 
-    <div style="margin-bottom:10px;<?php if ( $opt == 'srel_class' ) { ?>color:#999;<?php } ?>">
-    <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_class" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links with class=&quot;shutter&quot; or &quot;shutterset&quot; or &quot;shutterset_setname&quot;.', 'srel-l10n'); ?></div>
+    <p style="margin:8px;padding:2px;<?php if ( $opt == 'srel_class' ) { ?>color:#999;<?php } ?>">
+    <input class="button" type="submit" name="srel_class" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links with class=&quot;shutter&quot; or &quot;shutterset&quot; or &quot;shutterset_setname&quot;.', 'srel-l10n'); ?></p>
 
-    <div style="margin-bottom:10px;<?php if ( $opt == 'srel_all' ) { ?>color:#999;<?php } ?>">
-    <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_all" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links. Sets created with class=&quot;shutterset&quot;, &quot;shutterset_setname&quot; or rel=&quot;lightbox[...]&quot; will still work.', 'srel-l10n'); ?></div>
+    <p style="margin:8px;padding:2px;<?php if ( $opt == 'srel_all' ) { ?>color:#999;<?php } ?>">
+    <input class="button" type="submit" name="srel_all" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links. Sets created with class=&quot;shutterset&quot;, &quot;shutterset_setname&quot; or rel=&quot;lightbox[...]&quot; will still work.', 'srel-l10n'); ?></p>
 
-    <div style="margin-bottom:10px;<?php if ( $opt == 'auto_set' ) { ?>color:#999;<?php } ?>">
-    <input class="button" type="submit" style="color:blue;cursor:pointer;" name="auto_set" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links and automatically make image sets for each Post/Page.', 'srel-l10n'); ?></div>
+    <p style="margin:8px;padding:2px;<?php if ( $opt == 'auto_set' ) { ?>color:#999;<?php } ?>">
+    <input class="button" type="submit" name="auto_set" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links and automatically make image sets for each Post/Page.', 'srel-l10n'); ?></p>
 
-    <div style="margin-bottom:10px;<?php if ( $opt == 'srel_pages' ) { ?>color:#999;<?php } ?>">
-    <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_pages" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links on specific page(s).', 'srel-l10n'); ?></div>
+    <p style="margin:8px;padding:2px;<?php if ( $opt == 'srel_pages' ) { ?>color:#999;<?php } ?>">
+    <input class="button" type="submit" name="srel_pages" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links on specific page(s).', 'srel-l10n'); ?></p>
     
-    <div style="margin-bottom:10px;<?php if ( $opt == 'srel_lb' ) { ?>color:#999;<?php } ?>">
-    <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_lb" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links and use LightBox style (rel=&quot;lightbox[...]&quot;) activation and sets.', 'srel-l10n'); ?></div>
-
-    </fieldset>
+    <p style="margin:8px;padding:2px;<?php if ( $opt == 'srel_lb' ) { ?>color:#999;<?php } ?>">
+    <input class="button" type="submit" name="srel_lb" value="<?php _e('Activate', 'srel-l10n'); ?>" /> <?php _e('Shutter on all image links and use LightBox style (rel=&quot;lightbox[...]&quot;) activation and sets.', 'srel-l10n'); ?></p>
+	</div>
     </form>
     
+    <div style="padding:0 12px 4px;border: 1px solid #C6D9E9;">
 <?php
 if ( $opt == 'srel_all' || $opt == 'auto_set' ) { ?>
 
-    <table class="optiontable">
-    <tr><td style="background-color:#eee;border:1px solid #ddd;">
-    
     <form method="post" name="srel_excluded" id="srel_excluded" action="">
-    <fieldset>
+    <div>
 <?php
     if( $opt == 'srel_all' ) { ?><p><strong><?php _e('Shutter is activated for all links pointing to an image.', 'srel-l10n'); ?></strong></p><?php }
     else { ?><p><strong><?php _e('Shutter is activated for all links pointing to an image and will create different image set for each Post/Page.', 'srel-l10n'); ?></strong><br /><?php _e('This option is most suitable if you display several Posts on your home page and want to have different image set for each Post. It adds shutter\'s activation class at runtime and doesn\'t modify the html.', 'srel-l10n'); ?></p><?php }
@@ -306,41 +303,33 @@ if ( $opt == 'srel_all' || $opt == 'auto_set' ) { ?>
     </p>
 
     <input type="text" name="srel_exclude" size="4" maxlength="4" tabindex="4" value="" />
-    <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_add_excluded" value="<?php _e('Add Excluded ID', 'srel-l10n'); ?>" 
+    <input class="button" type="submit" name="srel_add_excluded" value="<?php _e('Add Excluded ID', 'srel-l10n'); ?>" 
         onclick="if (form.srel_exclude.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to add to this list.", "srel-l10n")); ?>');return false;}" />
     
-    <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_rem_excluded" value="<?php _e('Remove Excluded ID', 'srel-l10n'); ?>" 
+    <input class="button" type="submit" name="srel_rem_excluded" value="<?php _e('Remove Excluded ID', 'srel-l10n'); ?>" 
     onclick="if (form.srel_exclude.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to remove from this list.", "srel-l10n")); ?>');return false;}" />
     
-    <div style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it at the <a href="edit-pages.php">Manage Pages</a> or the <a href="edit.php">Manage Posts</a> page.', 'srel-l10n'); ?></div>
+    <div style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it in your browser\'s status bar(at the bottom of the window) when hovering over the name at the <a href="edit-pages.php">Manage Pages</a> or the <a href="edit.php">Manage Posts</a> page.', 'srel-l10n'); ?></div>
     <?php wp_nonce_field( 'srel-save-options' ); ?>
-    </fieldset>
+    </div>
     </form>
-    </td></tr>
-    </table>
 <?php
     }
 
 if ( $opt == 'srel_class' ) { ?>
 
-    <table class="optiontable">
-    <tr><td style="background-color:#eee;border:1px solid #ddd;">
-    
+    <div>    
     <p><strong><?php _e('Shutter is activated for all links pointing to an image, that have class = &quot;shutter&quot;, &quot;shutterset&quot; or &quot;shutterset_setname&quot;', 'srel-l10n'); ?></strong></p>
 
     <p><?php _e('Class = &quot;shutter&quot; will display a single image, class = &quot;shutterset&quot; will create a single set for all images and class=&quot;shutterset_setname&quot;, where setname is a short ASCII word and/or number, will create multiple sets on the same page.', 'srel-l10n'); ?></p>
-
-    </td></tr>
-    </table>
+    </div>
 <?php
     }
 
 if ( $opt == 'srel_pages' ) { ?>
 
-    <table class="optiontable">
-    <tr><td style="background-color:#eee;border:1px solid #ddd;">
     <form method="post" name="srel_included" id="srel_included" action="">
-    <fieldset>
+    <div>
     <p><strong><?php _e('Shutter is activated for the following Posts and Pages (by ID):', 'srel-l10n'); ?> 
 <?php
     if ( is_array($included) && !empty($included) ) { 
@@ -354,67 +343,64 @@ if ( $opt == 'srel_pages' ) { ?>
     </strong></p>
 
     <input type="text" name="srel_include" size="4" maxlength="4" tabindex="4" value="" />
-    <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_add_included" value="<?php _e('Add ID', 'srel-l10n'); ?>" 
+    <input class="button" type="submit" name="srel_add_included" value="<?php _e('Add ID', 'srel-l10n'); ?>" 
         onclick="if (form.srel_include.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to add to this list.", "srel-l10n")); ?>');return false;}" />
-    <input class="button" type="submit" style="color:blue;cursor:pointer;" name="srel_rem_included" value="<?php _e('Remove ID', 'srel-l10n'); ?>" 
+    <input class="button" type="submit" name="srel_rem_included" value="<?php _e('Remove ID', 'srel-l10n'); ?>" 
     onclick="if (form.srel_include.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to remove from this list.", "srel-l10n")); ?>');return false;}" />
     
-    <div style="color:#888;"><?php _e('Please enter the ID for the post/page for use with shutter. You can see it at the <a href="edit-pages.php">Manage Pages</a> or the <a href="edit.php">Manage Posts</a> page.', 'srel-l10n'); ?></div>
+    <div style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it in your browser\'s status bar(at the bottom of the window) when hovering over the name at the <a href="edit-pages.php">Manage Pages</a> or the <a href="edit.php">Manage Posts</a> page.', 'srel-l10n'); ?></div>
     <?php wp_nonce_field( 'srel-save-options' ); ?>
-    </fieldset>
+    </div>
     </form>
-    </td></tr>
-    </table>
 <?php 
     } 
     
     if ( $opt == 'srel_lb' ) { ?>
-
-    <table class="optiontable">
-    <tr><td style="background-color:#eee;border:1px solid #ddd;padding: 0 10px;">
-
+	<div>
     <p><strong><?php _e('Shutter uses Lightbox style activation.', 'srel-l10n'); ?></strong></p>
 
     <p><?php _e('Shutter is activated for all links pointing to an image, that have rel=&quot;lightbox&quot; or rel=&quot;lightbox[...]&quot;. To make sets of images, you will have to add rel=&quot;lightbox[abc]&quot;, where &quot;abc&quot; can be any short ASCII word and/or number.', 'srel-l10n'); ?></p>
-
-    </td></tr>
-    </table>
+    </div>
 <?php
     }
 ?>
-
+	</div>
+	
     <form method="post" name="srel_saveoptform" id="srel_saveoptform" action="">
-    <table class="optiontable" style="padding:5px 12px;">
-    <tr><th colspan="2" style="text-align:center;">
+    <table class="widefat" style="padding:5px 12px;border:0;margin-top:20px;">
+    <thead>
+	<tr><th colspan="2" style="text-align:center;">
     <?php _e('Customization', 'srel-l10n'); ?>
     </th></tr>
+    </thead>
     
+    <tbody>
     <tr><td style="width:50%;text-align:right;">
     <?php _e('Shutter color (default 000000):', 'srel-l10n'); ?> <br /><?php _e('Please enter valid HTML color codes, from 000000 to FFFFFF.', 'srel-l10n'); ?> 
     </td><td>
     <input type="text" name="shcolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['shcolor']; ?>" />
-    <input type="text" name="shcolor2" size="6" disabled style="background-color:#<?php echo $srel_options['shcolor']; ?>;" />
+    <input type="text" name="shcolor2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['shcolor']; ?>;" />
     </td></tr>
     
     <tr><td style="text-align:right;">
     <?php _e('Shutter opacity (default 80):', 'srel-l10n'); ?> <br /><?php _e('Enter a number between 1 (see-through) and 99 (solid color).', 'srel-l10n'); ?>
     </td><td>
     <input type="text" name="opacity" size="6" maxlength="3" tabindex="" value="<?php echo $srel_options['opacity']; ?>" />
-    <input type="text" name="opacity2" size="6" disabled style="background-color:#<?php echo $srel_options['shcolor']; ?>;opacity:<?php echo ($srel_options['opacity']/100); ?>;filter:alpha(opacity=<?php echo $srel_options['opacity']; ?>);" />
+    <input type="text" name="opacity2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['shcolor']; ?>;opacity:<?php echo ($srel_options['opacity']/100); ?>;filter:alpha(opacity=<?php echo $srel_options['opacity']; ?>);" />
     </td></tr>
     
     <tr><td style="text-align:right;">
     <?php _e('Caption text color (default FFFFFF):', 'srel-l10n'); ?>
     </td><td>
     <input type="text" name="capcolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['capcolor']; ?>" />
-    <input type="text" name="capcolor2" size="6"  disabled style="background-color:#<?php echo $srel_options['capcolor']; ?>;" />
+    <input type="text" name="capcolor2" size="6"  disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['capcolor']; ?>;" />
     </td></tr>
         
     <tr><td style="text-align:right;">
-    <?php _e('Menubar color (default 2E2E2E):', 'srel-l10n'); ?>
+    <?php _e('Menubar color (default 3E3E3E):', 'srel-l10n'); ?>
     </td><td>
     <input type="text" name="menucolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['menucolor']; ?>" />
-    <input type="text" name="menucolor2" size="6" disabled style="background-color:#<?php echo $srel_options['menucolor']; ?>;" />
+    <input type="text" name="menucolor2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['menucolor']; ?>;" />
     </td></tr>
     
     <tr><td style="text-align:right;">
@@ -427,7 +413,7 @@ if ( $opt == 'srel_pages' ) { ?>
     <?php _e('Images count color (default 999999):', 'srel-l10n'); ?>
     </td><td>
     <input type="text" name="imgcountcolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['imgcountcolor']; ?>" />
-    <input type="text" name="imgcountcolor2" size="6" disabled style="background-color:#<?php echo $srel_options['imgcountcolor']; ?>;" />
+    <input type="text" name="imgcountcolor2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['imgcountcolor']; ?>;" />
     </td></tr>
     
     <tr><td style="text-align:right;">
@@ -437,19 +423,17 @@ if ( $opt == 'srel_pages' ) { ?>
     </td></tr>
     
     <tr><td style="text-align:right;">
-    <?php _e('Text buttons color (default AAAAFF):', 'srel-l10n'); ?>
+    <?php _e('Text buttons color (default CCCCCC):', 'srel-l10n'); ?>
     </td><td>
     <input type="text" name="btncolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['btncolor']; ?>" />
-    <input type="text" name="btncolor2" size="6" disabled style="background-color:#<?php echo $srel_options['btncolor']; ?>;" />
+    <input type="text" name="btncolor2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['btncolor']; ?>;" />
     </td></tr>
-    
-    <tr><td colspan="2">
-    <p><?php _e('To restore the defaults, delete the current value(s) and submit the form.', 'srel-l10n'); ?></p>
-    <p class="submit"><input type="submit" name="srel_saveopt" value="<?php _e('Save Options', 'srel-l10n'); ?>" /></p>
-    
-    <?php wp_nonce_field( 'srel-save-options' ); ?>
-    </td></tr>
+    </tbody>
     </table>
+
+    <p><?php _e('To restore the defaults, delete the current value(s) and submit the form.', 'srel-l10n'); ?></p>
+	<p class="submit"><input type="submit" name="srel_saveopt" value="<?php _e('Save Options', 'srel-l10n'); ?>" /></p>
+    <?php wp_nonce_field( 'srel-save-options' ); ?>
     </form>
     </div>
 <?php
