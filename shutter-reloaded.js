@@ -1,10 +1,9 @@
 // This file is part of Shutter Reloaded WordPress plugin. For standalone version visit http://www.laptoptips.ca/javascripts/shutter-reloaded/
-
 if (typeof shutterOnload == 'function') {
   var shutterLinks = {}, shutterSets = {};
-  oldonload = window.onload;
-  if( typeof window.onload != 'function' ) window.onload = shutterOnload;
-  else window.onload = function(){shutterOnload();if(oldonload){oldonload();}};
+  if ('undefined' != typeof jQuery) jQuery(document).ready(function(){shutterOnload();});
+  else if( typeof window.onload != 'function' ) window.onload = shutterOnload;
+  else {oldonld = window.onload;window.onload = function(){if(oldonld){oldonld();};shutterOnload();}};
 }
 
 shutterReloaded = {
@@ -13,13 +12,17 @@ shutterReloaded = {
     return document.getElementById(a);
   },
   
-  L10n : shL10n,
-  imageCount : shImageCount,
-  textBtns : shTextBtns,
-  shImgDir : shImgDir,
+  settings : function() {
+    var t = this, s = ( 'object' == typeof shutterSettings ) ? shutterSettings : {};
 
+	t.L10n = s.L10n || ['Previous','Next','Close','Full Size','Fit to Screen','Image','of','Loading...'];
+    t.imageCount = s.imageCount || 0;
+    t.textBtns = s.textBtns || 0;
+    t.imgDir = s.imgDir || 'images/';
+  },
+  
   Init : function (a) {
-    var L, T, shtype, i, setid, inset, shfile, shMenuPre, k, img;
+    var t = this, L, T, shtype, i, m, setid, inset, shfile, shMenuPre, k, img;
     for ( i = 0; i < document.links.length; i++ ) {
       L = document.links[i];
       shtype = L.href.slice(-4).toLowerCase();
@@ -28,9 +31,9 @@ shutterReloaded = {
       if ( a == 'lb' && L.rel.toLowerCase().indexOf('lightbox') == -1 ) continue;
       
       if ( L.className.toLowerCase().indexOf('shutterset') != -1 ) 
-        setid = ( L.className.indexOf(' ') != -1 ) ? L.className.slice(0,L.className.indexOf(' ')) : L.className;
+        setid = L.className.replace(/\s/g, '_');
       else if ( L.rel.toLowerCase().indexOf('lightbox[') != -1 ) 
-        setid = L.rel;
+        setid = L.rel.replace(/\s/g, '_');
       else setid = 0, inset = -1;
       
       if( setid ) {
@@ -45,58 +48,60 @@ shutterReloaded = {
       L.onclick = new Function('shutterReloaded.Make("'+i+'");return false;');
     }
     
-    if ( ! this.textBtns ) {
+    t.settings();
+    
+    if ( ! t.textBtns ) {
       shMenuPre = ['close.gif','prev.gif','next.gif','resize1.gif','resize2.gif','loading.gif'];
       for ( k = 0; k < shMenuPre.length; k++ ) {
         img = new Image();
-        img.src = this.shImgDir+shMenuPre[k];
+        img.src = t.imgDir+shMenuPre[k];
       }
     }
   },
 
   Make : function(ln,fs) {
-    var prev, next, prevlink = '', nextlink = '', previmg, nextimg, prevbtn, nextbtn, D, S, W, NB, fsarg = '', imgNum, closebtn, fsbtn, fsLink;
+    var t = this, prev, next, prevlink = '', nextlink = '', previmg, nextimg, prevbtn, nextbtn, D, S, W, NB, fsarg = '', imgNum, closebtn, fsbtn, fsLink;
 
-    if ( ! this.Top ) {
-      if ( typeof window.pageYOffset != 'undefined' ) this.Top = window.pageYOffset;
-      else this.Top = (document.documentElement.scrollTop > 0) ? document.documentElement.scrollTop : document.body.scrollTop;
+    if ( ! t.Top ) {
+      if ( typeof window.pageYOffset != 'undefined' ) t.Top = window.pageYOffset;
+      else t.Top = (document.documentElement.scrollTop > 0) ? document.documentElement.scrollTop : document.body.scrollTop;
     }
     
-    if ( typeof this.pgHeight == 'undefined' ) 
-      this.pgHeight = Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
+    if ( typeof t.pgHeight == 'undefined' ) 
+      t.pgHeight = Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
     
-    if ( fs ) this.FS = true;
-    else this.FS = null;
+    if ( fs ) t.FS = true;
+    else t.FS = null;
     
-    if ( this.resizing ) this.resizing = null;
+    if ( t.resizing ) t.resizing = null;
     window.onresize = new Function('shutterReloaded.Resize("'+ln+'");');
     
     document.documentElement.style.overflowX = 'hidden';
-    if ( ! this.VP ) {
-      this._viewPort();
-      this.VP = true;
+    if ( ! t.VP ) {
+      t._viewPort();
+      t.VP = true;
     }
     
-    if ( ! (S = this.I('shShutter')) ) {
+    if ( ! (S = t.I('shShutter')) ) {
       S = document.createElement('div');
       S.setAttribute('id','shShutter');
       document.getElementsByTagName('body')[0].appendChild(S);
-      this.hideTags();
+      t.hideTags();
     }
 
-    if ( ! (D = this.I('shDisplay')) ) {
+    if ( ! (D = t.I('shDisplay')) ) {
       D = document.createElement('div');
       D.setAttribute('id','shDisplay');
-      D.style.top = this.Top + 'px';
+      D.style.top = t.Top + 'px';
       document.getElementsByTagName('body')[0].appendChild(D);
     }
 
-    S.style.height = this.pgHeight + 'px';    
+    S.style.height = t.pgHeight + 'px';    
     
-    var dv = this.textBtns ? ' | ' : '';
+    var dv = t.textBtns ? ' | ' : '';
     if ( shutterLinks[ln].num > 1 ) {
       prev = shutterSets[shutterLinks[ln].set][shutterLinks[ln].num - 2];
-      prevbtn = this.textBtns ? this.L10n[0] : '<img src="'+this.shImgDir+'prev.gif" title="'+this.L10n[0]+'" />';
+      prevbtn = t.textBtns ? t.L10n[0] : '<img src="'+t.imgDir+'prev.gif" title="'+t.L10n[0]+'" />';
       prevlink = '<a href="#" onclick="shutterReloaded.Make('+prev+');return false">'+prevbtn+'</a>'+dv;
       previmg = new Image();
       previmg.src = shutterLinks[prev].link;
@@ -104,26 +109,26 @@ shutterReloaded = {
     
     if ( shutterLinks[ln].num != -1 && shutterLinks[ln].num < (shutterSets[shutterLinks[ln].set].length) ) {
       next = shutterSets[shutterLinks[ln].set][shutterLinks[ln].num];
-      nextbtn = this.textBtns ? this.L10n[1] : '<img src="'+this.shImgDir+'next.gif" title="'+this.L10n[1]+'" />';
+      nextbtn = t.textBtns ? t.L10n[1] : '<img src="'+t.imgDir+'next.gif" title="'+t.L10n[1]+'" />';
       nextlink = '<a href="#" onclick="shutterReloaded.Make('+next+');return false">'+nextbtn+'</a>'+dv;
       nextimg = new Image();
       nextimg.src = shutterLinks[next].link;
     }
     
-    closebtn = this.textBtns ? this.L10n[2] : '<img src="'+this.shImgDir+'close.gif" title="'+this.L10n[2]+'" />';
+    closebtn = t.textBtns ? t.L10n[2] : '<img src="'+t.imgDir+'close.gif" title="'+t.L10n[2]+'" />';
     
-    imgNum = ( (shutterLinks[ln].num > 0) && this.imageCount ) ? ' '+this.L10n[5]+'&nbsp;'+shutterLinks[ln].num+'&nbsp;'+this.L10n[6]+'&nbsp;'+shutterSets[shutterLinks[ln].set].length : '';
+    imgNum = ( (shutterLinks[ln].num > 0) && t.imageCount ) ? ' '+t.L10n[5]+'&nbsp;'+shutterLinks[ln].num+'&nbsp;'+t.L10n[6]+'&nbsp;'+shutterSets[shutterLinks[ln].set].length : '';
 
-    if ( this.FS ) {
-      fsbtn = this.textBtns ? this.L10n[4] : '<img src="'+this.shImgDir+'resize2.gif" title="'+this.L10n[4]+'"  />';
+    if ( t.FS ) {
+      fsbtn = t.textBtns ? t.L10n[4] : '<img src="'+t.imgDir+'resize2.gif" title="'+t.L10n[4]+'"  />';
     } else {
-      fsbtn = this.textBtns ? this.L10n[3] : '<img src="'+this.shImgDir+'resize1.gif" title="'+this.L10n[3]+'" />';
+      fsbtn = t.textBtns ? t.L10n[3] : '<img src="'+t.imgDir+'resize1.gif" title="'+t.L10n[3]+'" />';
       fsarg = ',1';
     }
     
     fsLink = '<span id="fullSize"><a href="#" onclick="shutterReloaded.Make('+ln+fsarg+');return false">'+fsbtn+'</a>'+dv+'</span>';
     
-    if ( ! (NB = this.I('shNavBar')) ) {
+    if ( ! (NB = t.I('shNavBar')) ) {
       NB = document.createElement('div');
       NB.setAttribute('id','shNavBar');
       document.getElementsByTagName('body')[0].appendChild(NB);
@@ -137,100 +142,103 @@ shutterReloaded = {
   },
   
   loading : function() {
-    var S, WB, W;
-    if ( (W = this.I('shWrap')) && W.style.visibility == 'visible' ) return;
-    if ( ! (S = this.I('shShutter')) ) return;
-    if ( this.I('shWaitBar') ) return;
+    var t = this, S, WB, W;
+    if ( (W = t.I('shWrap')) && W.style.visibility == 'visible' ) return;
+    if ( ! (S = t.I('shShutter')) ) return;
+    if ( t.I('shWaitBar') ) return;
     WB = document.createElement('div');
     WB.setAttribute('id','shWaitBar');
-    WB.style.top = this.Top + 'px';
-    WB.innerHTML = '<img src="'+this.shImgDir+'loading.gif" title="'+this.L10n[7]+'" />';
+    WB.style.top = t.Top + 'px';
+    WB.innerHTML = '<img src="'+t.imgDir+'loading.gif" title="'+t.L10n[7]+'" />';
     S.appendChild(WB);
   },
   
   hideShutter : function() {
-    var D, S, NB;
-    if ( D = this.I('shDisplay') ) D.parentNode.removeChild(D);
-    if ( S = this.I('shShutter') ) S.parentNode.removeChild(S);
-    if ( NB = this.I('shNavBar') ) NB.parentNode.removeChild(NB);
-    this.hideTags(true);
-    window.scrollTo(0,this.Top);
-    window.onresize = this.FS = this.Top = this.VP = null;
+    var t = this, D, S, NB;
+    if ( D = t.I('shDisplay') ) D.parentNode.removeChild(D);
+    if ( S = t.I('shShutter') ) S.parentNode.removeChild(S);
+    if ( NB = t.I('shNavBar') ) NB.parentNode.removeChild(NB);
+    t.hideTags(true);
+    window.scrollTo(0,t.Top);
+    window.onresize = t.FS = t.Top = t.VP = null;
     document.documentElement.style.overflowX = '';
   },
 
   Resize : function(ln) {
-    if ( this.resizing ) return;
-    if ( ! this.I('shShutter') ) return;
-    var W = this.I('shWrap');
+    var t = this;
+	
+	if ( t.resizing ) return;
+    if ( ! t.I('shShutter') ) return;
+    var W = t.I('shWrap');
     if ( W ) W.style.visibility = 'hidden';
     
     window.setTimeout(function(){shutterReloaded.resizing = null},500);
     window.setTimeout(new Function('shutterReloaded.VP = null;shutterReloaded.Make("'+ln+'");'),100);
-    this.resizing = true;
+    t.resizing = true;
   },
   
   _viewPort : function() {
-    var wiH = window.innerHeight ? window.innerHeight : 0;
+    var t = this;
+	var wiH = window.innerHeight ? window.innerHeight : 0;
     var dbH = document.body.clientHeight ? document.body.clientHeight : 0;
     var deH = document.documentElement ? document.documentElement.clientHeight : 0;
       
     if( wiH > 0 ) {
-      this.wHeight = ( (wiH - dbH) > 1 && (wiH - dbH) < 30 ) ? dbH : wiH;
-      this.wHeight = ( (this.wHeight - deH) > 1 && (this.wHeight - deH) < 30 ) ? deH : this.wHeight;
-    } else this.wHeight = ( deH > 0 ) ? deH : dbH;
+      t.wHeight = ( (wiH - dbH) > 1 && (wiH - dbH) < 30 ) ? dbH : wiH;
+      t.wHeight = ( (t.wHeight - deH) > 1 && (t.wHeight - deH) < 30 ) ? deH : t.wHeight;
+    } else t.wHeight = ( deH > 0 ) ? deH : dbH;
 
     var deW = document.documentElement ? document.documentElement.clientWidth : 0;
     var dbW = window.innerWidth ? window.innerWidth : document.body.clientWidth;
-    this.wWidth = ( deW > 1 ) ? deW : dbW;
+    t.wWidth = ( deW > 1 ) ? deW : dbW;
   },
   
   ShowImg : function() {
-    var S, W, WB, D, T, TI, NB, wHeight, wWidth, capH, shHeight, maxHeight, itop, mtop, resized = 0;
-    S = this.I('shShutter');
+    var t = this, S, W, WB, D, T, TI, NB, wHeight, wWidth, capH, shHeight, maxHeight, itop, mtop, resized = 0;
+    S = t.I('shShutter');
     if ( ! S ) return;
 
-    if ( (W = this.I('shWrap')) && W.style.visibility == 'visible' ) return;
-    if ( WB = this.I('shWaitBar') ) WB.parentNode.removeChild(WB);
+    if ( (W = t.I('shWrap')) && W.style.visibility == 'visible' ) return;
+    if ( WB = t.I('shWaitBar') ) WB.parentNode.removeChild(WB);
     
-    D = this.I('shDisplay');
-    TI = this.I('shTopImg');
-    T = this.I('shTitle');
-    NB = this.I('shNavBar');
+    D = t.I('shDisplay');
+    TI = t.I('shTopImg');
+    T = t.I('shTitle');
+    NB = t.I('shNavBar');
     S.style.width = D.style.width = '';
     T.style.width = (TI.width - 4) + 'px';
     
     capH = NB.offsetHeight ? T.offsetHeight + NB.offsetHeight : 30;
-    shHeight = this.wHeight - 7 - capH;
+    shHeight = t.wHeight - 7 - capH;
 
-    if ( this.FS ) {
-      if ( TI.width > (this.wWidth - 10) ) 
+    if ( t.FS ) {
+      if ( TI.width > (t.wWidth - 10) ) 
         S.style.width = D.style.width = TI.width + 10 + 'px';
         document.documentElement.style.overflowX = '';
     } else {
-      window.scrollTo(0,this.Top);
+      window.scrollTo(0,t.Top);
       if ( TI.height > shHeight ) {
         TI.width = TI.width * (shHeight / TI.height);
         TI.height = shHeight;
         resized = 1;
       }
-      if ( TI.width > (this.wWidth - 16) ) {
-        TI.height = TI.height * ((this.wWidth - 16) / TI.width);
-        TI.width = this.wWidth - 16;
+      if ( TI.width > (t.wWidth - 16) ) {
+        TI.height = TI.height * ((t.wWidth - 16) / TI.width);
+        TI.width = t.wWidth - 16;
         resized = 1;
       }
       T.style.width = (TI.width - 4) + 'px';
       NB.style.bottom = '0px';
     }
 
-    maxHeight = this.Top + TI.height + capH + 10;
-    if ( maxHeight > this.pgHeight ) S.style.height = maxHeight + 'px'; 
-    window.scrollTo(0,this.Top);
-    if ( (this.FS && (TI.height > shHeight || TI.width > this.wWidth)) || resized ) this.I('fullSize').style.visibility = 'visible';
+    maxHeight = t.Top + TI.height + capH + 10;
+    if ( maxHeight > t.pgHeight ) S.style.height = maxHeight + 'px'; 
+    window.scrollTo(0,t.Top);
+    if ( (t.FS && (TI.height > shHeight || TI.width > t.wWidth)) || resized ) t.I('fullSize').style.visibility = 'visible';
     
     itop = (shHeight - TI.height) * 0.45;
     mtop = (itop > 3) ? Math.floor(itop) : 3;
-    D.style.top = this.Top + mtop + 'px';
+    D.style.top = t.Top + mtop + 'px';
     NB.style.bottom = '0';
     W.style.visibility = 'visible';
   },

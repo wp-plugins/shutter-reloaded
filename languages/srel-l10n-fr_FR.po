@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Shutter reloaded\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-12-03 09:57-0800\n"
+"PO-Revision-Date: 2008-07-20 11:10-0800\n"
 "Last-Translator: Andrew Ozz\n"
 "Language-Team: Le Blog de Lise <webmaster@liseweb.fr>\n"
 "MIME-Version: 1.0\n"
@@ -11,35 +11,35 @@ msgstr ""
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 
-#: ../shutter-reloaded.php:100
+#: ../shutter-reloaded.php:99
 msgid "Previous"
 msgstr "Précédente"
 
-#: ../shutter-reloaded.php:100
+#: ../shutter-reloaded.php:99
 msgid "Next"
 msgstr "Suivante"
 
-#: ../shutter-reloaded.php:100
+#: ../shutter-reloaded.php:99
 msgid "Close"
 msgstr "Fermer"
 
-#: ../shutter-reloaded.php:100
+#: ../shutter-reloaded.php:99
 msgid "Full Size"
 msgstr "Pleine page"
 
-#: ../shutter-reloaded.php:100
+#: ../shutter-reloaded.php:99
 msgid "Fit to Screen"
 msgstr "Taille de l'écran"
 
-#: ../shutter-reloaded.php:100
+#: ../shutter-reloaded.php:99
 msgid "Image"
 msgstr "Image"
 
-#: ../shutter-reloaded.php:100
+#: ../shutter-reloaded.php:99
 msgid "of"
 msgstr "sur"
 
-#: ../shutter-reloaded.php:100
+#: ../shutter-reloaded.php:99
 msgid "Loading..."
 msgstr "Chargement..."
 
@@ -68,44 +68,44 @@ msgstr "Options enregistrées !"
 msgid "Shutter Reloaded Options"
 msgstr "Options Shutter Reloaded "
 
-#: ../shutter-reloaded.php:248
+#: ../shutter-reloaded.php:247
 msgid "Hide Help"
 msgstr "Cacher l'aide"
 
+#: ../shutter-reloaded.php:248
 #: ../shutter-reloaded.php:249
-#: ../shutter-reloaded.php:250
 msgid "Show Help"
 msgstr "Montrer l'aide"
 
-#: ../shutter-reloaded.php:253
+#: ../shutter-reloaded.php:252
 msgid "Setup and Usage"
 msgstr "Configuration et utilisation"
 
-#: ../shutter-reloaded.php:254
+#: ../shutter-reloaded.php:253
 msgid "Shutter is activated by <strong>the link</strong> pointing to the image you want to display, with or without a thumbnail (text links work too). The activation class and the title have to be set on that link."
 msgstr "Shutter est activé par <strong>le lien</strong> pointant sur l'image à afficher, avec ou sans vignette (fonctionne avec les liens hypertextes également). La classe d'activation et le titre doivent être indiqués pour le lien."
 
-#: ../shutter-reloaded.php:255
+#: ../shutter-reloaded.php:254
 msgid "To take full control of Shutter's activation and to make multiple image sets on the same page, you will need to add the <strong>class=&quot;shutter&quot;</strong> or <strong>&quot;shutterset&quot;</strong> or <strong>&quot;shutterset_setname&quot;</strong> to your links in &quot;Code&quot; view on the Write/Edit Post page."
 msgstr "Pour prendre le contrôle sur l'activation de Shutter et pour disposer de plusieurs ensembles d'images sur la même page, vous devez ajouter la <strong>class=&quot;shutter&quot;</strong> ou <strong>&quot;shutterset&quot;</strong> ou <strong>&quot;shutterset_nom&quot;</strong> à vos liens dans l'onglet &quot;Code&quot; dans la page d'édition des billets ou des pages."
 
-#: ../shutter-reloaded.php:256
+#: ../shutter-reloaded.php:255
 msgid "To add caption to the images, set the <strong>title=&quot;...&quot;</strong> attribute of the <strong>links</strong> pointing to them."
 msgstr "Pour ajouter une légende aux images, utilisez la balise <strong>title=&quot;...&quot;</strong> pour les <strong>liens</strong> qui pointent vers elles."
 
-#: ../shutter-reloaded.php:257
+#: ../shutter-reloaded.php:256
 msgid "If you want to use image sets, you will need to add <strong>class=&quot;shutterset&quot;</strong> to all <strong>links</strong> that point to the images for that set. If you want to apply css style to the links, you can add second class, like this: class=&quot;shutterset myClass&quot;, but &quot;shutterset&quot; should be first."
 msgstr "Si vous souhaitez utiliser des ensembles d'images, vous devrez ajouter la <strong>class=&quot;shutterset&quot;</strong> à tous les <strong>liens</strong> qui pointent vers les images de cet ensemble. Si vous souhaitez appliquer une feuille de style css aux liens, vous pouvez ajouter une seconde classe comme cecic : class=&quot;shutterset maCalsse&quot;, mais la classe &quot;shutterset&quot; doit être spécifiée en premier."
 
-#: ../shutter-reloaded.php:258
+#: ../shutter-reloaded.php:257
 msgid "Adding class=&quot;shutterset&quot; will also trigger activation (for the first activation option). There is no need to add both &quot;shutter&quot; and &quot;shutterset&quot;."
 msgstr "Ajouter la <strong>class=&quot;shutterset&quot;</strong> déclenchera également l'activation de Shutter (pour la première option). Il n'est pas nécessaire d'ajouter à la fois les classes  &quot;shutter&quot; et &quot;shutterset&quot;."
 
-#: ../shutter-reloaded.php:259
+#: ../shutter-reloaded.php:258
 msgid "To make more than one set per page, use <strong>class=&quot;shutterset_setname&quot;.</strong> The underscore is required and setname can be any short ASCII word and/or number (different for each set)."
 msgstr "Pour disposer de plus d'un ensemble d'images par page, utilisez la  <strong>class=&quot;shutterset_nom&quot;.</strong> Le <em>underscore</em> est obligatoire et le nom peut être un nom ou un nombre utilisant des caractères ASCII  (différent pour chaque ensemble d'images)."
 
-#: ../shutter-reloaded.php:260
+#: ../shutter-reloaded.php:259
 msgid "You can use the &quot;Activate shutter on all image links&quot; and also make sets by adding class=&quot;shutterset&quot; or class=&quot;shutterset_setname&quot; or rel=&quot;lightbox[...]&quot; to some of the image links."
 msgstr "Vous pouvez utiliser l'option &quot;Activer shutter pour tous les liens d'images&quot; et également définir des ensemble d'images en ajoutant <strong> class=&quot;shutterset&quot; ou class=&quot;shutterset_nom&quot; ou rel=&quot;lightbox[...]&quot; </strong>à certains liens vers les images."
 
@@ -141,134 +141,131 @@ msgstr "Shutter sur tous les liens pointant vers les images sur un ou des page(s
 msgid "Shutter on all image links and use LightBox style (rel=&quot;lightbox[...]&quot;) activation and sets."
 msgstr "Shutter sur tous les liens pointant vers les images en utilisant l'effet LightBox (rel=&quot;lightbox[...]&quot;)."
 
-#: ../shutter-reloaded.php:294
+#: ../shutter-reloaded.php:291
 msgid "Shutter is activated for all links pointing to an image."
 msgstr "Shutter est activé  pour tous les liens pointant sur une image."
 
-#: ../shutter-reloaded.php:295
+#: ../shutter-reloaded.php:292
 msgid "Shutter is activated for all links pointing to an image and will create different image set for each Post/Page."
 msgstr "Shutter est activé  pour tous les liens pointant sur une image et créera un ensemble d'image différent pour chaque article ou page."
 
-#: ../shutter-reloaded.php:295
+#: ../shutter-reloaded.php:292
 msgid "This option is most suitable if you display several Posts on your home page and want to have different image set for each Post. It adds shutter's activation class at runtime and doesn't modify the html."
 msgstr "Cette option convient si vous disposez de plusieurs billets sur votre page d'accueil et avez différets ensembles d'images pour chaque billet. Elle ajoute une classe d'activation de Shutter et ne modifie pas le code html."
 
-#: ../shutter-reloaded.php:297
+#: ../shutter-reloaded.php:294
 msgid "Excluded Posts or Pages (by ID):"
 msgstr "Exclure des billets ou des pages (par identifiant - ID) : "
 
-#: ../shutter-reloaded.php:303
-#: ../shutter-reloaded.php:351
+#: ../shutter-reloaded.php:300
+#: ../shutter-reloaded.php:340
 msgid "[none]"
 msgstr "[aucun]"
 
-#: ../shutter-reloaded.php:309
+#: ../shutter-reloaded.php:306
 msgid "Add Excluded ID"
 msgstr "Exclure l'identifiant (ID)"
 
-#: ../shutter-reloaded.php:310
-#: ../shutter-reloaded.php:358
+#: ../shutter-reloaded.php:307
+#: ../shutter-reloaded.php:347
 msgid "Please enter the Page/Post ID that you want to add to this list."
 msgstr "Saisissez l'identifiant (ID) du billet ou de la page que vous souhaitez ajouter à cette liste."
 
-#: ../shutter-reloaded.php:312
+#: ../shutter-reloaded.php:309
 msgid "Remove Excluded ID"
 msgstr "Ne pas exclure l'identifiant (ID)"
 
-#: ../shutter-reloaded.php:313
-#: ../shutter-reloaded.php:360
+#: ../shutter-reloaded.php:310
+#: ../shutter-reloaded.php:349
 msgid "Please enter the Page/Post ID that you want to remove from this list."
 msgstr "Saisissez l'identifiant (ID) du billet ou de la page que vous souhaitez retirer de cette liste."
 
-#: ../shutter-reloaded.php:315
-msgid "Please enter the ID for the post/page you want to exclude. You can see it at the <a href=\"edit-pages.php\">Manage Pages</a> or the <a href=\"edit.php\">Manage Posts</a> page."
+#: ../shutter-reloaded.php:312
+#: ../shutter-reloaded.php:351
+msgid "Please enter the ID for the post/page you want to exclude. You can see it in your browser's status bar(at the bottom of the window) when hovering over the name at the <a href=\"edit-pages.php\">Manage Pages</a> or the <a href=\"edit.php\">Manage Posts</a> page."
 msgstr "Saisissez l'identifiant (ID) du billet ou de la page que vous souhaitez exclure. Vous pouvez connaître l'identifiant depuis la page <a href=\"edit-pages.php\">Gérer les pages</a> ou <a href=\"edit.php\">Gérer les articles</a>."
 
-#: ../shutter-reloaded.php:329
+#: ../shutter-reloaded.php:322
 msgid "Shutter is activated for all links pointing to an image, that have class = &quot;shutter&quot;, &quot;shutterset&quot; or &quot;shutterset_setname&quot;"
 msgstr "Shutter est activé  pour tous les liens pointant sur une image, avec la class = &quot;shutter&quot;, &quot;shutterset&quot; ou &quot;shutterset_nom&quot;"
 
-#: ../shutter-reloaded.php:331
+#: ../shutter-reloaded.php:324
 msgid "Class = &quot;shutter&quot; will display a single image, class = &quot;shutterset&quot; will create a single set for all images and class=&quot;shutterset_setname&quot;, where setname is a short ASCII word and/or number, will create multiple sets on the same page."
 msgstr "Class = &quot;shutter&quot; affichera une seule image, class = &quot;shutterset&quot; créera un seul ensemble pour toutes les images et class=&quot;shutterset_nom&quot;, où nom est un mot ou un nombre en caractères ASCII, créera plusieurs ensemble sur la même page."
 
-#: ../shutter-reloaded.php:344
+#: ../shutter-reloaded.php:333
 msgid "Shutter is activated for the following Posts and Pages (by ID):"
 msgstr "Shutter est activé pour les billets et pages suivants (par ID) : "
 
-#: ../shutter-reloaded.php:357
+#: ../shutter-reloaded.php:346
 msgid "Add ID"
 msgstr "Ajouter l'identifiant (ID)"
 
-#: ../shutter-reloaded.php:359
+#: ../shutter-reloaded.php:348
 msgid "Remove ID"
 msgstr "Supprimer l'identifiant (ID)"
 
-#: ../shutter-reloaded.php:362
-msgid "Please enter the ID for the post/page for use with shutter. You can see it at the <a href=\"edit-pages.php\">Manage Pages</a> or the <a href=\"edit.php\">Manage Posts</a> page."
-msgstr "Saisissez l'identifiant (ID) du billet ou de la page à utiliser avec Shutter. Vous pouvez connaître l'identifiant depuis la page <a href=\"edit-pages.php\">Gérer les pages</a> ou <a href=\"edit.php\">Gérer les articles</a>."
-
-#: ../shutter-reloaded.php:376
+#: ../shutter-reloaded.php:360
 msgid "Shutter uses Lightbox style activation."
 msgstr "Shutter utilse l'effet Lightbox."
 
-#: ../shutter-reloaded.php:378
+#: ../shutter-reloaded.php:362
 msgid "Shutter is activated for all links pointing to an image, that have rel=&quot;lightbox&quot; or rel=&quot;lightbox[...]&quot;. To make sets of images, you will have to add rel=&quot;lightbox[abc]&quot;, where &quot;abc&quot; can be any short ASCII word and/or number."
 msgstr "Shutter is activé pour tous les liens pointant vers un image, avec rel=&quot;lightbox&quot; ou rel=&quot;lightbox[...]&quot;. Pour créer un ensemble d'images, vous devez ajouter rel=&quot;lightbox[abc]&quot;, où &quot;abc&quot; peut être un nombre ou un mot comportant des caractères ASCII."
 
-#: ../shutter-reloaded.php:389
+#: ../shutter-reloaded.php:373
 msgid "Customization"
 msgstr "Personnalisation"
 
-#: ../shutter-reloaded.php:393
+#: ../shutter-reloaded.php:379
 msgid "Shutter color (default 000000):"
 msgstr "Couleur de Shutter (par defaut 000000) :"
 
-#: ../shutter-reloaded.php:393
+#: ../shutter-reloaded.php:379
 msgid "Please enter valid HTML color codes, from 000000 to FFFFFF."
 msgstr "Saisissez un code de couleur HTML valide, de 000000 à FFFFFF."
 
-#: ../shutter-reloaded.php:400
+#: ../shutter-reloaded.php:386
 msgid "Shutter opacity (default 80):"
 msgstr "Opacité (par défaut 80) : "
 
-#: ../shutter-reloaded.php:400
+#: ../shutter-reloaded.php:386
 msgid "Enter a number between 1 (see-through) and 99 (solid color)."
 msgstr "Saisissez un nombre compris entre 1 (transparent) et 99 (opaque)."
 
-#: ../shutter-reloaded.php:407
+#: ../shutter-reloaded.php:393
 msgid "Caption text color (default FFFFFF):"
 msgstr "Couleur du texte de légende (par défaut FFFFFF) :"
 
-#: ../shutter-reloaded.php:414
-msgid "Menubar color (default 2E2E2E):"
-msgstr "Couleur de la barre de menu (par défaut 2E2E2E) :"
+#: ../shutter-reloaded.php:400
+msgid "Menubar color (default 3E3E3E):"
+msgstr "Couleur de la barre de menu (par défaut 3E3E3E) :"
 
-#: ../shutter-reloaded.php:421
+#: ../shutter-reloaded.php:407
 msgid "Show images count for sets (Image 1 of ...):"
 msgstr "Montrer le compteur d'images (Image 1 sur ...) : "
 
-#: ../shutter-reloaded.php:427
+#: ../shutter-reloaded.php:413
 msgid "Images count color (default 999999):"
 msgstr "Couleur du numéro des images (par défaut 999999) :"
 
-#: ../shutter-reloaded.php:434
+#: ../shutter-reloaded.php:420
 msgid "Text buttons (instead of images):"
 msgstr "Texte à la place des boutons : "
 
-#: ../shutter-reloaded.php:440
-msgid "Text buttons color (default AAAAFF):"
-msgstr "Couleur du texte affiché à la place des boutons (par défaut AAAAFF) :"
+#: ../shutter-reloaded.php:426
+msgid "Text buttons color (default CCCCCC):"
+msgstr "Couleur du texte affiché à la place des boutons (par défaut CCCCCC) :"
 
-#: ../shutter-reloaded.php:447
+#: ../shutter-reloaded.php:434
 msgid "To restore the defaults, delete the current value(s) and submit the form."
 msgstr "Pour restaurer les paramètres par défaut, supprimez les valeurs actuelles et cliquez sur le bouton \"Enregistrer\"."
 
-#: ../shutter-reloaded.php:448
+#: ../shutter-reloaded.php:435
 msgid "Save Options"
 msgstr "Enregistrer"
 
-#: ../shutter-reloaded.php:461
+#: ../shutter-reloaded.php:445
 msgid "Shutter Reloaded"
 msgstr "Shutter Reloaded"
 

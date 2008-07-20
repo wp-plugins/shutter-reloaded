@@ -90,15 +90,15 @@ div#shShutter{background-color:#<?php echo $srel_options['shcolor']; ?>;opacity:
 <?php } ?>
 <script type="text/javascript">
 //<![CDATA[
-shImgDir = '<?php bloginfo('wpurl'); ?>/wp-content/plugins/shutter-reloaded/menu/';
-<?php if( $srel_options['shImageCount'] == 1 ) { ?>shImageCount = true;
-<?php } else { ?>shImageCount = false;
-<?php } 
-    if( $srel_options['shTextBtns'] == 1 ) { ?>shTextBtns = true;
-<?php } else { ?>shTextBtns = false;
-<?php } ?>
-shL10n = ['<?php echo js_escape(__("Previous", "srel-l10n")); ?>','<?php echo js_escape(__("Next", "srel-l10n")); ?>','<?php echo js_escape(__("Close", "srel-l10n")); ?>','<?php echo js_escape(__("Full Size", "srel-l10n")); ?>','<?php echo js_escape(__("Fit to Screen", "srel-l10n")); ?>','<?php echo js_escape(__("Image", "srel-l10n")); ?>','<?php echo js_escape(__("of", "srel-l10n")); ?>','<?php echo js_escape(__("Loading...", "srel-l10n")); ?>'];
-shutterOnload = function(){<?php echo $addshutter; ?>};
+shutterSettings = {
+  imgDir : '<?php bloginfo('wpurl'); ?>/wp-content/plugins/shutter-reloaded/menu/',
+  <?php if( $srel_options['imageCount'] == 1 ) { ?>  imageCount : 1,
+  <?php } 
+  if( $srel_options['textBtns'] == 1 ) { ?>  textBtns : 1,
+  <?php } ?>
+  L10n : ['<?php echo js_escape(__("Previous", "srel-l10n")); ?>','<?php echo js_escape(__("Next", "srel-l10n")); ?>','<?php echo js_escape(__("Close", "srel-l10n")); ?>','<?php echo js_escape(__("Full Size", "srel-l10n")); ?>','<?php echo js_escape(__("Fit to Screen", "srel-l10n")); ?>','<?php echo js_escape(__("Image", "srel-l10n")); ?>','<?php echo js_escape(__("of", "srel-l10n")); ?>','<?php echo js_escape(__("Loading...", "srel-l10n")); ?>']
+}
+shutterOnload = function(){<?php echo $addshutter; ?>}
 //]]>
 </script>
 <script src="<?php bloginfo('wpurl'); ?>/wp-content/plugins/shutter-reloaded/shutter-reloaded.js?ver=2.0" type="text/javascript"></script>
@@ -107,18 +107,23 @@ shutterOnload = function(){<?php echo $addshutter; ?>};
 add_action('wp_head', 'srel_makeshutter' );
 
 function srel_auto_set($content) {
-	global $post, $srel_autoset;
+	global $srel_autoset;
   	
-  	if( $srel_autoset ) {
-        $pattern = array( '/<a([^>]*)href=[\'"]([^"\']+).(gif|jpeg|jpg|png)[\'"]([^>]*>)/i', '/<a class="shutterset_%SRELID%" href="([^"]+)"([^>]*)class=[\'"]([^"\']+)[\'"]([^>]*>)/i' );
-        $replacement = array( '<a class="shutterset_%SRELID%" href="$2.$3"$1$4', '<a class="shutterset_%SRELID% $3" href="$1"$2$4' );
-        $content = preg_replace($pattern, $replacement, $content);
+  	if( $srel_autoset )
+		return preg_replace_callback('/<a ([^>]*?href=[\'"][^"\']+?\.(?:gif|jpeg|jpg|png)[^>]*)>/i', 'srel_cback', $content);
 
-        return str_replace('%SRELID%', $post->ID, $content);
-    }
     return $content;
 }
 add_filter('the_content', 'srel_auto_set', 65 );
+
+function srel_cback($a) {
+	global $post;
+			
+	$str = $a[1];
+	if ( false !== strpos(strtolower($str), 'class=') ) 
+		return '<a '.preg_replace('/class=[\'"]([^"\']+)[\'"]/i', 'class="shutterset_'.$post->ID.' $1"', $str).'>';
+	else return '<a class="shutterset_'.$post->ID.'" '.$str.'>';
+}
 
 function srel_deactiv() {
     delete_option('srel_options');
@@ -153,7 +158,7 @@ function srel_optpage() {
     $def = array( 'shcolor' => '000000', 'opacity' => '80', 'capcolor' => 'ffffff', 'menucolor' => '3e3e3e', 'btncolor' => 'cccccc', 'imgcountcolor' => '999999' );
     
     if( ! is_array($srel_options) ) {
-        $srel_options = array_merge( $def, array('shImageCount' => '1', 'shTextBtns' => '0', 'custom' => '0') );
+        $srel_options = array_merge( $def, array('imageCount' => '1', 'textBtns' => '0', 'custom' => '0') );
         add_option( 'srel_options', $srel_options, 'Shutter Reloaded' );
     }
 
@@ -164,12 +169,12 @@ function srel_optpage() {
         $new_srel_options['menucolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['menucolor']) ? strtolower($_POST['menucolor']) : '3e3e3e';
         $new_srel_options['btncolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['btncolor']) ? strtolower($_POST['btncolor']) : 'cccccc';
         $new_srel_options['imgcountcolor'] = preg_match("/[0-9A-Fa-f]{6}/", $_POST['imgcountcolor']) ? strtolower($_POST['imgcountcolor']) : '999999';
-        $new_srel_options['shImageCount'] = $_POST['shImageCount'] ? 1 : 0;
-        $new_srel_options['shTextBtns'] = $_POST['shTextBtns'] ? 1 : 0;
+        $new_srel_options['imageCount'] = $_POST['imageCount'] ? 1 : 0;
+        $new_srel_options['textBtns'] = $_POST['textBtns'] ? 1 : 0;
         $new_srel_options['opacity'] = preg_match("/^[0-9][0-9]?$/", $_POST['opacity']) ? $_POST['opacity'] : '80';
         
         $new_opt = $new_srel_options;
-        unset($new_opt['shImageCount'], $new_opt['shTextBtns'], $new_opt['custom']);
+        unset($new_opt['imageCount'], $new_opt['textBtns'], $new_opt['custom']);
         if( $def != $new_opt ) $new_srel_options['custom'] = 1;
         else $new_srel_options['custom'] = 0;
         
@@ -406,7 +411,7 @@ if ( $opt == 'srel_pages' ) { ?>
     <tr><td style="text-align:right;">
     <?php _e('Show images count for sets (Image 1 of ...):', 'srel-l10n'); ?>
     </td><td>
-    <input type="checkbox" class="checkbox"  name="shImageCount" id="shImageCount" <?php if ($srel_options['shImageCount'] == 1) { echo ' checked="checked"'; } ?> />
+    <input type="checkbox" class="checkbox"  name="imageCount" id="imageCount" <?php if ($srel_options['imageCount'] == 1) { echo ' checked="checked"'; } ?> />
     </td></tr>
     
     <tr><td style="text-align:right;">
@@ -419,7 +424,7 @@ if ( $opt == 'srel_pages' ) { ?>
     <tr><td style="text-align:right;">
     <?php _e('Text buttons (instead of images):', 'srel-l10n'); ?>
     </td><td>
-    <input type="checkbox" class="checkbox"  name="shTextBtns" id="shTextBtns" <?php if ($srel_options['shTextBtns'] == 1) { echo ' checked="checked"'; } ?> />
+    <input type="checkbox" class="checkbox"  name="textBtns" id="textBtns" <?php if ($srel_options['textBtns'] == 1) { echo ' checked="checked"'; } ?> />
     </td></tr>
     
     <tr><td style="text-align:right;">

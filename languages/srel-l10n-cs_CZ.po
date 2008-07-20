@@ -1,121 +1,118 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: shutter-reloaded-2.0_beta-2\n"
+"Project-Id-Version: shutter-reloaded\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2008-07-20 11:10-0800\n"
+"PO-Revision-Date: 2008-07-20 11:09-0800\n"
 "Last-Translator: Andrew Ozz\n"
-"Language-Team: Gerhard Lehnhoff (aufBlog.de) <aufBlog@gmx.de>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
+"X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: ./\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: ..\n"
+"X-Poedit-SearchPath-0: ..\n"
 
 #: ../shutter-reloaded.php:99
 msgid "Previous"
-msgstr "Vorheriges"
+msgstr "Předchozí"
 
 #: ../shutter-reloaded.php:99
 msgid "Next"
-msgstr "Nächstes"
+msgstr "Další"
 
 #: ../shutter-reloaded.php:99
 msgid "Close"
-msgstr "Schließen"
+msgstr "Zavřít"
 
 #: ../shutter-reloaded.php:99
 msgid "Full Size"
-msgstr "Volle Größe"
+msgstr "Plná velikost"
 
 #: ../shutter-reloaded.php:99
 msgid "Fit to Screen"
-msgstr "An Bildschirm anpassen"
+msgstr "Zmenšit na obrazovku"
 
 #: ../shutter-reloaded.php:99
 msgid "Image"
-msgstr "Bild"
+msgstr "Obrázek"
 
 #: ../shutter-reloaded.php:99
 msgid "of"
-msgstr "von"
+msgstr "z"
 
 #: ../shutter-reloaded.php:99
 msgid "Loading..."
-msgstr "Lade …"
+msgstr "Nahrávám..."
 
 #: ../shutter-reloaded.php:134
 msgid "Permission denied"
-msgstr "Zugriff verweigert"
+msgstr "Přístup zamítnut"
 
 #: ../shutter-reloaded.php:189
 #: ../shutter-reloaded.php:216
 msgid "Please enter valid post ID."
-msgstr "Bitte eine gültige Beitrags-ID eingeben."
+msgstr "Prosím vložte správné ID příspěvku"
 
 #: ../shutter-reloaded.php:202
 msgid "This post ID is not currently excluded."
-msgstr "Diese Beitrags-ID ist zurzeit nicht ausgeschlossen."
+msgstr "Příspěvek s tímto ID není vyloučen."
 
 #: ../shutter-reloaded.php:229
 msgid "This post ID is not currently included."
-msgstr "Diese Beitrags-ID ist zurzeit nicht eingeschlossen."
+msgstr "Příspěvek s tímto ID je vyloučen."
 
 #: ../shutter-reloaded.php:240
 msgid "Options saved!"
-msgstr "Optionen gespeichert!"
+msgstr "Nastavení uloženo!"
 
 #: ../shutter-reloaded.php:244
 msgid "Shutter Reloaded Options"
-msgstr "Optionen"
+msgstr "Nastavení Shutter Reloaded"
 
 #: ../shutter-reloaded.php:247
 msgid "Hide Help"
-msgstr "Erläuterungen ausblenden"
+msgstr "Skrýt nápovědu"
 
 #: ../shutter-reloaded.php:248
 #: ../shutter-reloaded.php:249
 msgid "Show Help"
-msgstr "Erläuterungen einblenden"
+msgstr "Zobrazit nápovědu"
 
 #: ../shutter-reloaded.php:252
 msgid "Setup and Usage"
-msgstr "Erläuterungen"
+msgstr "Nastavení a použití"
 
 #: ../shutter-reloaded.php:253
 msgid "Shutter is activated by <strong>the link</strong> pointing to the image you want to display, with or without a thumbnail (text links work too). The activation class and the title have to be set on that link."
-msgstr "Die Bildanzeige wird durch den Link im (Vorschau-) Bild aktiviert, der wiederum auf das eigene Bild zeigt. Am Besten wirkt die Funktion, wenn im Beitrag mittels des WordPress-Editors Bilder als Vorschaubilder eingefügt werden (<strong>\"Anzeigen Vorschaubild\"</strong>) mit Link auf sich selbst bzw. dem vergrößerten Original-Bild (<strong>\"Link zu: Datei\"</strong>)."
+msgstr "Shutter je aktivován textovým i náhledovým <strong>odkazem</strong> vedoucím na obrázek, který chcete zobrazit. Třída (class) a titulek (title) jsou u odkazu nutné."
 
 #: ../shutter-reloaded.php:254
 msgid "To take full control of Shutter's activation and to make multiple image sets on the same page, you will need to add the <strong>class=&quot;shutter&quot;</strong> or <strong>&quot;shutterset&quot;</strong> or <strong>&quot;shutterset_setname&quot;</strong> to your links in &quot;Code&quot; view on the Write/Edit Post page."
-msgstr "Um zu einer größeren Funktionsvielfalt dieser Erweiterung (Plugin) zu gelangen und um mehrere Bilder-Sets (browsen durch Bilder im Beitrag) auf der gleichen Seite aufzubauen, muss <strong>class=&quot;shutter&quot;</strong> oder <strong>class=&quot;shutterset&quot;</strong> oder <strong>class=&quot;shutterset_setname&quot;</strong> im Link-Tag eingefügt werden. Das muss man über die &quot;Code&quot;-Ansicht im Editor tun. "
+msgstr "K plné kontrole nad aktivací Shutter pluginu a k vytváření setů o více obrázcích je potřeba přidat <strong>class=&quot;shutter&quot;</strong> nebo <strong>&quot;shutterset&quot;</strong> nebo <strong>&quot;shutterset_jmeno&quot;</strong> k odkazům na panelu &quot;Kód&quot; při psaní či editaci článků nebo stránek."
 
 #: ../shutter-reloaded.php:255
 msgid "To add caption to the images, set the <strong>title=&quot;...&quot;</strong> attribute of the <strong>links</strong> pointing to them."
-msgstr "Damit Bildbeschriftungen angezeigt werden, muss dass <strong>title=&quot;...&quot;</strong>-Attribut im Bild-Tag bzw. im Link-Tag vorhanden sein. Das ist i.d.R. der Fall, wenn beim Hochladen des Bildes im WordPress-Editor ein Titel vergeben wird (welcher die Bildbeschriftung ist)."
+msgstr "Pro přidání popisku k obrázkům přidejte k odkazu vedoucí na obrázek atribut <strong>title=&quot;...&quot;</strong>."
 
 #: ../shutter-reloaded.php:256
 msgid "If you want to use image sets, you will need to add <strong>class=&quot;shutterset&quot;</strong> to all <strong>links</strong> that point to the images for that set. If you want to apply css style to the links, you can add second class, like this: class=&quot;shutterset myClass&quot;, but &quot;shutterset&quot; should be first."
-msgstr "<!-- Überflüssiger Original-Text --> "
+msgstr "Pokud chcete používat obrázkové galerie, je nutné přidat třídu <strong>class=&quot;shutterset&quot;</strong> ke všem <strong>odkazům</strong> vedoucím na obrázky této galerie. Pokud chcete na odkazy aplikovat CSS styly, můžete přidat také druhou třídu takto: class=&quot;shutterset dalsitrida&quot;, ovšem &quot;shutterset&quot; by měl být první."
 
 #: ../shutter-reloaded.php:257
 msgid "Adding class=&quot;shutterset&quot; will also trigger activation (for the first activation option). There is no need to add both &quot;shutter&quot; and &quot;shutterset&quot;."
-msgstr "<!-- Überflüssiger Original-Text --> "
+msgstr "Přidáním třídy class=&quot;shutterset&quot; se spustí aktivace efektu (v případě první aktivační možnosti). Není tedy nutné používat obojí &quot;shutter&quot; a &quot;shutterset&quot;."
 
 #: ../shutter-reloaded.php:258
 msgid "To make more than one set per page, use <strong>class=&quot;shutterset_setname&quot;.</strong> The underscore is required and setname can be any short ASCII word and/or number (different for each set)."
-msgstr "Um mehr als ein Bilder-Set pro Seite zu organisieren, wird <strong>class=&quot;shutterset_setname&quot;.</strong> genutzt, wobei &quot;setname&quot; für eine ASCII-Zeichenfolge/Nummer steht. Jedes Bilder-Set bekommt seinen eigenen &quot;setname&quot;."
+msgstr "Pro zobrazení více galerií na jedné stránce použijte <strong>class=&quot;shutterset_jmeno&quot;.</strong> Podtržítko je povinné a jméno může být jakékoli ASCII slovo nebo číslice (rozdílné pro každou galerii)."
 
 #: ../shutter-reloaded.php:259
 msgid "You can use the &quot;Activate shutter on all image links&quot; and also make sets by adding class=&quot;shutterset&quot; or class=&quot;shutterset_setname&quot; or rel=&quot;lightbox[...]&quot; to some of the image links."
-msgstr "<!-- Überflüssiger Original-Text --> "
+msgstr "Můžete použít &quot;Aktivovat shutter na všechny obrázkové odkazy&quot; a také vytvářet galerie pomocí class=&quot;shutterset&quot; nebo class=&quot;shutterset_jmeno&quot; nebo rel=&quot;lightbox[...]&quot; pro vybrané obrázkové odkazy."
 
 #: ../shutter-reloaded.php:263
 msgid "You can add Shutter Reloaded to your site in five different ways:"
-msgstr "Die Bildanzeige kann auf fünf verschiedenen Art und Weisen integriert werden: "
+msgstr "Shutter Reloaded můžete na vašich stránkách použít pěti rozdílnými způsoby:"
 
 #: ../shutter-reloaded.php:268
 #: ../shutter-reloaded.php:271
@@ -123,153 +120,153 @@ msgstr "Die Bildanzeige kann auf fünf verschiedenen Art und Weisen integriert w
 #: ../shutter-reloaded.php:277
 #: ../shutter-reloaded.php:280
 msgid "Activate"
-msgstr "Aktivieren"
+msgstr "Aktivovat"
 
 #: ../shutter-reloaded.php:268
 msgid "Shutter on all image links with class=&quot;shutter&quot; or &quot;shutterset&quot; or &quot;shutterset_setname&quot;."
-msgstr "Aktivierung für alle Bilder mit class=&quot;shutter&quot; oder class=&quot;shutterset&quot; oder class=&quot;shutterset_setname&quot;."
+msgstr "Shutter na všechny obrázky s class=&quot;shutter&quot; nebo &quot;shutterset&quot; nebo &quot;shutterset_jmeno&quot;."
 
 #: ../shutter-reloaded.php:271
 msgid "Shutter on all image links. Sets created with class=&quot;shutterset&quot;, &quot;shutterset_setname&quot; or rel=&quot;lightbox[...]&quot; will still work."
-msgstr "Aktivierung für alle Bilder. Eigene Bilder-Sets mit class=&quot;shutterset&quot;, &quot;shutterset_setname&quot; oder rel=&quot;lightbox[...]&quot; funktionieren auch."
+msgstr "Shutter na všechny odkazy na obrázky. Galerie je možné stále vytvořit s class=&quot;shutterset&quot;, &quot;shutterset_jmeno&quot; nebo rel=&quot;lightbox[...]&quot;."
 
 #: ../shutter-reloaded.php:274
 msgid "Shutter on all image links and automatically make image sets for each Post/Page."
-msgstr "Aktivierung für alle Bilder und automatische Erstellung der Bilder-Sets für jeden Beitrag bzw. für jede Seite. Dies ist sicherlich die vernünftigste Einstellung."
+msgstr "Shutter na všechny odkazy na obrázky a také automaticky tvořit obrázkové galerie v každém příspěvku nebo stránce."
 
 #: ../shutter-reloaded.php:277
 msgid "Shutter on all image links on specific page(s)."
-msgstr "Aktivierung nur für ganz bestimmte Seiten."
+msgstr "Shutter na všechny odkazy na obrázky ve specifikovaných stránkách."
 
 #: ../shutter-reloaded.php:280
 msgid "Shutter on all image links and use LightBox style (rel=&quot;lightbox[...]&quot;) activation and sets."
-msgstr "Aktivierung für alle Bilder mit LightBox-class-Tags (rel=&quot;lightbox[...]&quot;)."
+msgstr "Shutter na všechny odkazy na obrázky s použitím stylu LightBox (rel=&quot;lightbox[...]&quot;) pro aktivaci a galerii."
 
 #: ../shutter-reloaded.php:291
 msgid "Shutter is activated for all links pointing to an image."
-msgstr "Die Funktion ist für alle Bilder mit Link aktiviert."
+msgstr "Shutter je aktivní pro všechny odkazy vedoucí na obrázek."
 
 #: ../shutter-reloaded.php:292
 msgid "Shutter is activated for all links pointing to an image and will create different image set for each Post/Page."
-msgstr "Die Funktion ist für alle Bilder mit Link aktiviert. Bilder-Sets werden für jede/n Beitrag/Seite generiert. Das ist wahrscheinlich die beste Einstellung."
+msgstr "Shutter je aktivní pro všechny odkazy vedoucí na obrázky a vytvoří pro každou stránku nebo příspěvek vlastní galerii."
 
 #: ../shutter-reloaded.php:292
 msgid "This option is most suitable if you display several Posts on your home page and want to have different image set for each Post. It adds shutter's activation class at runtime and doesn't modify the html."
-msgstr "Diese Option ist sicherlich die beste Einstellung, wenn - wie im Normalfall - mehrere Beiträge angezeigt werden. Für jeden Beitrag wird dann ein eigenes Bilder-Set generiert. Die Code für Bildanzeige wird beim Aufruf des Beitrages generiert und ändert keinen vorhandenen html-Code."
+msgstr "Tato možnost je vhodná, pokud na úvodní stránce zobrazujete několik příspěvků a chcete mít rozdílnou galerii pro každý z nich. Funkce přidá aktivační třídu a nevyžaduje modifikaci HTML."
 
 #: ../shutter-reloaded.php:294
 msgid "Excluded Posts or Pages (by ID):"
-msgstr "Diese Beiträge und Seiten werden ausgeschlossen (per ID): "
+msgstr "Vyloučit příspěvky nebo stránky (podle ID):"
 
 #: ../shutter-reloaded.php:300
 #: ../shutter-reloaded.php:340
 msgid "[none]"
-msgstr "keine"
+msgstr "[žádné]"
 
 #: ../shutter-reloaded.php:306
 msgid "Add Excluded ID"
-msgstr "Gebe ausschließende ID an"
+msgstr "Přidat vyloučené ID"
 
 #: ../shutter-reloaded.php:307
 #: ../shutter-reloaded.php:347
 msgid "Please enter the Page/Post ID that you want to add to this list."
-msgstr "Hier werden die Beitrags- oder Seiten-IDs angegeben, um sie der Ausschlussliste hinzu zu fügen."
+msgstr "Prosím vložte ID stránky nebo příspěvku které chcete přidat na seznam."
 
 #: ../shutter-reloaded.php:309
 msgid "Remove Excluded ID"
-msgstr "Entferne Ausschluss (ID)"
+msgstr "Odebrat vyloučené ID"
 
 #: ../shutter-reloaded.php:310
 #: ../shutter-reloaded.php:349
 msgid "Please enter the Page/Post ID that you want to remove from this list."
-msgstr "Hier werden die Beitrags- und Seiten-IDs angegeben, die von der Ausschlussliste entfernt werden soll."
+msgstr "Prosím vložte ID příspěvku nebo stránky, které chcete odebrat ze seznamu."
 
 #: ../shutter-reloaded.php:312
 #: ../shutter-reloaded.php:351
 msgid "Please enter the ID for the post/page you want to exclude. You can see it in your browser's status bar(at the bottom of the window) when hovering over the name at the <a href=\"edit-pages.php\">Manage Pages</a> or the <a href=\"edit.php\">Manage Posts</a> page."
-msgstr "Gebe die ID des Beitrages oder der Seite an, die von der Funktion ausgeschlossen werden soll. Die IDs finden sich hier: <a href=\"edit-pages.php\">Seitenverwaltung</a> oder <a href=\"edit.php\">Beitragsverwaltung</a>."
+msgstr "Prosím vložte ID příspěvku nebo stránky, které chcete vyloučit. ID najdete na stránce <a href=\"edit-pages.php\">Správa stránek</a> nebo <a href=\"edit.php\">Správa příspěvků</a>."
 
 #: ../shutter-reloaded.php:322
 msgid "Shutter is activated for all links pointing to an image, that have class = &quot;shutter&quot;, &quot;shutterset&quot; or &quot;shutterset_setname&quot;"
-msgstr "Aktivierung für alle Bilder (mit Links) mit class=&quot;shutter&quot; oder class=&quot;shutterset&quot; oder class=&quot;shutterset_setname&quot;."
+msgstr "Shutter je aktivní pro všechny odkazy vedoucí na obrázek se třídou class = &quot;shutter&quot;, &quot;shutterset&quot; nebo &quot;shutterset_jmeno&quot;"
 
 #: ../shutter-reloaded.php:324
 msgid "Class = &quot;shutter&quot; will display a single image, class = &quot;shutterset&quot; will create a single set for all images and class=&quot;shutterset_setname&quot;, where setname is a short ASCII word and/or number, will create multiple sets on the same page."
-msgstr "Class = &quot;shutter&quot; zeigt ein einzelnes Bild, class = &quot;shutterset&quot; generiert ein Set aller Bilder und  class=&quot;shutterset_setname&quot;, wobei &quot;setname&quot; ein kurzes ASCII-Wort und/oder eine Nummer ist, generiert mehrere Bilder-Sets in einer Seite."
+msgstr "Class = &quot;shutter&quot; zobrazí jeden obrázek, class = &quot;shutterset&quot; vytvoří jednu obrázkovou galerii a class=&quot;shutterset_jmeno&quot;, kde jméno je krátké slovo nebo čísla v ASCII, vytvoří více galerií na jedné stránce."
 
 #: ../shutter-reloaded.php:333
 msgid "Shutter is activated for the following Posts and Pages (by ID):"
-msgstr "Die Funktion ist für folgende Beiträge und Seiten aktiviert (nach ID): "
+msgstr "Shutter je aktivní pro tyto příspěvky a stránky (podle ID):"
 
 #: ../shutter-reloaded.php:346
 msgid "Add ID"
-msgstr "Füge ID hinzu"
+msgstr "Přidat ID"
 
 #: ../shutter-reloaded.php:348
 msgid "Remove ID"
-msgstr "Entferne ID"
+msgstr "Odebrat ID"
 
 #: ../shutter-reloaded.php:360
 msgid "Shutter uses Lightbox style activation."
-msgstr "Es werden die LightBox-class-Attribute genutzt."
+msgstr "Shutter používá aktivaci ve stylu LightBox."
 
 #: ../shutter-reloaded.php:362
 msgid "Shutter is activated for all links pointing to an image, that have rel=&quot;lightbox&quot; or rel=&quot;lightbox[...]&quot;. To make sets of images, you will have to add rel=&quot;lightbox[abc]&quot;, where &quot;abc&quot; can be any short ASCII word and/or number."
-msgstr "Die Funktion ist für alle Bilder (mit Link) und der Klasse <strong>rel=&quot;lightbox&quot;</strong> oder <strong>rel=&quot;lightbox[...]&quot;</strong> aktiviert. Um Bilder-Sets zu generieren, muss in den Bildern das Attribut <strong>rel=&quot;lightbox[abc]&quot;</strong> hinzugefügt werden, wobei <strong>&quot;abc&quot;</strong> irgendeine ASCII-Zeichenfolge/Nummer sein kann."
+msgstr "Shutter je aktivován všemi odkazy vedoucími na obrázek, které mají atribut rel=&quot;lightbox&quot; nebo rel=&quot;lightbox[...]&quot;. K vytvoření setu obrázků musíte přidat rel=&quot;lightbox[abc]&quot;, kde &quot;abc&quot; může být libovolné krátké slovo nebo čísla v ASCII."
 
 #: ../shutter-reloaded.php:373
 msgid "Customization"
-msgstr "Persönliche Anpassung"
+msgstr "Přizpůsobení"
 
 #: ../shutter-reloaded.php:379
 msgid "Shutter color (default 000000):"
-msgstr "Hintergrundfarbe (Standard ist 000000/schwarz)"
+msgstr "Barva Shutteru (výchozí 000000)"
 
 #: ../shutter-reloaded.php:379
 msgid "Please enter valid HTML color codes, from 000000 to FFFFFF."
-msgstr "von 000000/schwarz bis FFFFFF/weiß:"
+msgstr "Prosím vložte platný kód barvy od 000000 do FFFFFF."
 
 #: ../shutter-reloaded.php:386
 msgid "Shutter opacity (default 80):"
-msgstr "Hintergrundtransparenz (Standard ist 80)"
+msgstr "Průhlednost Shutteru (výchozí 80):"
 
 #: ../shutter-reloaded.php:386
 msgid "Enter a number between 1 (see-through) and 99 (solid color)."
-msgstr "von 1 (Hintergrund ist komplett durchsichtig, nicht vorhanden) bis 99 (Hintergrund ist nicht durchsichtig):"
+msgstr "Vložte číslo mezi 1 (průhledné) a 99 (plná barva)."
 
 #: ../shutter-reloaded.php:393
 msgid "Caption text color (default FFFFFF):"
-msgstr "Textfarbe (Standard ist FFFFFF/weiß):"
+msgstr "Barva popisku (výchozí FFFFFF):"
 
 #: ../shutter-reloaded.php:400
 msgid "Menubar color (default 3E3E3E):"
-msgstr "Farbe der Menüleiste (Standard 3E3E3E):"
+msgstr "Barva panelu menu (výchozí 2E2E2E):"
 
 #: ../shutter-reloaded.php:407
 msgid "Show images count for sets (Image 1 of ...):"
-msgstr "Zeige Bildernummerierung (Bild 1 von ...):"
+msgstr "Zobrazit počitadlo obrázků u galerií (Obrázek 1 z ...):"
 
 #: ../shutter-reloaded.php:413
 msgid "Images count color (default 999999):"
-msgstr "Farbe des Bildzählers (Standard 999999):"
+msgstr "Barva počitadla obrázků (výchozí 999999):"
 
 #: ../shutter-reloaded.php:420
 msgid "Text buttons (instead of images):"
-msgstr "Text-Schaltfläche (anstatt des Bildes):"
+msgstr "Textové tlačítka (místo obrázků):"
 
 #: ../shutter-reloaded.php:426
 msgid "Text buttons color (default CCCCCC):"
-msgstr "Farbe der Text-Schaltfläche (Standard CCCCCC):"
+msgstr "Barva textových tlačítek (výchozí AAAAFF):"
 
 #: ../shutter-reloaded.php:434
 msgid "To restore the defaults, delete the current value(s) and submit the form."
-msgstr "Um die Standardwerte wieder herzustellen, bitte alle Felder leeren und Eingaben speichern."
+msgstr "Pro obnovení výchozích hodnot smažte z polí současné hodnoty."
 
 #: ../shutter-reloaded.php:435
 msgid "Save Options"
-msgstr "Eingaben speichern"
+msgstr "Uložit nastavení"
 
 #: ../shutter-reloaded.php:445
 msgid "Shutter Reloaded"
-msgstr "Bildanzeige"
+msgstr "Shutter Reloaded"
 
