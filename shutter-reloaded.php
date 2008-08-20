@@ -94,7 +94,7 @@ shutterSettings = {
 	if ( $srel_options['textBtns'] == 1 ) echo "  textBtns : 1,\n";
 	echo '  L10n : ["'.js_escape(__("Previous", "srel-l10n")).'","'. js_escape(__("Next", "srel-l10n")).'","'. js_escape(__("Close", "srel-l10n")).'","'. js_escape(__("Full Size", "srel-l10n")).'","'. js_escape(__("Fit to Screen", "srel-l10n")).'","'. js_escape(__("Image", "srel-l10n")).'","'. js_escape(__("of", "srel-l10n")).'","'. js_escape(__("Loading...", "srel-l10n")).'"]'."\n}\n";
 
-if ( $srel_options['altLoad'] == 1 ) add_action('get_footer', 'srel_addtofooter');
+if ( $srel_options['altLoad'] == 1 ) add_action('get_footer', 'srel_addtofooter', 99);
 else echo "shutterOnload = function(){".$addshutter."}\n";
 ?>
 //]]>
@@ -107,7 +107,7 @@ add_action('wp_head', 'srel_makeshutter' );
 function srel_addtofooter() {
 	global $addshutter;
 
-	echo '<script type="text/javascript">if("object"==typeof shutterReloaded)'.$addshutter.'</script>'."\n";
+	echo '<script type="text/javascript">if("object" == typeof shutterReloaded)'.$addshutter.'</script>'."\n";
 }
 
 function srel_auto_set($content) {
@@ -128,6 +128,59 @@ function srel_cback($a) {
 		return '<a '.preg_replace('/class=[\'"]([^"\']+)[\'"]/i', 'class="shutterset_'.$post->ID.' $1"', $str).'>';
 	else return '<a class="shutterset_'.$post->ID.'" '.$str.'>';
 }
+
+function srel_gallery_shortcode($no, $attr) {
+	global $post;
+
+	$opt = get_option('srel_options');
+	if ( $opt['shgallery'] != 1 )
+		return '';
+
+	// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
+	if ( isset( $attr['orderby'] ) ) {
+		$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
+		if ( !$attr['orderby'] )
+			unset( $attr['orderby'] );
+	}
+
+	extract(shortcode_atts(array(
+		'order'      => 'ASC',
+		'orderby'    => 'menu_order ID',
+		'id'         => $post->ID,
+		'size'       => 'thumbnail'
+	), $attr));
+
+	$id = intval($id);
+	$attachments = get_children( array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+
+	if ( empty($attachments) || is_feed() )
+		return '';
+
+	$columns = ( isset($opt['g_columns']) && (int) $opt['g_columns'] ) ? $opt['g_columns'] : 0;
+
+	$output = '<div class="gallery">'."\n";
+
+	foreach ( $attachments as $att_id => $attachment ) {
+		$img = wp_get_attachment_image_src($att_id, 'thumbnail', true);
+		$href = wp_get_attachment_url( $att_id );
+		$caption = $attachment->post_excerpt ? $attachment->post_excerpt : $attachment->post_title;
+		$width = ( isset($opt['g_width']) && (int) $opt['g_width'] ) ? $opt['g_width'] : $img[1];
+
+		$output .= '<div id="attachment_' . $att_id . '" class="wp-caption alignleft" style="width: ' . (10 + (int) $width) . 'px">'."\n";
+		$output .= '<a href="'.$href.'" class="shutterset_'.$id.'"><img src="'.$img[0].'" width="'.$width.'" /></a>'."\n";
+		$output .= '<p class="wp-caption-text">' . $caption . '</p></div>'."\n\n";
+
+		if ( $columns > 0 && ++$i % $columns == 0 )
+			$output .= '<br style="clear: both" />';
+	}
+
+	if ( $columns )
+		$output .= '<br style="clear: both;" />'."\n";
+	$output .= "</div>\n";
+
+	return $output;
+}
+add_filter('post_gallery', 'srel_gallery_shortcode', 10, 2);
 
 function srel_deactiv() {
 	delete_option('srel_options');
@@ -178,6 +231,10 @@ function srel_optpage() {
 		$new_opt['opacity'] = preg_match("/^[0-9][0-9]?$/", $_POST['opacity']) ? $_POST['opacity'] : '80';
 		$new_opt['altLoad'] = isset($_POST['altLoad']) ? 1 : 0;
 		$new_opt['startFull'] = isset($_POST['startFull']) ? 1 : 0;
+
+		$new_opt['shgallery'] = isset($_POST['shgallery']) ? 1 : 0;
+		$new_opt['g_width'] = isset($_POST['g_width']) ? (int) $_POST['g_width'] : 0;
+		$new_opt['g_columns'] = isset($_POST['g_columns']) ? (int) $_POST['g_columns'] : 0;
 
 		$new_opt['custom'] = ( $new_opt['shcolor'] != '000000' ||
 			$new_opt['capcolor'] != 'ffffff' ||
@@ -458,6 +515,15 @@ if ( $opt == 'srel_pages' ) { ?>
 	<input type="checkbox" class="checkbox"  name="altLoad" id="altLoad" <?php if ($srel_options['altLoad'] == 1) { echo ' checked="checked"'; } ?> />
 	</td></tr>
 
+	<tr><td style="text-align:right;">
+	<p><?php _e('In the default WordPress Gallery open all images with Shutter:', 'srel-l10n'); ?></p>
+	<p><?php _e('Limit the thumbnails width to ... pixels:', 'srel-l10n'); ?></p>
+	<p><?php _e('Arrange the thumbnails in ... columns:', 'srel-l10n'); ?></p>
+	</td><td>
+	<p><input type="checkbox" class="checkbox" name="shgallery" id="shgallery" <?php if ($srel_options['shgallery'] == 1) { echo ' checked="checked"'; } ?> /></p>
+	<input type="text" name="g_width" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['g_width']; ?>" /><br />
+	<input type="text" name="g_columns" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['g_columns']; ?>" />
+	</td></tr>
 	</tbody>
 	</table>
 

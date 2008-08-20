@@ -3,7 +3,7 @@ Contributors: Andrew Ozz
 Donate link: 
 Tags: images, javascript, viewer, lightbox
 Requires at least: 2.5
-Tested up to: 2.5
+Tested up to: 2.6.1
 Stable tag: 2.1
 
 Darkens the current page and displays an image on top (like Lightbox, Thickbox, etc.), but is a lot smaller (10KB) and faster.
@@ -12,6 +12,8 @@ Darkens the current page and displays an image on top (like Lightbox, Thickbox, 
 == Description ==
 
 Shutter Reloaded is an image viewer for your website that works similary to Lightbox, Thickbox, etc. but is under 10KB in size and does not require any external libraries. It has many features: resizing large images if the window is too small to display them with option to show the full size image, combining images in sets, redrawing the window after resizing, pre-loading of neighbour images for faster display and very good browser compatibility.
+
+Current development version: has an alternate init option that loads Shutter earlier and works better, has option to replace the default gallery with Shutter powered one.
 
 New in version 2.1: Upgrades for compatibility with WordPress 2.5.
 

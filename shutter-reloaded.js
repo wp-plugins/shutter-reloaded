@@ -55,7 +55,7 @@ shutterReloaded = {
 		t.settings();
 
 		if ( ! t.textBtns ) {
-			shMenuPre = ['close.gif','prev.gif','prev-d.gif','next.gif','next-d.gif','resize1.gif','resize2.gif','loading.gif'];
+			shMenuPre = ['close.gif','prev.gif','prev-d.gif','next.gif','next-d.gif','resize1.gif','resize2.gif','resize-d.gif','loading.gif'];
 			for ( k = 0; k < shMenuPre.length; k++ ) {
 			img = new Image();
 			img.src = t.imgDir+shMenuPre[k];
