@@ -1,65 +1,64 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Shutter reloaded\n"
+"Project-Id-Version: Shutter Reloaded Español\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2008-12-11 01:08-0800\n"
 "Last-Translator: Andrew Ozz\n"
-"Language-Team: Hugo5688 <hugo5688@gmail.com>\n"
+"Language-Team: Mato (Bolsadeideas.cl) <mato@bolsadeideas.cl>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: TAIWAN\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Language: zh-TW\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: CHILE\n"
 
 #: ../shutter-reloaded.php:97
 msgid "Previous"
-msgstr "先前的"
+msgstr "Anterior"
 
 #: ../shutter-reloaded.php:97
 msgid "Next"
-msgstr "下一步"
+msgstr "Siguiente"
 
 #: ../shutter-reloaded.php:97
 msgid "Close"
-msgstr "關閉"
+msgstr "Cerrar"
 
 #: ../shutter-reloaded.php:97
 msgid "Full Size"
-msgstr "完整大小"
+msgstr "Tamaño Completo"
 
 #: ../shutter-reloaded.php:97
 msgid "Fit to Screen"
-msgstr "適合螢幕"
+msgstr "Ajustar a la Pantalla"
 
 #: ../shutter-reloaded.php:97
 msgid "Image"
-msgstr "圖像"
+msgstr "Imagen"
 
 #: ../shutter-reloaded.php:97
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #: ../shutter-reloaded.php:97
 msgid "Loading..."
-msgstr "讀取中..."
+msgstr "Cargando..."
 
 #: ../shutter-reloaded.php:137
 msgid "Permission denied"
-msgstr "權限不足"
+msgstr "Permiso denegado"
 
 #: ../shutter-reloaded.php:196
 #: ../shutter-reloaded.php:222
 msgid "Please enter valid post ID."
-msgstr "請輸入存在的文章 ID"
+msgstr "Por favor ingresar ID de post válida"
 
 #: ../shutter-reloaded.php:209
 msgid "This post ID is not currently excluded."
-msgstr "目前並不拒絕此文章 ID"
+msgstr "Esta ID de post no esta actualmente excluída."
 
 #: ../shutter-reloaded.php:235
 msgid "This post ID is not currently included."
-msgstr "目前並不包含此文章 ID "
+msgstr "Esta ID de post no esta actualmente incluída."
 
 #: ../shutter-reloaded.php:250
 msgid "All options reset! You can either "
@@ -68,7 +67,7 @@ msgstr ""
 #: ../shutter-reloaded.php:250
 #, fuzzy
 msgid "uninstall Shutter Reloaded,"
-msgstr "Shutter Reloaded"
+msgstr "Visor Shutter Reloaded"
 
 #: ../shutter-reloaded.php:250
 msgid "or return to the settings page."
@@ -76,65 +75,64 @@ msgstr ""
 
 #: ../shutter-reloaded.php:253
 msgid "Options saved!"
-msgstr "選項以儲存"
+msgstr "Opciones guardadas!"
 
 #: ../shutter-reloaded.php:257
 msgid "Shutter Reloaded Options"
-msgstr "Shutter Reloaded 選項"
+msgstr "Opciones de Shutter Reloaded"
 
 #: ../shutter-reloaded.php:260
 msgid "Hide Help"
-msgstr "隱藏幫助"
+msgstr "Esconder la Ayuda"
 
 #: ../shutter-reloaded.php:261
 #: ../shutter-reloaded.php:262
 msgid "Show Help"
-msgstr "顯示幫助"
+msgstr "Mostrar la Ayuda"
 
 #: ../shutter-reloaded.php:265
 msgid "Setup and Usage"
-msgstr "安裝及使用"
+msgstr "Configuración y Uso"
 
 #: ../shutter-reloaded.php:266
 msgid "Shutter is activated by <strong>the link</strong> pointing to the image you want to display, with or without a thumbnail (text links work too). The activation class and the title have to be set on that link."
-msgstr "Shutter 的啟用方式是經由<strong>the link</strong> 指向到您所想要顯示的圖像上，不管有沒有縮圖 (文字連結也相同)， class 及  title 在 link 中都是必需被設置的"
+msgstr "Shutter es activado por <strong>el link</strong> que apunta a la imagen que quieres mostrar, con o sin una miniatura (links de texto también funcionan). La clase (class) de activación y el título deben ser configurados en ese link."
 
 #: ../shutter-reloaded.php:267
 msgid "To take full control of Shutter's activation and to make multiple image sets on the same page, you will need to add the <strong>class=&quot;shutter&quot;</strong> or <strong>&quot;shutterset&quot;</strong> or <strong>&quot;shutterset_setname&quot;</strong> to your links in &quot;Code&quot; view on the Write/Edit Post page."
-msgstr "如要取得完整的 Shutter 啟用效果並要在同一頁面設定多個圖像集，你將會需要加入<strong>class=&quot;shutter&quot;</strong> 或 <strong>&quot;shutterset&quot;</strong> 或 <strong>&quot;shutterset_setname&quot;</strong> 到您連結的 &quot;Code&quot; 內，您可以在編輯頁面瀏覽。"
+msgstr "Para tomar el control total de la activación de Shutter y para hacer múltiples sets de imágenes en una misma página, necesitas agregar <strong>class=&quot;shutter&quot;</strong> o <strong>&quot;shutterset&quot;</strong> o <strong>&quot;shutterset_setname&quot;</strong> a tus links en la vista &quot;Code&quot; en la página Escribir/Editar Post. "
 
 #: ../shutter-reloaded.php:268
 msgid "To add caption to the images, set the <strong>title=&quot;...&quot;</strong> attribute of the <strong>links</strong> pointing to them."
-msgstr "如您要幫圖像加上標題，請設為 <strong>title=&quot;...&quot;</strong> 並把 <strong>links</strong>的屬性指向它們"
+msgstr "Para agregar detalles al pie de las fotos, incluye el atributo <strong>title=&quot;...&quot;</strong> de los <strong>links</strong> apuntando hacia ella."
 
 #: ../shutter-reloaded.php:269
 msgid "If you want to use image sets, you will need to add <strong>class=&quot;shutterset&quot;</strong> to all <strong>links</strong> that point to the images for that set. If you want to apply css style to the links, you can add second class, like this: class=&quot;shutterset myClass&quot;, but &quot;shutterset&quot; should be first."
-msgstr "如果您想使用圖像集的話，您將會需要加入<strong>class=&quot;shutterset&quot;</strong> 到所的 <strong>links</strong> 並指到圖像集中的圖像。如果您要將 css 樣式套用到連結， 您可以增加第二個類別，像是： class=&quot;shutterset myClass&quot;，但 &quot;shutterset&quot; 應為第一"
+msgstr "Si quieres usar sets de imágenes, necesitas agregar <strong>class=&quot;shutterset&quot;</strong> a todos los <strong>links</strong> que apunten a las imágenes de ese set. Si quieres aplicar estilos css a esos links, puedes agregar una segunda clase (class), como esta: class=&quot;shutterset myClass&quot;, pero &quot;shutterset&quot; debiera ir primero."
 
 #: ../shutter-reloaded.php:270
 msgid "Adding class=&quot;shutterset&quot; will also trigger activation (for the first activation option). There is no need to add both &quot;shutter&quot; and &quot;shutterset&quot;."
-msgstr "加入 class=&quot;shutterset&quot; 也會啟用 Shutter 效果 (對於第一個選項而言). 而且不需要再加入 &quot;shutter&quot; 和 &quot;shutterset&quot;."
+msgstr "Agregando la class=&quot;shutterset&quot; también provocarás la activación (para la primera opción de activación). No hay necesidad de agregar &quot;shutter&quot; y &quot;shutterset&quot; juntas."
 
 #: ../shutter-reloaded.php:271
 msgid "To make more than one set per page, use <strong>class=&quot;shutterset_setname&quot;.</strong> The underscore is required and setname can be any short ASCII word and/or number (different for each set)."
-msgstr "如要在同一頁面設定多個圖像集，可以使用 <strong>class=&quot;shutterset_setname&quot;</strong>來設定，而底線是必需的，setname 可以是任何簡短的 ASCII 文字 / 數字 (每一組的 setname 必需不同)."
+msgstr "Para crear mas de un set por página, usa <strong>class=&quot;shutterset_setname&quot;.</strong> El guión bajo es requisito y el nombre del set (setname) puede ser cualquier palabra corta ASCII y/o un número (diferente para cada set)."
 
 #: ../shutter-reloaded.php:272
 msgid "You can use the &quot;Activate shutter on all image links&quot; and also make sets by adding class=&quot;shutterset&quot; or class=&quot;shutterset_setname&quot; or rel=&quot;lightbox[...]&quot; to some of the image links."
-msgstr "您可以使用 &quot;所有圖像連結都使用 Shutter 效果&quot; 並且也可以使用 class=&quot;shutterset&quot; 或 class=&quot;shutterset_setname&quot; 或 rel=&quot;lightbox[...]&quot; 來針對某些圖片連結。"
+msgstr "Puedes usar &quot;Activar shutter en todo link de imagen&quot; y además hacer sets agregango la clase (class) =&quot;shutterset&quot; o class=&quot;shutterset_setname&quot; o rel=&quot;lightbox[...]&quot; a algunos de los link de imagen."
 
 #: ../shutter-reloaded.php:276
 msgid "You can add Shutter Reloaded to your site in five different ways:"
-msgstr "您有五種方式可以把 Shutter Reloaded 加入到您的站點:"
+msgstr "Puedes agregar Shutter Reloaded a tu sitio de cinco maneras diferentes:"
 
 #: ../shutter-reloaded.php:281
 #: ../shutter-reloaded.php:285
 #: ../shutter-reloaded.php:289
 #: ../shutter-reloaded.php:293
 #: ../shutter-reloaded.php:297
-#, fuzzy
 msgid "Active: "
-msgstr "啟用"
+msgstr "Activo: "
 
 #: ../shutter-reloaded.php:282
 #: ../shutter-reloaded.php:286
@@ -142,159 +140,159 @@ msgstr "啟用"
 #: ../shutter-reloaded.php:294
 #: ../shutter-reloaded.php:298
 msgid "Activate"
-msgstr "啟用"
+msgstr "Activar:"
 
 #: ../shutter-reloaded.php:283
 msgid "Shutter on all image links with class=&quot;shutter&quot; or &quot;shutterset&quot; or &quot;shutterset_setname&quot;."
-msgstr "請使用標籤 class=&quot;shutter&quot; 或 &quot;shutterset&quot; 或 &quot;shutterset_setname&quot; 來產生 Shutter 效果"
+msgstr "Shutter en todo link de imagen con class=&quot;shutter&quot; o &quot;shutterset&quot; o &quot;shutterset_setname&quot;."
 
 #: ../shutter-reloaded.php:287
 msgid "Shutter on all image links. Sets created with class=&quot;shutterset&quot;, &quot;shutterset_setname&quot; or rel=&quot;lightbox[...]&quot; will still work."
-msgstr "所有圖像連結都使用 Shutter 效果。如圖像設置為 class=&quot;shutterset&quot;, &quot;shutterset_setname&quot; 或 rel=&quot;lightbox[...]&quot; 一樣會正常顯示"
+msgstr "Shutter en todo link de imagen. Sets creados con class=&quot;shutterset&quot;, &quot;shutterset_setname&quot; o rel=&quot;lightbox[...]&quot; funcionarán de igual forma."
 
 #: ../shutter-reloaded.php:291
 msgid "Shutter on all image links and automatically make image sets for each Post/Page."
-msgstr "所有圖像連結都使用 Shutter 效果，並自動的在每一個文章/頁面上制成圖像集"
+msgstr "Shutter en todo link de imagen y crea automáticamente sets de imágenes para cada Post/Página."
 
 #: ../shutter-reloaded.php:295
 msgid "Shutter on all image links on specific page(s)."
-msgstr "只在特定的頁面產生 Shutter 效果"
+msgstr "Shutter en todos los links de imágenes en página(s) específica(s)."
 
 #: ../shutter-reloaded.php:299
 msgid "Shutter on all image links and use LightBox style (rel=&quot;lightbox[...]&quot;) activation and sets."
-msgstr "使用 LightBox 的樣式 (rel=&quot;lightbox[...]&quot;) 來產生 Shutter 效果"
+msgstr "Shutter en todo link de imagen y usa activación y sets estilo Lightbox (rel=&quot;lightbox[...]&quot;)."
 
 #: ../shutter-reloaded.php:310
 msgid "Shutter is activated for all links pointing to an image."
-msgstr "所有圖片連結都會啟用 Shutter 效果"
+msgstr "Shutter es activado por todos los links que apuntan a una imagen."
 
 #: ../shutter-reloaded.php:311
 msgid "Shutter is activated for all links pointing to an image and will create different image set for each Post/Page."
-msgstr "所有圖片連結都會啟用 Shutter 效果，並且會在每個文章/頁面建立不同的圖像集"
+msgstr "Shutter es activado por todos los links que apuntan a una imagen y creará diferentes set de imágenes por cada Post/Página."
 
 #: ../shutter-reloaded.php:311
 msgid "This option is most suitable if you display several Posts on your home page and want to have different image set for each Post. It adds shutter's activation class at runtime and doesn't modify the html."
-msgstr "這選項最適合在於如果你的網站上有多頁文章而且想在每個頁面要有不同的圖像集. 它會在執行階段加入 Shutter 的啟用類別並且不需修改HTML"
+msgstr "Esta opción es más apropiada si despliegas varios Posts en tu página principal y quieres tener diferentes sets de imágenes por cada Post. Esto agrega la clase de activación de shutter en el tiempo de ejecución y no modifica el html."
 
 #: ../shutter-reloaded.php:313
 msgid "Excluded Posts or Pages (by ID):"
-msgstr "不使用 Shutter 效果的文章或頁面 (by ID):"
+msgstr "Posts o Páginas Excluídas (por ID):"
 
 #: ../shutter-reloaded.php:319
 #: ../shutter-reloaded.php:359
 msgid "[none]"
-msgstr "[無]"
+msgstr "[ninguna]"
 
 #: ../shutter-reloaded.php:325
 msgid "Add Excluded ID"
-msgstr "加入不啟用的 ID"
+msgstr "Agregar ID Excluída"
 
 #: ../shutter-reloaded.php:326
 #: ../shutter-reloaded.php:366
 msgid "Please enter the Page/Post ID that you want to add to this list."
-msgstr "請輸入您所要加入清單內的文章或頁面的 ID"
+msgstr "Por favor ingresa el ID de Página/Post que quieres agregar a esta lista."
 
 #: ../shutter-reloaded.php:328
 msgid "Remove Excluded ID"
-msgstr "移除不啟用的 ID"
+msgstr "Remover ID Excluída"
 
 #: ../shutter-reloaded.php:329
 #: ../shutter-reloaded.php:368
 msgid "Please enter the Page/Post ID that you want to remove from this list."
-msgstr "請輸入您所要移除清單內的文章或頁面的 ID"
+msgstr "Por favor ingresa el ID de Página/Post que quieres remover de esta lista."
 
 #: ../shutter-reloaded.php:331
 #, fuzzy
 msgid "Please enter the ID for the post/page you want to exclude. You can see it in your browser's status bar(at the bottom of the window) when hovering over the name at the <a href=\"edit-pages.php\">Edit Pages</a> or the <a href=\"edit.php\">Edit Posts</a> page."
-msgstr "請輸入您所「不要」顯示 Shutter 效果的文章/頁面 ID，您可以在 <a href=\"edit-pages.php\">網誌分頁</a> 或是 <a href=\"edit.php\">文章管理</a> 的頁面中檢視。"
+msgstr "Por favor ingresa el ID del post/página que quieres excluir. Puedes encontrarlo en la barra de estado de tu navegador (en la parte de abajo de la ventana) cuando pasas con el mouse sobre el nombre del mismo dentro de <a href=\"edit-pages.php\">Gestionar Páginas</a> o en <a href=\"edit.php\">Gestionar Posts</a>."
 
 #: ../shutter-reloaded.php:341
 msgid "Shutter is activated for all links pointing to an image that have class = &quot;shutter&quot;, &quot;shutterset&quot; or &quot;shutterset_setname&quot;"
-msgstr "具有 class = &quot;shutter&quot;, &quot;shutterset&quot; or &quot;shutterset_setname&quot; 的圖片連結都會啟用 Shutter 效果， "
+msgstr "Shutter es activado por todos los links que apuntan a una imagen que tenga class= &quot;shutter&quot;, &quot;shutterset&quot; o &quot;shutterset_setname&quot;"
 
 #: ../shutter-reloaded.php:343
 msgid "Class = &quot;shutter&quot; will display a single image, class = &quot;shutterset&quot; will create a single set for all images and class=&quot;shutterset_setname&quot;, where setname is a short ASCII word and/or number, will create multiple sets on the same page."
-msgstr "Class = &quot;shutter&quot; 將會顯示單張圖像，class = &quot;shutterset&quot; 會將所有圖像設成一圖像集， class=&quot;shutterset_setname&quot;，setname 可以是任何簡短的 ASCII 文字 / 數字，而這將會在單一頁面建立多個圖像集。"
+msgstr "Class = &quot;shutter&quot; mostrará una imagen única,  class = &quot;shutterset&quot; creará un sólo set para todas las imágenes y class=&quot;shutterset_setname&quot;, donde \"setname\" es una palabra corta ASCII y/o un número, creará múltiples sets en la misma página."
 
 #: ../shutter-reloaded.php:352
 msgid "Shutter is activated for the following Posts and Pages (by ID):"
-msgstr "在下列的文章/頁面已經啟動Shutter 效果 (by ID):"
+msgstr "Shutter es activado por los siguientes Posts y Páginas (por ID):"
 
 #: ../shutter-reloaded.php:365
 msgid "Add ID"
-msgstr "加入 ID"
+msgstr "Agregar ID"
 
 #: ../shutter-reloaded.php:367
 msgid "Remove ID"
-msgstr "移除 ID"
+msgstr "Remover ID"
 
 #: ../shutter-reloaded.php:370
 msgid "Please enter the ID for the post/page you want to exclude. You can see it in your browser's status bar(at the bottom of the window) when hovering over the name at the <a href=\"edit-pages.php\">Manage Pages</a> or the <a href=\"edit.php\">Manage Posts</a> page."
-msgstr "請輸入您所「不要」顯示 Shutter 效果的文章/頁面 ID，您可以在 <a href=\"edit-pages.php\">網誌分頁</a> 或是 <a href=\"edit.php\">文章管理</a> 的頁面中檢視。"
+msgstr "Por favor ingresa el ID del post/página que quieres excluir. Puedes encontrarlo en la barra de estado de tu navegador (en la parte de abajo de la ventana) cuando pasas con el mouse sobre el nombre del mismo dentro de <a href=\"edit-pages.php\">Gestionar Páginas</a> o en <a href=\"edit.php\">Gestionar Posts</a>."
 
 #: ../shutter-reloaded.php:379
 msgid "Shutter uses Lightbox style activation."
-msgstr "使用 LightBox 的樣式來產生 Shutter 效果"
+msgstr "Shutter utiliza activación estilo Lightbox."
 
 #: ../shutter-reloaded.php:381
 msgid "Shutter is activated for all links pointing to an image, that have rel=&quot;lightbox&quot; or rel=&quot;lightbox[...]&quot;. To make sets of images, you will have to add rel=&quot;lightbox[abc]&quot;, where &quot;abc&quot; can be any short ASCII word and/or number."
-msgstr "具有 rel=&quot;lightbox&quot; 或 rel=&quot;lightbox[...]&quot; 的圖片都將會啟用 Shutter 效果，如要使用圖像集，您可以加入 rel=&quot;lightbox[abc]&quot;, 其中的 &quot;abc&quot; 可以是任何簡短的 ASCII 文字 / 或數字。"
+msgstr "Shutter es activado por todos los links que apuntan a una imagen, que tenga rel=&quot;lightbox&quot; o rel=&quot;lightbox[...]&quot;. Para hacer sets de imágenes, debes agregar rel=&quot;lightbox[abc]&quot;, donde &quot;abc&quot; puede ser cualquier palabra ASCII corta y/o un número."
 
 #: ../shutter-reloaded.php:392
 msgid "Customization"
-msgstr "自定"
+msgstr "Personalización"
 
 #: ../shutter-reloaded.php:398
 msgid "Shutter color (default 000000):"
-msgstr "Shutter 顏色 (預設 000000):"
+msgstr "Color de fondo de Shutter (por defecto 000000):"
 
 #: ../shutter-reloaded.php:398
 msgid "Please enter valid HTML color codes, from 000000 to FFFFFF."
-msgstr "請輸入有效的 HTML 色碼，介於 000000 到 FFFFFF"
+msgstr "Por favor ingresa códigos HTML de color válidos, desde 000000 a FFFFFF."
 
 #: ../shutter-reloaded.php:405
 msgid "Shutter opacity (default 80):"
-msgstr "Shutter 透明度 (預設 80):"
+msgstr "Opacidad del color de fondo de Shutter (por defecto 80):"
 
 #: ../shutter-reloaded.php:405
 msgid "Enter a number between 1 (see-through) and 99 (solid color)."
-msgstr "請輸入一個號碼介於 1 (可看穿的) 到 99 (不透明色彩)."
+msgstr "Ingresa un valor entre 1 (transparente) y 99 (color sólido)."
 
 #: ../shutter-reloaded.php:412
 msgid "Caption text color (default FFFFFF):"
-msgstr "標題文字顏色 (預設 FFFFFF):"
+msgstr "Color del texto al pie de la foto (por defecto FFFFFF):"
 
 #: ../shutter-reloaded.php:419
 msgid "Menubar color (default 3E3E3E):"
-msgstr "選單列顏色 (預設 3E3E3E):"
+msgstr "Color barra menú (por defecto 3E3E3E):"
 
 #: ../shutter-reloaded.php:426
 msgid "Show images count for sets (Image 1 of ...):"
-msgstr "顯示圖像計數 (Image 1 of ...):"
+msgstr "Mostrar contador de imágenes para sets (Imagen 1 de ...):"
 
 #: ../shutter-reloaded.php:432
 msgid "Images count color (default 999999):"
-msgstr "圖像計數顏色 (預設 999999):"
+msgstr "Color del contador de imágenes (por defecto 999999):"
 
 #: ../shutter-reloaded.php:439
 msgid "Text buttons (instead of images):"
-msgstr "使用文字代替圖像:"
+msgstr "Botones de texto (en vez de imágenes):"
 
 #: ../shutter-reloaded.php:445
 msgid "Text buttons color (default CCCCCC):"
-msgstr "文字按鈕顏色 (預設 CCCCCC):"
+msgstr "Color de los botones de texto (por defecto CCCCCC):"
 
 #: ../shutter-reloaded.php:452
 msgid "Open the images in full size:"
-msgstr ""
+msgstr "Abrir las imágenes a tamaño completo:"
 
 #: ../shutter-reloaded.php:458
 msgid "Alternate loading (select if Shutter does not start):"
-msgstr ""
+msgstr "Alternar carga (seleccionar si es que otro script evita que Shutter cargue apropiadamente):"
 
 #: ../shutter-reloaded.php:466
 msgid "To restore the defaults, delete the current value(s) and submit the form."
-msgstr "回復成原始值，並刪除當前的設定"
+msgstr "Para volver a los valores por defecto, borre el(los) valor(es) actual(es) y guarde los cambios."
 
 #: ../shutter-reloaded.php:468
 msgid "Reset all options"
@@ -302,9 +300,9 @@ msgstr ""
 
 #: ../shutter-reloaded.php:469
 msgid "Save Options"
-msgstr "儲存選項"
+msgstr "Guardar Cambios"
 
 #: ../shutter-reloaded.php:480
 msgid "Shutter Reloaded"
-msgstr "Shutter Reloaded"
+msgstr "Visor Shutter Reloaded"
 

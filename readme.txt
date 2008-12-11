@@ -2,9 +2,9 @@
 Contributors: Andrew Ozz
 Donate link: 
 Tags: images, javascript, viewer, lightbox
-Requires at least: 2.5
-Tested up to: 2.6.1
-Stable tag: 2.1
+Requires at least: 2.6
+Tested up to: 2.7
+Stable tag: 2.2
 
 Darkens the current page and displays an image on top (like Lightbox, Thickbox, etc.), but is a lot smaller (10KB) and faster.
 
@@ -13,17 +13,17 @@ Darkens the current page and displays an image on top (like Lightbox, Thickbox, 
 
 Shutter Reloaded is an image viewer for your website that works similary to Lightbox, Thickbox, etc. but is under 10KB in size and does not require any external libraries. It has many features: resizing large images if the window is too small to display them with option to show the full size image, combining images in sets, redrawing the window after resizing, pre-loading of neighbour images for faster display and very good browser compatibility.
 
-Current development version: has an alternate init option that loads Shutter earlier and works better, has option to replace the default gallery with Shutter powered one.
+Version 2.2: New loading method (the old method can still be used by selecting it at the bottom of the options page), update to the options page to fit WordPress 2.7.
 
-New in version 2.1: Upgrades for compatibility with WordPress 2.5.
+Version 2.1: Upgrades for compatibility with WordPress 2.5.
 
-New in version 2.0: Option to display full size image if it was resized to fit the browser window, display of image count (for sets), option for graphic or text buttons, support for localization (.pot file included), the code is better organized and improved.
+Version 2.0: Option to display full size image if it was resized to fit the browser window, display of image count (for sets), option for graphic or text buttons, support for localization (.pot file included), the code is better organized and improved.
 
-New in version 1.2: Compatibility with WordPress version 2.0 (2.0.9 and 2.0.11) and 2.3, several improvements and small bugfixes. 
+Version 1.2: Compatibility with WordPress version 2.0 (2.0.9 and 2.0.11) and 2.3, several improvements and small bugfixes. 
 
-New in version 1.1: Support for Lightbox style activation (rel = lightbox[...]), better build-in help, several bugfixes.
+Version 1.1: Support for Lightbox style activation (rel = lightbox[...]), better build-in help, several bugfixes.
 
-This plugin offers customisation of the colour and opacity settings for the background and colour for the caption text, buttons text and the menu background.
+This plugin offers customization of the colour and opacity settings for the background and colour for the caption text, buttons text and the menu background.
 
 There are options to enable it for all links pointing to an image on your site (with option to exclude some pages), or just on selected pages. It can be enabled only for image links with CSS class="shutter" with option to create a single set or multiple sets for each page.
 
@@ -38,7 +38,7 @@ Standard WordPress quick and easy installation:
 2. Unzip. 
 3. Upload the shutter-reloaded folder to the plugins directory.
 4. Activate the plugin.
-5. Go to "Options - Shutter Reloaded" and set your preferences.
+5. Go to "Appearance - Shutter Reloaded" and set your preferences.
 
 = Upgrade =
 
@@ -48,13 +48,9 @@ Standard WordPress quick and easy installation:
 
 == Frequently Asked Questions == 
 
-= Does this plugin work on WordPress version... =
-
-Shutter Reloaded has been tested on WordPress 2.0.11, 2.1, 2.2, 2.3 and 2.5. For WordPress version 2.3.3 and earlier, please use version 2.0 of the plugin.
-
 = I have ... plugin installed that uses javascript, will there be any conflicts/incompatibilities? =
 
-Since Shutter Reloaded does not use any js libraries, it does not interfere with them. It uses an onload event but has a function to play nice with other scripts that use onload too (from WordPress).
+Since Shutter Reloaded does not use any js libraries, it does not interfere with them.
 
 = What will happen if my site visitors have Javascript disabled? =
 

@@ -18,7 +18,7 @@ shutterReloaded = {
 		t.L10n = s.L10n || ['Previous','Next','Close','Full Size','Fit to Screen','Image','of','Loading...'];
 		t.imageCount = s.imageCount || 0;
 		t.textBtns = s.textBtns || 0;
-		t.imgDir = s.imgDir || 'images/';
+		t.imgDir = s.imgDir || '/wp-content/plugins/shutter-reloaded/menu/';
 		t.FS = s.FS || 0;
 	},
 

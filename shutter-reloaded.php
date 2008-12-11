@@ -3,7 +3,7 @@
 Plugin Name: Shutter Reloaded
 Plugin URI: http://www.laptoptips.ca/projects/wp-shutter-reloaded/
 Description: Darkens the current page and displays an image on top like Lightbox, Thickbox, etc. However this script is a lot smaller and faster.
-Version: 2.2-beta
+Version: 2.2
 Author: Andrew Ozz
 Author URI: http://www.laptoptips.ca/
 
@@ -23,10 +23,12 @@ $srel_load_txtdomain = true;
 function srel_txtdomain() {
 	global $srel_load_txtdomain;
 
-	$path = defined('WP_PLUGIN_DIR') ? WP_PLUGIN_DIR : ABSPATH . '/' . PLUGINDIR;
-
 	if( $srel_load_txtdomain ) {
-		load_plugin_textdomain('srel-l10n', $path.'/shutter-reloaded/languages');
+		if ( defined('WP_PLUGIN_DIR') )
+			load_plugin_textdomain('srel-l10n', '', 'shutter-reloaded/languages');
+		else
+			load_plugin_textdomain('srel-l10n', ABSPATH . '/' . PLUGINDIR . '/shutter-reloaded/languages');
+
 		$srel_load_txtdomain = false;
 	}
 }
@@ -94,8 +96,8 @@ shutterSettings = {
 	if ( $srel_options['textBtns'] == 1 ) echo "  textBtns : 1,\n";
 	echo '  L10n : ["'.js_escape(__("Previous", "srel-l10n")).'","'. js_escape(__("Next", "srel-l10n")).'","'. js_escape(__("Close", "srel-l10n")).'","'. js_escape(__("Full Size", "srel-l10n")).'","'. js_escape(__("Fit to Screen", "srel-l10n")).'","'. js_escape(__("Image", "srel-l10n")).'","'. js_escape(__("of", "srel-l10n")).'","'. js_escape(__("Loading...", "srel-l10n")).'"]'."\n}\n";
 
-if ( $srel_options['altLoad'] == 1 ) add_action('get_footer', 'srel_addtofooter', 99);
-else echo "shutterOnload = function(){".$addshutter."}\n";
+if ( isset($srel_options['altLoad']) && $srel_options['altLoad'] == 1 ) echo "shutterOnload = function(){".$addshutter."}\n";
+else add_action('get_footer', 'srel_addtofooter', 99);
 ?>
 //]]>
 </script>
@@ -114,13 +116,13 @@ function srel_auto_set($content) {
 	global $srel_autoset;
 
 	if( $srel_autoset )
-		return preg_replace_callback('/<a ([^>]*?href=[\'"][^"\']+?\.(?:gif|jpeg|jpg|png)[^>]*)>/i', 'srel_cback', $content);
+		return preg_replace_callback('/<a ([^>]*?href=[\'"][^"\']+?\.(?:gif|jpeg|jpg|png)[^>]*)>/i', 'srel_callback', $content);
 
 	return $content;
 }
 add_filter('the_content', 'srel_auto_set', 65 );
 
-function srel_cback($a) {
+function srel_callback($a) {
 	global $post;
 
 	$str = $a[1];
@@ -128,67 +130,6 @@ function srel_cback($a) {
 		return '<a '.preg_replace('/class=[\'"]([^"\']+)[\'"]/i', 'class="shutterset_'.$post->ID.' $1"', $str).'>';
 	else return '<a class="shutterset_'.$post->ID.'" '.$str.'>';
 }
-
-function srel_gallery_shortcode($no, $attr) {
-	global $post;
-
-	$opt = get_option('srel_options');
-	if ( $opt['shgallery'] != 1 )
-		return '';
-
-	// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
-	if ( isset( $attr['orderby'] ) ) {
-		$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
-		if ( !$attr['orderby'] )
-			unset( $attr['orderby'] );
-	}
-
-	extract(shortcode_atts(array(
-		'order'      => 'ASC',
-		'orderby'    => 'menu_order ID',
-		'id'         => $post->ID,
-		'size'       => 'thumbnail'
-	), $attr));
-
-	$id = intval($id);
-	$attachments = get_children( array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
-
-	if ( empty($attachments) || is_feed() )
-		return '';
-
-	$columns = ( isset($opt['g_columns']) && (int) $opt['g_columns'] ) ? $opt['g_columns'] : 0;
-
-	$output = '<div class="gallery">'."\n";
-
-	foreach ( $attachments as $att_id => $attachment ) {
-		$img = wp_get_attachment_image_src($att_id, 'thumbnail', true);
-		$href = wp_get_attachment_url( $att_id );
-		$caption = $attachment->post_excerpt ? $attachment->post_excerpt : $attachment->post_title;
-		$width = ( isset($opt['g_width']) && (int) $opt['g_width'] ) ? $opt['g_width'] : $img[1];
-
-		$output .= '<div id="attachment_' . $att_id . '" class="wp-caption alignleft" style="width: ' . (10 + (int) $width) . 'px">'."\n";
-		$output .= '<a href="'.$href.'" class="shutterset_'.$id.'"><img src="'.$img[0].'" width="'.$width.'" /></a>'."\n";
-		$output .= '<p class="wp-caption-text">' . $caption . '</p></div>'."\n\n";
-
-		if ( $columns > 0 && ++$i % $columns == 0 )
-			$output .= '<br style="clear: both" />';
-	}
-
-	if ( $columns )
-		$output .= '<br style="clear: both;" />'."\n";
-	$output .= "</div>\n";
-
-	return $output;
-}
-add_filter('post_gallery', 'srel_gallery_shortcode', 10, 2);
-
-function srel_deactiv() {
-	delete_option('srel_options');
-	delete_option('srel_main');
-	delete_option('srel_included');
-	delete_option('srel_excluded');
-}
-add_action('deactivate_shutter-reloaded/shutter-reloaded.php', 'srel_deactiv');
 
 function srel_optpage() {
 
@@ -212,7 +153,7 @@ function srel_optpage() {
 	}
 
 	$srel_options = get_option('srel_options');
-	$def = array( 'shcolor' => '000000', 'opacity' => '80', 'capcolor' => 'ffffff', 'menucolor' => '3e3e3e', 'btncolor' => 'cccccc', 'countcolor' => '999999' );
+	$def = array( 'shcolor' => '000000', 'opacity' => '80', 'capcolor' => 'ffffff', 'menucolor' => '3e3e3e', 'btncolor' => 'cccccc', 'countcolor' => '999999', 'altLoad' => '0' );
 
 	if( ! is_array($srel_options) ) {
 		$srel_options = array_merge( $def, array('imageCount' => '1', 'textBtns' => '0', 'custom' => '0') );
@@ -231,10 +172,6 @@ function srel_optpage() {
 		$new_opt['opacity'] = preg_match("/^[0-9][0-9]?$/", $_POST['opacity']) ? $_POST['opacity'] : '80';
 		$new_opt['altLoad'] = isset($_POST['altLoad']) ? 1 : 0;
 		$new_opt['startFull'] = isset($_POST['startFull']) ? 1 : 0;
-
-		$new_opt['shgallery'] = isset($_POST['shgallery']) ? 1 : 0;
-		$new_opt['g_width'] = isset($_POST['g_width']) ? (int) $_POST['g_width'] : 0;
-		$new_opt['g_columns'] = isset($_POST['g_columns']) ? (int) $_POST['g_columns'] : 0;
 
 		$new_opt['custom'] = ( $new_opt['shcolor'] != '000000' ||
 			$new_opt['capcolor'] != 'ffffff' ||
@@ -304,7 +241,15 @@ function srel_optpage() {
 		}
 	}
 
-	if ( isset($_POST['srel_saveopt']) ) { ?>
+	if ( isset($_POST['srel_delete_options']) ) {
+		check_admin_referer('srel-save-options');
+		delete_option('srel_options');
+		delete_option('srel_main');
+		delete_option('srel_included');
+		delete_option('srel_excluded'); ?>
+		<div id="message" class="updated fade"><p><?php _e('All options reset! You can either ', 'srel-l10n'); ?><a href="<?php echo admin_url('plugins.php'); ?>"><?php _e( 'uninstall Shutter Reloaded,', 'srel-l10n' ); ?></a> <a href=""><?php _e( 'or return to the settings page.', 'srel-l10n' ); ?></a></p></div><?php 
+		return;
+	} elseif ( isset($_POST['srel_saveopt']) ) { ?>
 	<div id="message" class="updated fade"><p><?php _e('Options saved!', 'srel-l10n'); ?></p></div>
 <?php } ?>
 
@@ -316,7 +261,7 @@ function srel_optpage() {
 } else {document.getElementById('srelhelp').style.display = 'none';document.getElementById('srelhide').value = '<?php echo js_escape(__("Show Help", "srel-l10n")); ?>';}"
 value="<?php echo js_escape(__("Show Help", "srel-l10n")); ?>" /></p>
 
-	<div id="srelhelp" style="display:none;border: 1px solid #C6D9E9;padding:0 12px;margin:10px 0 0">
+	<div id="srelhelp" style="display:none;border: 1px solid #dfdfdf;padding:0 12px;margin:10px 0 0">
 	<h4><?php _e('Setup and Usage', 'srel-l10n'); ?></h4>
 	<p><?php _e('Shutter is activated by <strong>the link</strong> pointing to the image you want to display, with or without a thumbnail (text links work too). The activation class and the title have to be set on that link.', 'srel-l10n'); ?></p>
 	<p><?php _e('To take full control of Shutter\'s activation and to make multiple image sets on the same page, you will need to add the <strong>class=&quot;shutter&quot;</strong> or <strong>&quot;shutterset&quot;</strong> or <strong>&quot;shutterset_setname&quot;</strong> to your links in &quot;Code&quot; view on the Write/Edit Post page.', 'srel-l10n'); ?></p>
@@ -333,29 +278,29 @@ value="<?php echo js_escape(__("Show Help", "srel-l10n")); ?>" /></p>
 	<input type="hidden" name="srel_main" value="srel_main" />
 
 <?php
-	if ( $opt == 'srel_class' ) echo '<div class="updated fade"><p><strong>'.__('Active: ', 'srel-l10n').'</strong>';
+	if ( $opt == 'srel_class' ) echo '<div style="background-color:#ffffe0;border:1px solid #e6db55;" class="fade"><p style="margin:8px;"><strong>'.__('Active: ', 'srel-l10n').'</strong>';
 	else echo '<div><p><input class="button" type="submit" name="srel_class" value="'. __('Activate', 'srel-l10n').'" /> ';
 	echo __('Shutter on all image links with class=&quot;shutter&quot; or &quot;shutterset&quot; or &quot;shutterset_setname&quot;.', 'srel-l10n')."</p></div>\n";
 
-	if ( $opt == 'srel_all' ) echo '<div class="updated fade"><p><strong>'.__('Active: ', 'srel-l10n').'</strong>';
+	if ( $opt == 'srel_all' ) echo '<div style="background-color:#ffffe0;border:1px solid #e6db55;" class="fade"><p style="margin:8px;"><strong>'.__('Active: ', 'srel-l10n').'</strong>';
 	else echo '<div><p><input class="button" type="submit" name="srel_all" value="'.__('Activate', 'srel-l10n').'" /> ';
 	echo __('Shutter on all image links. Sets created with class=&quot;shutterset&quot;, &quot;shutterset_setname&quot; or rel=&quot;lightbox[...]&quot; will still work.', 'srel-l10n')."</p></div>\n";
 
-	if ( $opt == 'auto_set' ) echo '<div class="updated fade"><p><strong>'.__('Active: ', 'srel-l10n').'</strong>';
+	if ( $opt == 'auto_set' ) echo '<div style="background-color:#ffffe0;border:1px solid #e6db55;" class="fade"><p style="margin:8px;"><strong>'.__('Active: ', 'srel-l10n').'</strong>';
 	else echo '<div><p><input class="button" type="submit" name="auto_set" value="'.__('Activate', 'srel-l10n').'" /> ';
 	echo __('Shutter on all image links and automatically make image sets for each Post/Page.', 'srel-l10n')."</p></div>\n";
 
-	if ( $opt == 'srel_pages' ) echo '<div class="updated fade"><p><strong>'.__('Active: ', 'srel-l10n').'</strong>';
+	if ( $opt == 'srel_pages' ) echo '<div style="background-color:#ffffe0;border:1px solid #e6db55;" class="fade"><p style="margin:8px;"><strong>'.__('Active: ', 'srel-l10n').'</strong>';
 	else echo '<div><p><input class="button" type="submit" name="srel_pages" value="'.__('Activate', 'srel-l10n').'" /> ';
 	echo __('Shutter on all image links on specific page(s).', 'srel-l10n')."</p></div>\n";
 
-	if ( $opt == 'srel_lb' ) echo '<div class="updated fade"><p><strong>'.__('Active: ', 'srel-l10n').'</strong>';
+	if ( $opt == 'srel_lb' ) echo '<div style="background-color:#ffffe0;border:1px solid #e6db55;" class="fade"><p style="margin:8px;"><strong>'.__('Active: ', 'srel-l10n').'</strong>';
 	else echo '<div><p><input class="button" type="submit" name="srel_lb" value="'.__('Activate', 'srel-l10n').'" /> ';
 	echo __('Shutter on all image links and use LightBox style (rel=&quot;lightbox[...]&quot;) activation and sets.', 'srel-l10n')."</p></div>\n"; ?>
 	</div>
 	</form>
 
-	<div style="padding:0 12px 4px;border: 1px solid #C6D9E9;">
+	<div style="padding:0 12px 4px;border: 1px solid #dfdfdf;">
 <?php
 if ( $opt == 'srel_all' || $opt == 'auto_set' ) { ?>
 
@@ -368,7 +313,7 @@ if ( $opt == 'srel_all' || $opt == 'auto_set' ) { ?>
 	<p><?php _e('Excluded Posts or Pages (by ID):', 'srel-l10n'); ?> <?php
 	if ( is_array($excluded) && !empty($excluded) ) {
 		foreach( $excluded as $excl ) { ?>
-		  <span style="border: 1px solid #ccc;padding:2px 4px;cursor:pointer;" onclick="document.forms.srel_excluded.srel_exclude.value = '<?php echo $excl; ?>'"><?php echo $excl; ?></span>
+		  <span style="border: 1px solid #dfdfdf;padding:2px 4px;cursor:pointer;" onclick="document.forms.srel_excluded.srel_exclude.value = '<?php echo $excl; ?>'"><?php echo $excl; ?></span>
 <?php   }
 	} else { ?>
 		<?php _e('[none]', 'srel-l10n'); ?>
@@ -383,7 +328,7 @@ if ( $opt == 'srel_all' || $opt == 'auto_set' ) { ?>
 	<input class="button" type="submit" name="srel_rem_excluded" value="<?php _e('Remove Excluded ID', 'srel-l10n'); ?>"
 	onclick="if (form.srel_exclude.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to remove from this list.", "srel-l10n")); ?>');return false;}" />
 
-	<div style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it in your browser\'s status bar(at the bottom of the window) when hovering over the name at the <a href="edit-pages.php">Manage Pages</a> or the <a href="edit.php">Manage Posts</a> page.', 'srel-l10n'); ?></div>
+	<p style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it in your browser\'s status bar(at the bottom of the window) when hovering over the name at the <a href="edit-pages.php">Edit Pages</a> or the <a href="edit.php">Edit Posts</a> page.', 'srel-l10n'); ?></p>
 	<?php wp_nonce_field( 'srel-save-options' ); ?>
 	</div>
 	</form>
@@ -408,7 +353,7 @@ if ( $opt == 'srel_pages' ) { ?>
 <?php
 	if ( is_array($included) && !empty($included) ) {
 		foreach( $included as $incl ) { ?>
-			<span style="border: 1px solid #ccc;padding:2px 4px;cursor:pointer;" onclick="document.forms.srel_included.srel_include.value = '<?php echo $incl; ?>'"><?php echo $incl; ?></span>
+			<span style="border: 1px solid #dfdfdf;padding:2px 4px;cursor:pointer;" onclick="document.forms.srel_included.srel_include.value = '<?php echo $incl; ?>'"><?php echo $incl; ?></span>
 <?php   }
 	} else { ?>
 		<?php _e('[none]', 'srel-l10n'); ?>
@@ -422,7 +367,7 @@ if ( $opt == 'srel_pages' ) { ?>
 	<input class="button" type="submit" name="srel_rem_included" value="<?php _e('Remove ID', 'srel-l10n'); ?>"
 	onclick="if (form.srel_include.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to remove from this list.", "srel-l10n")); ?>');return false;}" />
 
-	<div style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it in your browser\'s status bar(at the bottom of the window) when hovering over the name at the <a href="edit-pages.php">Manage Pages</a> or the <a href="edit.php">Manage Posts</a> page.', 'srel-l10n'); ?></div>
+	<p style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it in your browser\'s status bar(at the bottom of the window) when hovering over the name at the <a href="edit-pages.php">Manage Pages</a> or the <a href="edit.php">Manage Posts</a> page.', 'srel-l10n'); ?></p>
 	<?php wp_nonce_field( 'srel-save-options' ); ?>
 	</div>
 	</form>
@@ -449,86 +394,80 @@ if ( $opt == 'srel_pages' ) { ?>
 	</thead>
 
 	<tbody>
-	<tr><td style="width:50%;text-align:right;">
+	<tr><td style="width:50%;text-align:right;vertical-align:middle;">
 	<?php _e('Shutter color (default 000000):', 'srel-l10n'); ?> <br /><?php _e('Please enter valid HTML color codes, from 000000 to FFFFFF.', 'srel-l10n'); ?>
 	</td><td>
 	<input type="text" name="shcolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['shcolor']; ?>" />
 	<input type="text" name="shcolor2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['shcolor']; ?>;" />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
+	<tr><td style="text-align:right;vertical-align:middle;">
 	<?php _e('Shutter opacity (default 80):', 'srel-l10n'); ?> <br /><?php _e('Enter a number between 1 (see-through) and 99 (solid color).', 'srel-l10n'); ?>
 	</td><td>
 	<input type="text" name="opacity" size="6" maxlength="3" tabindex="" value="<?php echo $srel_options['opacity']; ?>" />
 	<input type="text" name="opacity2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['shcolor']; ?>;opacity:<?php echo ($srel_options['opacity']/100); ?>;filter:alpha(opacity=<?php echo $srel_options['opacity']; ?>);" />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
+	<tr><td style="text-align:right;vertical-align:middle;">
 	<?php _e('Caption text color (default FFFFFF):', 'srel-l10n'); ?>
 	</td><td>
 	<input type="text" name="capcolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['capcolor']; ?>" />
 	<input type="text" name="capcolor2" size="6"  disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['capcolor']; ?>;" />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
+	<tr><td style="text-align:right;vertical-align:middle;">
 	<?php _e('Menubar color (default 3E3E3E):', 'srel-l10n'); ?>
 	</td><td>
 	<input type="text" name="menucolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['menucolor']; ?>" />
 	<input type="text" name="menucolor2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['menucolor']; ?>;" />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
+	<tr><td style="text-align:right;vertical-align:middle;">
 	<?php _e('Show images count for sets (Image 1 of ...):', 'srel-l10n'); ?>
 	</td><td>
 	<input type="checkbox" class="checkbox"  name="imageCount" id="imageCount" <?php if ($srel_options['imageCount'] == 1) { echo ' checked="checked"'; } ?> />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
+	<tr><td style="text-align:right;vertical-align:middle;">
 	<?php _e('Images count color (default 999999):', 'srel-l10n'); ?>
 	</td><td>
 	<input type="text" name="countcolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['countcolor']; ?>" />
 	<input type="text" name="countcolor2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['countcolor']; ?>;" />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
+	<tr><td style="text-align:right;vertical-align:middle;">
 	<?php _e('Text buttons (instead of images):', 'srel-l10n'); ?>
 	</td><td>
 	<input type="checkbox" class="checkbox"  name="textBtns" id="textBtns" <?php if ($srel_options['textBtns'] == 1) { echo ' checked="checked"'; } ?> />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
+	<tr><td style="text-align:right;vertical-align:middle;">
 	<?php _e('Text buttons color (default CCCCCC):', 'srel-l10n'); ?>
 	</td><td>
 	<input type="text" name="btncolor" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['btncolor']; ?>" />
 	<input type="text" name="btncolor2" size="6" disabled style="padding:4px;border:1px solid #888;background-color:#<?php echo $srel_options['btncolor']; ?>;" />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
+	<tr><td style="text-align:right;vertical-align:middle;">
 	<?php _e('Open the images in full size:', 'srel-l10n'); ?>
 	</td><td>
 	<input type="checkbox" class="checkbox"  name="startFull" id="startFull" <?php if ($srel_options['startFull'] == 1) { echo ' checked="checked"'; } ?> />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
-	<?php _e('Alternate loading (select if another script is preventing Shutter from loading properly):', 'srel-l10n'); ?>
+	<tr><td style="text-align:right;vertical-align:middle;">
+	<?php _e('Alternate loading (select if Shutter does not start):', 'srel-l10n'); ?>
 	</td><td>
 	<input type="checkbox" class="checkbox"  name="altLoad" id="altLoad" <?php if ($srel_options['altLoad'] == 1) { echo ' checked="checked"'; } ?> />
 	</td></tr>
 
-	<tr><td style="text-align:right;">
-	<p><?php _e('In the default WordPress Gallery open all images with Shutter:', 'srel-l10n'); ?></p>
-	<p><?php _e('Limit the thumbnails width to ... pixels:', 'srel-l10n'); ?></p>
-	<p><?php _e('Arrange the thumbnails in ... columns:', 'srel-l10n'); ?></p>
-	</td><td>
-	<p><input type="checkbox" class="checkbox" name="shgallery" id="shgallery" <?php if ($srel_options['shgallery'] == 1) { echo ' checked="checked"'; } ?> /></p>
-	<input type="text" name="g_width" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['g_width']; ?>" /><br />
-	<input type="text" name="g_columns" size="6" maxlength="6" tabindex="" value="<?php echo $srel_options['g_columns']; ?>" />
-	</td></tr>
 	</tbody>
 	</table>
 
 	<p><?php _e('To restore the defaults, delete the current value(s) and submit the form.', 'srel-l10n'); ?></p>
-	<p class="submit"><input type="submit" name="srel_saveopt" value="<?php _e('Save Options', 'srel-l10n'); ?>" /></p>
+	<p class="submit">
+	<input type="submit" name="srel_delete_options" value="<?php _e('Reset all options', 'srel-l10n'); ?>" />
+	<input class="button-primary" type="submit" name="srel_saveopt" value="<?php _e('Save Options', 'srel-l10n'); ?>" />
+	</p>
 	<?php wp_nonce_field( 'srel-save-options' ); ?>
 	</form>
 	</div>
@@ -536,10 +475,9 @@ if ( $opt == 'srel_pages' ) { ?>
 } // end srel_optpage
 
 function srel_addmenu() {
-	if ( function_exists('add_options_page') ) {
+	if ( function_exists('add_theme_page') ) {
 		srel_txtdomain();
-		add_options_page(__('Shutter Reloaded', 'srel-l10n'), __('Shutter Reloaded', 'srel-l10n'), 9,  __FILE__, 'srel_optpage');
+		add_theme_page(__('Shutter Reloaded', 'srel-l10n'), __('Shutter Reloaded', 'srel-l10n'), 9,  'shutter-reloaded', 'srel_optpage');
 	}
 }
 add_action('admin_menu', 'srel_addmenu');
-?>
