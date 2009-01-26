@@ -101,7 +101,7 @@ else add_action('get_footer', 'srel_addtofooter', 99);
 ?>
 //]]>
 </script>
-<script src="<?php echo $url; ?>/shutter-reloaded.js?ver=2.2" type="text/javascript"></script>
+<script src="<?php echo $url; ?>/shutter-reloaded.js?ver=2.3b" type="text/javascript"></script>
 <?php }
 }
 add_action('wp_head', 'srel_makeshutter' );
