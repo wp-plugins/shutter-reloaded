@@ -38,7 +38,7 @@ shutterReloaded = {
 			if ( a == 'lb' && L.rel.toLowerCase().indexOf('lightbox') == -1 ) continue;
 
 			if ( L.className && L.className.toLowerCase().indexOf('shutterset') != -1 )
-				setid = L.className.match(/shutterset[^\s]+/g);
+				setid = L.className.match(/shutterset[^\s]*/g);
 			else if ( L.rel && L.rel.toLowerCase().indexOf('lightbox[') != -1 )
 				setid = L.rel.replace(/\s/g, '_');
 			else if ( t.oneSet )
