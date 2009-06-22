@@ -1,9 +1,10 @@
 // This file is part of Shutter Reloaded WordPress plugin. For standalone version visit http://www.laptoptips.ca/javascripts/shutter-reloaded/
+var shutterLinks = {}, shutterSets = {};
 
-if (typeof shutterOnload == 'function') {
-	if ('undefined' != typeof jQuery) jQuery(document).ready(function(){shutterOnload();});
-	else if( typeof window.onload != 'function' ) window.onload = shutterOnload;
-	else {oldonld = window.onload;window.onload = function(){if(oldonld){oldonld();};shutterOnload();}};
+function shutterAddLoad(fn) {
+	if ('undefined' != typeof jQuery) jQuery(document).ready(fn());
+	else if( typeof window.onload != 'function' ) window.onload = fn;
+	else {oldonld = window.onload; window.onload = function(){if(oldonld){oldonld();};fn();}};
 }
 
 shutterReloaded = {
@@ -25,7 +26,7 @@ shutterReloaded = {
 
 	init : function (a) {
 		var t = this, L, T, ext, i, j, m, setid, inset, shfile, shMenuPre, k, img;
-		shutterLinks = {}, shutterSets = {};
+
 		if ( 'object' != typeof shutterSettings ) shutterSettings = {};
 		t.settings();
 
@@ -37,7 +38,7 @@ shutterReloaded = {
 			if ( a == 'lb' && L.rel.toLowerCase().indexOf('lightbox') == -1 ) continue;
 
 			if ( L.className && L.className.toLowerCase().indexOf('shutterset') != -1 )
-				setid = L.className.replace(/\s/g, '_');
+				setid = L.className.match(/shutterset[^\s]+/g);
 			else if ( L.rel && L.rel.toLowerCase().indexOf('lightbox[') != -1 )
 				setid = L.rel.replace(/\s/g, '_');
 			else if ( t.oneSet )
@@ -255,11 +256,18 @@ shutterReloaded = {
 	},
 
 	hideTags : function(arg) {
-		var sel = document.getElementsByTagName('select'), obj = document.getElementsByTagName('object'), emb = document.getElementsByTagName('embed'), ifr = document.getElementsByTagName('iframe'), vis = ( arg ) ? 'visible' : 'hidden', i, j;
+		var sel = document.getElementsByTagName('select'), obj = document.getElementsByTagName('object'), emb = document.getElementsByTagName('embed'), ifr = document.getElementsByTagName('iframe'), vis = ( arg ) ? '' : 'hidden', i, j;
 
-		for (i = 0, j = sel.length; i < j; i++) sel[i].style.visibility = vis;
-		for (i = 0, j = obj.length; i < j; i++) obj[i].style.visibility = vis;
-		for (i = 0, j = emb.length; i < j; i++) emb[i].style.visibility = vis;
-		for (i = 0, j = ifr.length; i < j; i++) ifr[i].style.visibility = vis;
+		for ( i = 0, j = sel.length; i < j; i++ )
+			sel[i].style.visibility = vis;
+
+		for ( i = 0, j = obj.length; i < j; i++ )
+			obj[i].style.visibility = vis;
+
+		for ( i = 0, j = emb.length; i < j; i++ )
+			emb[i].style.visibility = vis;
+
+		for ( i = 0, j = ifr.length; i < j; i++ )
+			ifr[i].style.visibility = vis;
 	}
 }
