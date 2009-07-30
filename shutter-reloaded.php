@@ -3,7 +3,7 @@
 Plugin Name: Shutter Reloaded
 Plugin URI: http://www.laptoptips.ca/projects/wp-shutter-reloaded/
 Description: Darkens the current page and displays an image on top like Lightbox, Thickbox, etc. However this script is a lot smaller and faster.
-Version: 2.3
+Version: 2.4-beta
 Author: Andrew Ozz
 Author URI: http://www.laptoptips.ca/
 
@@ -23,7 +23,7 @@ $srel_load_txtdomain = true;
 function srel_txtdomain() {
 	global $srel_load_txtdomain;
 
-	if( $srel_load_txtdomain ) {
+	if ( $srel_load_txtdomain ) {
 		if ( defined('WP_PLUGIN_DIR') )
 			load_plugin_textdomain('srel-l10n', '', 'shutter-reloaded/languages');
 		else
@@ -34,11 +34,11 @@ function srel_txtdomain() {
 }
 
 function srel_makeshutter() {
-	global $post, $srel_autoset, $addshutter, $srel_options;
+	global $post, $srel_autoset, $addshutter;
 
 	$url = defined('WP_PLUGIN_URL') ? WP_PLUGIN_URL . '/shutter-reloaded' : get_bloginfo('wpurl') . '/wp-content/plugins/shutter-reloaded';
 
-	$srel_options = get_option( 'srel_options', array() );
+	$options = get_option( 'srel_options', array() );
 	$srel_main = get_option( 'srel_main', '' );
 	$srel_included = get_option( 'srel_included', array() );
 	$srel_excluded = get_option( 'srel_excluded', array() );
@@ -74,25 +74,23 @@ function srel_makeshutter() {
 
 	if ( $addshutter ) {
 ?>
-<link rel="stylesheet" href="<?php echo $url; ?>/shutter-reloaded.css?ver=2.3" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo $url; ?>/shutter-reloaded.css?ver=2.4" type="text/css" media="screen" />
 <?php
 		if ( !empty($options['custom']) ) {
 			$css = '';
 			if ( $options['btncolor'] != 'cccccc' )
-				$css .= "#shNavBar a {color: #" . $options['btncolor'] . ";}\n";
+				$css .= "div#shNavBar a {color: #" . $options['btncolor'] . ";}\n";
 			if ( $options['menucolor'] != '3e3e3e' )
-				$css .= "#shNavBar {background-color:#" . $options['menucolor'] . ";}\n";
+				$css .= "div#shNavBar {background-color:#" . $options['menucolor'] . ";}\n";
 			if ( $options['countcolor'] != '999999' )
-				$css .= "#shNavBar {color:#" . $options['countcolor'] . ";}\n";
+				$css .= "div#shNavBar {color:#" . $options['countcolor'] . ";}\n";
 			if ( $options['shcolor'] != '000000' || $options['opacity'] != '80' )
-				$css .= "#shShutter{background-color:#" . $options['shcolor'] . ";opacity:".($options['opacity']/100).";filter:alpha(opacity=".$options['opacity'].");}\n";
+				$css .= "div#shShutter{background-color:#" . $options['shcolor'] . ";opacity:" . ($options['opacity']/100) . ";filter:alpha(opacity=" . $options['opacity'] . ");}\n";
 			if ( $options['capcolor'] != 'ffffff' )
-				$css .= "  #shDisplay div#shTitle {color:#".$options['capcolor'].";}\n";
-?>
-<style type="text/css">
-<?php echo $css; ?>
-</style>
-<?php	}
+				$css .= "div#shDisplay div#shTitle {color:#" . $options['capcolor'] . ";}\n";
+
+			echo "<style type='text/css'>\n$css</style>\n";
+		}
 
 		if ( !empty($options['headload']) )
 			srel_addjs(true);
@@ -103,26 +101,31 @@ function srel_makeshutter() {
 add_action('wp_head', 'srel_makeshutter');
 
 function srel_addjs($head = false) {
-	global $addshutter, $srel_options;
+	global $addshutter;
+
+	$options = get_option( 'srel_options', array() );
 	$url = defined('WP_PLUGIN_URL') ? WP_PLUGIN_URL . '/shutter-reloaded' : get_bloginfo('wpurl') . '/wp-content/plugins/shutter-reloaded';
 ?>
 <script type="text/javascript">
 //<![CDATA[
 shutterSettings = {
 	imgDir : '<?php echo $url; ?>/menu/',
-<?php if ( !empty($srel_options['imageCount']) ) { ?>
+<?php if ( !empty($options['imageCount']) ) { ?>
 	imageCount : 1,
 <?php }
-	if ( !empty($srel_options['startFull']) ) { ?>
+	if ( !empty($options['startFull']) ) { ?>
 	FS : 1,
 <?php }
-	if ( !empty($srel_options['textBtns']) ) { ?>
+	if ( !empty($options['textBtns']) ) { ?>
 	textBtns : 1,
+<?php }
+	if ( !empty($options['oneset']) ) { ?>
+	oneSet : 1,
 <?php }
 	echo "\t" . 'L10n : ["'.js_escape(__("Previous", "srel-l10n")).'","'. js_escape(__("Next", "srel-l10n")).'","'. js_escape(__("Close", "srel-l10n")).'","'. js_escape(__("Full Size", "srel-l10n")).'","'. js_escape(__("Fit to Screen", "srel-l10n")).'","'. js_escape(__("Image", "srel-l10n")).'","'. js_escape(__("of", "srel-l10n")).'","'. js_escape(__("Loading...", "srel-l10n")).'"]'."\n}\n"; ?>
 //]]>
 </script>
-<script src="<?php echo $url; ?>/shutter-reloaded.js?ver=2.3" type="text/javascript"></script>
+<script src="<?php echo $url; ?>/shutter-reloaded.js?ver=2.4" type="text/javascript"></script>
 <script type="text/javascript">
 <?php echo $head ? 'try{shutterAddLoad( function(){' . $addshutter . '} );}catch(e){}' : 'try{' . $addshutter . '}catch(e){}'; ?>
 </script>
@@ -130,9 +133,9 @@ shutterSettings = {
 }
 
 function srel_auto_set($content) {
-	global $srel_autoset, $post;
+	global $srel_autoset;
 
-	if( $srel_autoset )
+	if ( $srel_autoset )
 		return preg_replace_callback('/<a ([^>]+)>/i', 'srel_callback', $content);
 
 	return $content;

@@ -255,19 +255,26 @@ shutterReloaded = {
 		W.style.visibility = 'visible';
 	},
 
+	visClass : function(el, rem) {
+		if ( rem )
+			el.className = el.className.replace(/sh-make-invisible /g, '');
+		else
+			el.className = 'sh-make-invisible ' + el.className;
+	},
+
 	hideTags : function(arg) {
-		var sel = document.getElementsByTagName('select'), obj = document.getElementsByTagName('object'), emb = document.getElementsByTagName('embed'), ifr = document.getElementsByTagName('iframe'), vis = ( arg ) ? '' : 'hidden', i, j;
+		var t = this, sel = document.getElementsByTagName('select'), obj = document.getElementsByTagName('object'), emb = document.getElementsByTagName('embed'), ifr = document.getElementsByTagName('iframe'), i, j;
 
 		for ( i = 0, j = sel.length; i < j; i++ )
-			sel[i].style.visibility = vis;
+			t.visClass(sel[i], arg);
 
 		for ( i = 0, j = obj.length; i < j; i++ )
-			obj[i].style.visibility = vis;
+			t.visClass(obj[i], arg);
 
 		for ( i = 0, j = emb.length; i < j; i++ )
-			emb[i].style.visibility = vis;
+			t.visClass(emb[i], arg);
 
 		for ( i = 0, j = ifr.length; i < j; i++ )
-			ifr[i].style.visibility = vis;
+			t.visClass(ifr[i], arg);
 	}
 }

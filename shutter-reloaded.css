@@ -116,6 +116,10 @@ div#shWaitBar {
 	filter: alpha(opacity=40);
 }
 
+.sh-make-invisible {
+	visibility: hidden !important;
+}
+
 * html div#shNavBar {
 	display: block;
 	position: absolute;
