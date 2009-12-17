@@ -3,7 +3,7 @@
 Plugin Name: Shutter Reloaded
 Plugin URI: http://www.laptoptips.ca/projects/wp-shutter-reloaded/
 Description: Darkens the current page and displays an image on top like Lightbox, Thickbox, etc. However this script is a lot smaller and faster.
-Version: 2.4
+Version: 2.4.1
 Author: Andrew Ozz
 Author URI: http://www.laptoptips.ca/
 

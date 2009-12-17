@@ -2,8 +2,8 @@
 Contributors: Andrew Ozz
 Tags: images, javascript, viewer, lightbox
 Requires at least: 2.6
-Tested up to: 2.8
-Stable tag: 2.4
+Tested up to: 2.9
+Stable tag: 2.4.1
 
 Darkens the current page and displays an image (like Lightbox, Thickbox, etc.), but is a lot smaller (10KB) and faster.
 
@@ -19,6 +19,9 @@ There are options to enable it for all links pointing to an image on your site (
 The plugin can also "auto-make" image sets for each Post, so when several posts are displayed on the "Home" page, links to images on each post will be in a separate set. See the built-in help for more information.
 
 == Changelog ==
+
+= 2.4.1 =
+Update to the French translation courtesy of Lise, http://liseweb.fr
 
 = 2.4 =
  * Fixed problems when saving custom color settings.
