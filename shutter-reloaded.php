@@ -105,6 +105,7 @@ function srel_addjs($head = false) {
 
 	$options = get_option( 'srel_options', array() );
 	$url = defined('WP_PLUGIN_URL') ? WP_PLUGIN_URL . '/shutter-reloaded' : get_bloginfo('wpurl') . '/wp-content/plugins/shutter-reloaded';
+	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 ?>
 <script type="text/javascript">
 //<![CDATA[
@@ -125,7 +126,7 @@ shutterSettings = {
 	echo "\t" . 'L10n : ["'.js_escape(__("Previous", "srel-l10n")).'","'. js_escape(__("Next", "srel-l10n")).'","'. js_escape(__("Close", "srel-l10n")).'","'. js_escape(__("Full Size", "srel-l10n")).'","'. js_escape(__("Fit to Screen", "srel-l10n")).'","'. js_escape(__("Image", "srel-l10n")).'","'. js_escape(__("of", "srel-l10n")).'","'. js_escape(__("Loading...", "srel-l10n")).'"]'."\n}\n"; ?>
 //]]>
 </script>
-<script src="<?php echo $url; ?>/shutter-reloaded.js?ver=2.4" type="text/javascript"></script>
+<script src="<?php echo $url; ?>/shutter-reloaded<?php echo $suffix; ?>.js?ver=2.4a" type="text/javascript"></script>
 <script type="text/javascript">
 <?php echo $head ? 'try{shutterAddLoad( function(){' . $addshutter . '} );}catch(e){}' : 'try{' . $addshutter . '}catch(e){}'; ?>
 </script>

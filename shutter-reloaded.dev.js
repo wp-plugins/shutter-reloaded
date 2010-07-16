@@ -175,9 +175,9 @@ shutterReloaded = {
 		if ( S = t.I('shShutter') ) S.parentNode.removeChild(S);
 		if ( NB = t.I('shNavBar') ) NB.parentNode.removeChild(NB);
 		t.hideTags(true);
+		document.documentElement.style.overflowX = '';
 		window.scrollTo(0,t.Top);
 		window.onresize = t.FS = t.Top = t.VP = null;
-		document.documentElement.style.overflowX = '';
 	},
 
 	resize : function(ln) {
