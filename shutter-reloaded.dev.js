@@ -194,7 +194,8 @@ shutterReloaded = {
 	},
 
 	_viewPort : function() {
-		var t = this, wiH = window.innerHeight ? window.innerHeight : 0, dbH = document.body.clientHeight ? document.body.clientHeight : 0, deH = document.documentElement ? document.documentElement.clientHeight : 0, deW, dbW;
+		var t = this, wiH = window.innerHeight ? window.innerHeight : 0, dbH = document.body.clientHeight ? document.body.clientHeight : 0,
+			deH = document.documentElement ? document.documentElement.clientHeight : 0, deW, dbW;
 
 		if( wiH > 0 ) {
 			t.wHeight = ( (wiH - dbH) > 1 && (wiH - dbH) < 30 ) ? dbH : wiH;
@@ -207,7 +208,8 @@ shutterReloaded = {
 	},
 
 	showImg : function() {
-		var t = this, S = t.I('shShutter'), D = t.I('shDisplay'), TI = t.I('shTopImg'), T = t.I('shTitle'), NB = t.I('shNavBar'), W, WB, capH, shHeight, maxHeight, itop, mtop, resized = 0;
+		var t = this, S = t.I('shShutter'), D = t.I('shDisplay'), TI = t.I('shTopImg'), T = t.I('shTitle'), NB = t.I('shNavBar'),
+			W, WB, capH, shHeight, maxHeight, itop, mtop, resized = 0;
 
 		if ( ! S ) return;
 		if ( (W = t.I('shWrap')) && W.style.visibility == 'visible' ) return;
@@ -256,7 +258,9 @@ shutterReloaded = {
 	},
 
 	hideTags : function(arg) {
-		var sel = document.getElementsByTagName('select'), obj = document.getElementsByTagName('object'), emb = document.getElementsByTagName('embed'), ifr = document.getElementsByTagName('iframe'), vis = ( arg ) ? 'visible' : 'hidden', i, j;
+		var sel = document.getElementsByTagName('select'), obj = document.getElementsByTagName('object'),
+			emb = document.getElementsByTagName('embed'), ifr = document.getElementsByTagName('iframe'),
+			vis = ( arg ) ? 'visible' : 'hidden', i, j;
 
 		for ( i = 0, j = sel.length; i < j; i++ )
 			sel[i].style.visibility = vis;

@@ -217,7 +217,7 @@ if ( $opt == 'srel_all' || $opt == 'auto_set' ) { ?>
 	<input class="button" type="submit" name="srel_rem_excluded" value="<?php _e('Remove Excluded ID', 'srel-l10n'); ?>"
 	onclick="if (form.srel_exclude.value == ''){alert('<?php echo js_escape(__("Please enter the Page/Post ID that you want to remove from this list.", "srel-l10n")); ?>');return false;}" />
 
-	<p style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it in your browser\'s status bar(at the bottom of the window) when hovering over the name at the <a href="edit-pages.php">Edit Pages</a> or the <a href="edit.php">Edit Posts</a> page.', 'srel-l10n'); ?></p>
+	<p style="color:#888;"><?php _e('Please enter the ID for the post/page you want to exclude. You can see it in your browser\'s status bar(at the bottom of the window) when hovering over the name at the <a href="edit.php?post_type=page">Edit Pages</a> or the <a href="edit.php">Edit Posts</a> page.', 'srel-l10n'); ?></p>
 	<?php wp_nonce_field( 'srel-save-options' ); ?>
 	</div>
 	</form>
@@ -364,5 +364,5 @@ if ( $opt == 'srel_pages' ) { ?>
 	</p>
 	<?php wp_nonce_field( 'srel-save-options' ); ?>
 	</form>
-	</div>
+	</div><?php //wrap ?>
 
